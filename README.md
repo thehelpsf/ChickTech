@@ -21,8 +21,8 @@ Once the student is registered for the year-long program and is assigned a mento
 
 ### App Audience
 
+* Students (Primary)
 * ChickTech.org Organizers
-* Students
 * Mentors
 
 
