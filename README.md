@@ -38,7 +38,7 @@ Once the student is registered for the year-long program and is assigned a mento
   - password
   - type (mentor/student)
 - Edit Profile:
-Name
+  - Name
   - e-mail
   - phone number
   - password
@@ -46,36 +46,36 @@ Name
   - Name
   - Description
   - Time
-Location
-Register for an Event
-Push Notification when a new event has been added
-View Matched User (student -> mentor, mentor -> student)
-Profile
-Registered Events
-View Organizer Profile
-Organizer Actions:
-View All Users
-Profile
-Registered Events
-Add/Delete User Profile
-Name
-e-mail
-phone number
-temporary password
-type (mentor/student)
-Assign Student User to Mentor User
-Add/Edit/Delete Events
+  - Location
+- Register for an Event
+- Push Notification when a new event has been added
+- View Matched User (student -> mentor, mentor -> student)
+  - Profile
+  - Registered Events
+- View Organizer Profile
+- Organizer Actions:
+  - View All Users
+    - Profile
+    - Registered Events
+  - Add/Delete User Profile
+    - Name
+    - e-mail
+    - phone number
+    - temporary password
+    - type (mentor/student)
+  - Assign Student User to Mentor User
+  - Add/Edit/Delete Events
 
 Optional User Stories:
 
-Recommend an event to matched user
-Password Reset + E-mail with temporary password
-Require User to choose new password after using a temporary password
-More Push Notifications
-An event has been updated
-Matched User recommended an event
-Reminder for registered events
-Reminder for Meetings
-Chat between matched users
-Create/Edit/Cancel a Meeting with matched user
+- Recommend an event to matched user
+- Password Reset + E-mail with temporary password
+- Require User to choose new password after using a temporary password
+- More Push Notifications
+  - An event has been updated
+  - Matched User recommended an event
+  - Reminder for registered events
+  - Reminder for Meetings
+- Chat between matched users
+- Create/Edit/Cancel a Meeting with matched user
 
