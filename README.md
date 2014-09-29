@@ -13,12 +13,14 @@ ChickTech Connect is the mobile window into the world of ChickTech.org! It promo
 * Assign mentors & students to each other
 * Create group events
 * See history of meetings between mentors & students
+
 ### Student portal
 * View/add/edit info (same as organizer’s “add a student” view)
 * See events & RSVP
 * Chat with mentor
 * Input last meeting with mentor
 * View mentor profile
+
 ### Mentor portal
 * View/add/edit info (same as organizer’s “add a volunteer” view)
 * See events & RSVP
