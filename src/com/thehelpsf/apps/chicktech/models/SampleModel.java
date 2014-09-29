@@ -1,4 +1,4 @@
-package com.codepath.apps.restclienttemplate.models;
+package com.thehelpsf.apps.chicktech.models;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.codepath.apps.restclienttemplate;
+package com.thehelpsf.apps.chicktech;
 
 import org.scribe.builder.api.Api;
 import org.scribe.builder.api.FlickrApi;
