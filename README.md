@@ -31,6 +31,8 @@ ChickTech Connect is the mobile window into the world of ChickTech.org! It promo
 * View student profile
 
 
+#### Notes from assignment
+
 - [ ] Required (core) user stories for your app in a bulleted list
 - [ ] Optional (nice to have) user stories listed separately
 - [ ] Tip: You can follow a similar format to stories specified for the weekly projects
