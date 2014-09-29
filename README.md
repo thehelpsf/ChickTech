@@ -19,6 +19,9 @@ Once the student is registered for the year-long program and is assigned a mento
 2. Register for upcoming events
 3. Communicate easily and regularly with mentor
 
+In this way the student will be proactively notified of upcoming events and the student will be able to easily contact her mentor, increasing the chance of avoiding attrition. 
+
+
 ### App Audience
 
 * Students (Primary)
