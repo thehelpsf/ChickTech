@@ -5,13 +5,13 @@
 
 ChickTech Connect is the mobile window into the world of ChickTech.org! It promotes communcaiton between mentors and students and allows organizers to push messages to volunteers and students to announce upcoming events.
 
-### What problem does this app address: 
+### What problem does this app address
 
 The number one issue for ChickTech is *attrition*.
 
 ChickTech provides a year long program for high school girls to learn about science and math through hands-on events and mentorship. The problem is that girls start the program and drop off as the year goes on. Organizers don’t successfully inform girls about upcoming events and get the girls registered. Girls don’t make and/or keep monthly appointments with their mentor.
 
-### How does this app solve that problem: 
+### How does this app solve that problem
 
 Once the student is registered for the year-long program and is assigned a mentor, she can use this app to:
 
