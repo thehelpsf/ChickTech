@@ -35,7 +35,7 @@ Secondary
 - Student signs on / app activation
 - (Use Parse backend to manually enter people and events and trigger push notifications)
 - Student receivies push notification when a new event has been added
-- Student Edit Profile
+- Student Edit Profile (including photo)
 - Student View events list
 - Student tap event to see event detail
 - Student Register for an Event
