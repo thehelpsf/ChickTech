@@ -65,4 +65,8 @@ Secondary
   - Reminder for registered events
   - Reminder for Meetings
 - Create/Edit/Cancel a Meeting with matched user
+- More Event Details
+- Export Event to Calendar
+- More User/Organizer Profile Details
+- Support Multiple Chapters per Organization, each Chapter has its own
 
