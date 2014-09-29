@@ -24,53 +24,38 @@ In this way the student will be proactively notified of upcoming events and the 
 
 ### App Audience
 
-* Students (Primary)
-* ChickTech.org Organizers
-* Mentors
+Primary
+* Students
 
+Secondary
+* Mentors
+* ChickTech.org Organizers
 
 ## Required User Stories:
-- Organizer Registration:
-  - Organization name
-  - e-mail
-  - password
-- User Registration
-  - Name
-  - Choose organization
-  - e-mail
-  - password
-  - type (mentor/student)
-- Edit Profile:
-  - Name
-  - e-mail
-  - phone number
-  - password
-- View Events, each event containing:
-  - Name
-  - Description
-  - Time
-  - Location
-- Register for an Event
-- Push Notification when a new event has been added
-- View Matched User (student -> mentor, mentor -> student)
-  - Profile
-  - Registered Events
-- View Organizer Profile
-- Organizer Actions:
-  - View All Users
-    - Profile
-    - Registered Events
-  - Add/Delete User Profile
-    - Name
-    - e-mail
-    - phone number
-    - temporary password
-    - type (mentor/student)
-  - Assign Student User to Mentor User
-  - Add/Edit/Delete Events
+- Student signs on / app activation
+- (Use Parse backend to manually enter people and events and trigger push notifications)
+- Student receivies push notification when a new event has been added
+- Student Edit Profile
+- Student View events list
+- Student tap event to see event detail
+- Student Register for an Event
+- Student receives notificaitons about going to event
+- Student gets directions to event
+- Student View Matched User (student -> mentor, mentor -> student)
+- Student View Organizer Profile
 
-Optional User Stories:
+## Optional User Stories (Organizer and Mentor functionality)
 
+- Mentor signs on / activiates app
+- Mentor sees events, details, RSVPs like student can
+- Mentor sees deatil about mentee
+- Mentor/Student chat
+- Organizer signs on 
+- Organizer Add/Edit/Delete Events
+- Organizer send message to all students
+- Organizer View All Users
+- Organizer Add/Delete User Profile
+- Organizer Assign Student User to Mentor User
 - Recommend an event to matched user
 - Password Reset + E-mail with temporary password
 - Require User to choose new password after using a temporary password
@@ -79,6 +64,5 @@ Optional User Stories:
   - Matched User recommended an event
   - Reminder for registered events
   - Reminder for Meetings
-- Chat between matched users
 - Create/Edit/Cancel a Meeting with matched user
 
