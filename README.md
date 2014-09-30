@@ -35,14 +35,15 @@ Secondary
 - Student signs on / app activation
 - (Use Parse backend to manually enter people and events and trigger push notifications)
 - Student receivies push notification when a new event has been added
-- Student Edit Profile (including photo)
-- Student View events list
-- Student tap event to see event detail
-- Student Register for an Event
-- Student receives notificaitons about going to event
+- Student views events list
+- Student taps event to see event detail
+- Student RSVPs for an event
+- Student edits profile (including photo)
+
+- Student receives reminder notificaitons about going to event
 - Student gets directions to event
-- Student View Matched User (student -> mentor, mentor -> student)
-- Student View Organizer Profile
+- Student views matched user (student -> mentor, mentor -> student)
+- Student views organizer profile
 
 ## Optional User Stories (Organizer and Mentor functionality)
 
