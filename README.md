@@ -39,7 +39,6 @@ Secondary
 - Student taps event to see event detail
 - Student RSVPs for an event
 - Student edits profile (including photo)
-
 - Student receives reminder notificaitons about going to event
 - Student gets directions to event
 - Student views matched user (student -> mentor, mentor -> student)
