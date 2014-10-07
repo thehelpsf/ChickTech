@@ -70,3 +70,8 @@ Secondary
 - More User/Organizer Profile Details
 - Support Multiple Chapters per Organization, each Chapter has its own
 
+
+## Wireframes
+
+https://docs.google.com/drawings/d/1Dinn5yW31zc4-HH0CjdRfvuECTHc8TRwsP8ka0mNLHw/edit?usp=sharing
+
