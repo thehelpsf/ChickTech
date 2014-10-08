@@ -1,11 +1,12 @@
-package com.thehelpsf.apps.chicktech;
+package org.chicktech;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 
-import com.codepath.apps.restclienttemplate.R;
 import com.codepath.oauth.OAuthLoginActivity;
+
+import org.chicktech.R;
 
 public class LoginActivity extends OAuthLoginActivity<RestClient> {
 

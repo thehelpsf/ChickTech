@@ -1,4 +1,4 @@
-package com.thehelpsf.apps.chicktech;
+package org.chicktech;
 
 import android.content.Context;
 

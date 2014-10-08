@@ -1,4 +1,4 @@
-package com.thehelpsf.apps.chicktech.models;
+package org.chicktech;
 
 import java.util.List;
 
