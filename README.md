@@ -32,43 +32,43 @@ Secondary
 * ChickTech.org Organizers
 
 ## Required User Stories:
-- Student signs on / app activation
-- (Use Parse backend to manually enter people and events and trigger push notifications)
-- Student receivies push notification when a new event has been added
-- Student views events list
-- Student taps event to see event detail
-- Student RSVPs for an event
-- Student edits profile (including photo)
-- Student receives reminder notificaitons about going to event
-- Student gets directions to event
-- Student views matched user (student -> mentor, mentor -> student)
-- Student views organizer profile
+- [ ] Student signs on / app activation
+- [ ] (Use Parse backend to manually enter people and events and trigger push notifications)
+- [ ] Student receivies push notification when a new event has been added
+- [ ] Student views events list
+- [ ] Student taps event to see event detail
+- [ ] Student RSVPs for an event
+- [ ] Student edits profile (including photo)
+- [ ] Student receives reminder notificaitons about going to event
+- [ ] Student gets directions to event
+- [ ] Student views matched user (student -> mentor, mentor -> student)
+- [ ] Student views organizer profile
 
 ## Optional User Stories (Organizer and Mentor functionality)
 
-- Mentor signs on / activiates app
-- Mentor sees events, details, RSVPs like student can
-- Mentor sees deatil about mentee
-- Mentor/Student chat
-- Organizer signs on 
-- Organizer Add/Edit/Delete Events
-- Organizer send message to all students
-- Organizer View All Users
-- Organizer Add/Delete User Profile
-- Organizer Assign Student User to Mentor User
-- Recommend an event to matched user
-- Password Reset + E-mail with temporary password
-- Require User to choose new password after using a temporary password
-- More Push Notifications
-  - An event has been updated
-  - Matched User recommended an event
-  - Reminder for registered events
-  - Reminder for Meetings
-- Create/Edit/Cancel a Meeting with matched user
-- More Event Details
-- Export Event to Calendar
-- More User/Organizer Profile Details
-- Support Multiple Chapters per Organization, each Chapter has its own
+- [ ] Mentor signs on / activiates app
+- [ ] Mentor sees events, details, RSVPs like student can
+- [ ] Mentor sees deatil about mentee
+- [ ] Mentor/Student chat
+- [ ] Organizer signs on 
+- [ ] Organizer Add/Edit/Delete Events
+- [ ] Organizer send message to all students
+- [ ] Organizer View All Users
+- [ ] Organizer Add/Delete User Profile
+- [ ] Organizer Assign Student User to Mentor User
+- [ ] Recommend an event to matched user
+- [ ] Password Reset + E-mail with temporary password
+- [ ] Require User to choose new password after using a temporary password
+- [ ] More Push Notifications
+  - [ ] An event has been updated
+  - [ ] Matched User recommended an event
+  - [ ] Reminder for registered events
+  - [ ] Reminder for Meetings
+- [ ] Create/Edit/Cancel a Meeting with matched user
+- [ ] More Event Details
+- [ ] Export Event to Calendar
+- [ ] More User/Organizer Profile Details
+- [ ] Support Multiple Chapters per Organization, each Chapter has its own
 
 
 ## Wireframes
