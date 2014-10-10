@@ -1,4 +1,4 @@
-package com.thehelpsf.apps.chicktech;
+package org.chicktech;
 
 import org.scribe.builder.api.Api;
 import org.scribe.builder.api.FlickrApi;
