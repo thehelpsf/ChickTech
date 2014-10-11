@@ -2,10 +2,12 @@ package org.chicktech.fragments;
 
 import java.util.ArrayList;
 
+import org.chicktech.EventDetailActivity;
 import org.chicktech.R;
 import org.chicktech.adapters.EventArrayAdapter;
 import org.chicktech.models.CTEvent;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class EventsFragment extends Fragment {
 	ListView lvEvents;
@@ -44,7 +45,9 @@ public class EventsFragment extends Fragment {
 		lvEvents.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Toast.makeText(getActivity(), "See event detail", Toast.LENGTH_SHORT).show();
+//				Toast.makeText(getActivity(), "See event detail", Toast.LENGTH_SHORT).show();
+				Intent i = new Intent(getActivity(), EventDetailActivity.class);
+				startActivity(i);
 			}
 		});
 	}
