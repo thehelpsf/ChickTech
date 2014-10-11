@@ -28,7 +28,7 @@ public class MainActivity extends ActionBarActivity {
 		dlDrawer.setupDrawerConfiguration((ListView) findViewById(R.id.lvDrawer), 
                      R.layout.drawer_nav_item, R.id.flContent);
 		// Add nav items
-		dlDrawer.addNavItem("Events", "Events Fragment", EventsFragment.class);
+		dlDrawer.addNavItem("Events", "Events", EventsFragment.class);
 		dlDrawer.addNavItem("Profile", "Profile Fragment", ProfileFragment.class);
 		dlDrawer.addNavItem("Chat", "Chat Fragment", ChatFragment.class);
 		// Select default
