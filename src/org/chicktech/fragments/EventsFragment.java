@@ -1,4 +1,4 @@
-package org.chicktech;
+package org.chicktech.fragments;
 
 import android.support.v4.app.Fragment;
 

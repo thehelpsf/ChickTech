@@ -1,4 +1,4 @@
-package org.chicktech;
+package org.chicktech.activities;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -7,6 +7,7 @@ import android.view.View;
 import com.codepath.oauth.OAuthLoginActivity;
 
 import org.chicktech.R;
+import org.chicktech.RestClient;
 
 public class LoginActivity extends OAuthLoginActivity<RestClient> {
 

@@ -1,8 +1,13 @@
-package org.chicktech;
+package org.chicktech.activities;
+
+import org.chicktech.FragmentNavigationDrawer;
+import org.chicktech.R;
+import org.chicktech.fragments.ChatFragment;
+import org.chicktech.fragments.EventsFragment;
+import org.chicktech.fragments.ProfileFragment;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
