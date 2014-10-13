@@ -2,9 +2,9 @@
 <merger version="2" >
 
     <dataSet config="main" >
-        <source path="/Users/kenanpulak/Documents/android/ChickTech/app/src/androidTest/res" />
-        <source path="/Users/kenanpulak/Documents/android/ChickTech/app/build/generated/res/rs/test/debug" />
-        <source path="/Users/kenanpulak/Documents/android/ChickTech/app/build/generated/res/generated/test/debug" />
+        <source path="/Users/jingidy/Stuff/codepath/ChickTech/app/src/androidTest/res" />
+        <source path="/Users/jingidy/Stuff/codepath/ChickTech/app/build/generated/res/rs/test/debug" />
+        <source path="/Users/jingidy/Stuff/codepath/ChickTech/app/build/generated/res/generated/test/debug" />
     </dataSet>
 
 </merger>
