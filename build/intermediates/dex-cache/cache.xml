@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="/Users/kenanpulak/Documents/android/ChickTech/app/build/intermediates/pre-dexed/debug/android-async-http-1.4.3-0ae68e9cadc8122dbeb78a290f26190706ce951c.jar"
+        jar="/Users/kenanpulak/Documents/android/ChickTech/app/libs/android-async-http-1.4.3.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="f70e680861fdf9449819003e7799a4e9aca047f8"/>
+    <item
+        dex="/Users/kenanpulak/Documents/android/ChickTech/app/build/intermediates/pre-dexed/debug/support-v4-19.1.0-fe930dc68beb1e566675ce71b270d4091c6c249b.jar"
+        jar="/Applications/Android Studio.app/sdk/extras/android/m2repository/com/android/support/support-v4/19.1.0/support-v4-19.1.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67"/>
+    <item
+        dex="/Users/kenanpulak/Documents/android/ChickTech/app/build/intermediates/pre-dexed/debug/codepath-oauth-0.3.0-1a6313a0fc219c47533eb2a2f1a6525aa5a988fd.jar"
+        jar="/Users/kenanpulak/Documents/android/ChickTech/app/libs/codepath-oauth-0.3.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="b90f1c3541987f690e2fb854775914cc23266250"/>
+    <item
+        dex="/Users/kenanpulak/Documents/android/ChickTech/app/build/intermediates/pre-dexed/debug/universal-image-loader-1.8.4-ab263d95ff9ec721dcd467e73784f6447f1c8a57.jar"
+        jar="/Users/kenanpulak/Documents/android/ChickTech/app/libs/universal-image-loader-1.8.4.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="eee81e43531ce82db1781c5a8b27781ca384eede"/>
+    <item
+        dex="/Users/kenanpulak/Documents/android/ChickTech/app/build/intermediates/pre-dexed/debug/scribe-codepath-08d3018dc86a7faed5fb7296a199fdd4eca8b0f3.jar"
+        jar="/Users/kenanpulak/Documents/android/ChickTech/app/libs/scribe-codepath.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="6e0748acc9e7be0695de0d38016d260df52d9167"/>
+    <item
+        dex="/Users/kenanpulak/Documents/android/ChickTech/app/build/intermediates/pre-dexed/debug/codepath-utils-314c56d9604b8e4f0dce8113438e27d6b8c30cac.jar"
+        jar="/Users/kenanpulak/Documents/android/ChickTech/app/libs/codepath-utils.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="10901a5ef726eacf1b2443b7f38dc4cc9cd3f7d4"/>
+    <item
+        dex="/Users/kenanpulak/Documents/android/ChickTech/app/build/intermediates/pre-dexed/debug/ActiveAndroid-3.1-adcddac4c58-e0e3acd23d115b046bd60c7191c9a3e1d40bcc2d.jar"
+        jar="/Users/kenanpulak/Documents/android/ChickTech/app/libs/ActiveAndroid-3.1-adcddac4c58.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="e550c03ed8bcfe3b9f97d8c5ce6e8ee305f3beed"/>
+    <item
+        dex="/Users/kenanpulak/Documents/android/ChickTech/app/build/intermediates/pre-dexed/debug/classes-09430966117308744c5b0a135e7323197d4ec3c3.jar"
+        jar="/Users/kenanpulak/Documents/android/ChickTech/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="3499ceba05ca1f6037c6a2fad73df8f636224a28"/>
+
+</pre-dex-items>
