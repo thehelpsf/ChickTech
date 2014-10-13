@@ -23,6 +23,8 @@ public class EventDetailActivity extends Activity {
 	ListView lvGirlsGoing;
 	TextView tvName;
 	TextView tvDescription;
+	TextView tvDate;
+	TextView tvLocation;
 	
 	
 	@Override
@@ -37,9 +39,13 @@ public class EventDetailActivity extends Activity {
 		tvName = (TextView) findViewById(R.id.tvEventName);
 		tvDescription = (TextView) findViewById(R.id.tvEventDescription);
 		lvGirlsGoing = (ListView) findViewById(R.id.lvGirlsGoing);
+		tvDate  = (TextView) findViewById(R.id.tvDate);
+		tvLocation = (TextView) findViewById(R.id.tvLocation);
 		
 		tvName.setText(event.getName());
 		tvDescription.setText(Html.fromHtml(event.getDescription()));
+		tvDate.setText(event.getStartDate());
+		tvLocation.setText(event.getLocation());
 		
 		girlsGoing = new ArrayList<String>();
 		girlsGoing.add("Bonnie");
