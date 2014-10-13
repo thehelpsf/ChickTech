@@ -22,6 +22,7 @@ public class EventDetailActivity extends Activity {
 	TextView tvName;
 	TextView tvDescription;
 	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

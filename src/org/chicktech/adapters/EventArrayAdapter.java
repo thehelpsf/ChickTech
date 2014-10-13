@@ -13,8 +13,14 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 public class EventArrayAdapter extends ArrayAdapter<CTEvent> {
-	TextView tvName;
-	TextView tvDescription;
+	ViewHolder viewHolder;
+	View view;
+
+	// View lookup cache
+	private static class ViewHolder {
+		TextView tvName;
+		TextView tvDescription;
+	}
 
 	public EventArrayAdapter(Context context, List<CTEvent> events) {
 		super(context, R.layout.item_event, events);
@@ -25,14 +31,17 @@ public class EventArrayAdapter extends ArrayAdapter<CTEvent> {
 		CTEvent event = getItem(position);
 		
 		if (convertView == null) {
+			viewHolder = new ViewHolder();
 			convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_event, parent, false);
-		} 
+			viewHolder.tvName = (TextView) convertView.findViewById(R.id.tvEventName);
+			viewHolder.tvDescription = (TextView) convertView.findViewById(R.id.tvEventDescription);
+			convertView.setTag(viewHolder);
+		} else {
+			viewHolder = (ViewHolder) convertView.getTag();
+		}
 		
-		tvName = (TextView) convertView.findViewById(R.id.tvEventName);
-		tvDescription = (TextView) convertView.findViewById(R.id.tvEventDescription);
-		
-		tvName.setText(event.getName());
-		tvDescription.setText(event.getDescription());
+		viewHolder.tvName.setText(event.getName());
+		viewHolder.tvDescription.setText(event.getDescription());
 		
 		return convertView;
 	}
