@@ -1,6 +1,14 @@
 package org.chicktech.models;
 
-public class CTEvent {
+import java.io.Serializable;
+
+public class CTEvent implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6878520745648415077L;
+	
+	
 	private String mName;
 	private String mDescription;
 	

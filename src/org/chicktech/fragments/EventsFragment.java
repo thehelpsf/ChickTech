@@ -46,7 +46,9 @@ public class EventsFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //				Toast.makeText(getActivity(), "See event detail", Toast.LENGTH_SHORT).show();
+				CTEvent event = (CTEvent) events.get(position);
 				Intent i = new Intent(getActivity(), EventDetailActivity.class);
+				i.putExtra("event", event);
 				startActivity(i);
 			}
 		});
