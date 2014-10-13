@@ -1,0 +1,137 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+* .gitignore
+* .idea/
+* .idea/.name
+* .idea/compiler.xml
+* .idea/copyright/
+* .idea/copyright/profiles_settings.xml
+* .idea/encodings.xml
+* .idea/misc.xml
+* .idea/modules.xml
+* .idea/scopes/
+* .idea/scopes/scope_settings.xml
+* .idea/vcs.xml
+* .idea/workspace.xml
+* README.md
+* app/
+* app/build.gradle
+* app/libs/
+* app/libs/ActiveAndroid-3.1-adcddac4c58.jar
+* app/libs/android-async-http-1.4.3.jar
+* app/libs/codepath-oauth-0.3.0.jar
+* app/libs/codepath-utils.jar
+* app/libs/scribe-codepath.jar
+* app/libs/universal-image-loader-1.8.4.jar
+* app/src/
+* app/src/main/
+* app/src/main/AndroidManifest.xml
+* app/src/main/java/
+* app/src/main/java/org/
+* app/src/main/java/org/chicktech/
+* app/src/main/java/org/chicktech/FragmentNavigationDrawer.java
+* app/src/main/java/org/chicktech/RestClient.java
+* app/src/main/java/org/chicktech/RestClientApp.java
+* app/src/main/java/org/chicktech/activities/
+* app/src/main/java/org/chicktech/activities/LoginActivity.java
+* app/src/main/java/org/chicktech/activities/MainActivity.java
+* app/src/main/java/org/chicktech/fragments/
+* app/src/main/java/org/chicktech/fragments/ChatFragment.java
+* app/src/main/java/org/chicktech/fragments/EventsFragment.java
+* app/src/main/java/org/chicktech/fragments/ProfileFragment.java
+* app/src/main/java/org/chicktech/models/
+* app/src/main/java/org/chicktech/models/SampleModel.java
+* app/src/main/res/
+* app/src/main/res/drawable-hdpi/
+* app/src/main/res/drawable-hdpi/drawer_shadow.9.png
+* app/src/main/res/drawable-hdpi/ic_drawer.png
+* app/src/main/res/drawable-hdpi/ic_launcher.png
+* app/src/main/res/drawable-mdpi/
+* app/src/main/res/drawable-mdpi/drawer_shadow.9.png
+* app/src/main/res/drawable-mdpi/ic_drawer.png
+* app/src/main/res/drawable-mdpi/ic_launcher.png
+* app/src/main/res/drawable-xhdpi/
+* app/src/main/res/drawable-xhdpi/drawer_shadow.9.png
+* app/src/main/res/drawable-xhdpi/ic_drawer.png
+* app/src/main/res/drawable-xhdpi/ic_launcher.png
+* app/src/main/res/drawable-xxhdpi/
+* app/src/main/res/drawable-xxhdpi/ic_launcher.png
+* app/src/main/res/layout/
+* app/src/main/res/layout/activity_login.xml
+* app/src/main/res/layout/activity_main.xml
+* app/src/main/res/layout/drawer_nav_item.xml
+* app/src/main/res/menu/
+* app/src/main/res/menu/login.xml
+* app/src/main/res/menu/photos.xml
+* app/src/main/res/values-sw600dp/
+* app/src/main/res/values-sw600dp/dimens.xml
+* app/src/main/res/values-sw720dp-land/
+* app/src/main/res/values-sw720dp-land/dimens.xml
+* app/src/main/res/values-v11/
+* app/src/main/res/values-v11/styles.xml
+* app/src/main/res/values-v14/
+* app/src/main/res/values-v14/styles.xml
+* app/src/main/res/values/
+* app/src/main/res/values/dimens.xml
+* app/src/main/res/values/strings.xml
+* app/src/main/res/values/styles.xml
+* build.gradle
+* gradle/
+* gradle/wrapper/
+* gradle/wrapper/gradle-wrapper.jar
+* gradle/wrapper/gradle-wrapper.properties
+* gradlew
+* gradlew.bat
+* ic_launcher-web.png
+* proguard-project.txt
+* settings.gradle
+
+Replaced Libraries with Dependencies:
+-------------------------------------
+The importer recognized the following library projects as third party
+libraries and replaced them with Gradle dependencies instead. This has
+the advantage that more explicit version information is known, and the
+libraries can be updated automatically. However, it is possible that
+the source files in your project were of an older version than the
+dependency we picked, which could render the project not compileable.
+You can disable the library replacement in the import wizard and try
+again:
+
+appcompat-v7 => [com.android.support:appcompat-v7:19.1.0]
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+* AndroidManifest.xml => app/src/main/AndroidManifest.xml
+* libs/ActiveAndroid-3.1-adcddac4c58.jar => app/libs/ActiveAndroid-3.1-adcddac4c58.jar
+* libs/android-async-http-1.4.3.jar => app/libs/android-async-http-1.4.3.jar
+* libs/codepath-oauth-0.3.0.jar => app/libs/codepath-oauth-0.3.0.jar
+* libs/codepath-utils.jar => app/libs/codepath-utils.jar
+* libs/scribe-codepath.jar => app/libs/scribe-codepath.jar
+* libs/universal-image-loader-1.8.4.jar => app/libs/universal-image-loader-1.8.4.jar
+* res/ => app/src/main/res/
+* src/ => app/src/main/java/
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)
