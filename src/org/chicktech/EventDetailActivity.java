@@ -1,18 +1,41 @@
 package org.chicktech;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 public class EventDetailActivity extends Activity {
-
+	ArrayList<String> girlsGoing;
+	ArrayAdapter<String> aGirlsGoing;
+	ListView lvGirlsGoing;
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event_detail);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
+		
+		lvGirlsGoing = (ListView) findViewById(R.id.lvGirlsGoing);
+		
+		girlsGoing = new ArrayList<String>();
+		girlsGoing.add("Bonnie");
+		girlsGoing.add("Steph");
+		girlsGoing.add("Linda");
+		girlsGoing.add("Liz");
+		girlsGoing.add("Brenda");
+		girlsGoing.add("Julie");
+		girlsGoing.add("Cathy");
+		girlsGoing.add("Lydia");
+		
+		aGirlsGoing = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, girlsGoing);
+		lvGirlsGoing.setAdapter(aGirlsGoing);
 	}
 	
 	@Override

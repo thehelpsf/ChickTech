@@ -12,20 +12,37 @@
         android:textColor="@color/chick_tech_green"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/tvEventDescription"
+    <LinearLayout
+        android:id="@+id/llRSVP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvEventName"
-        android:ellipsize="end"
-        android:maxLines="2"
-        android:text="Event Description" />
+        android:layout_alignLeft="@+id/llTime"
+        android:gravity="center_vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_below="@+id/tvEventName" >
+
+	    <TextView
+	        android:id="@+id/tvRSVPStatus"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="You have not RSVPd" />
+
+	    <Button
+	        android:id="@+id/btnRSVP"
+	        style="?android:attr/buttonStyleSmall"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:visibility="gone"
+	        android:text="RSVP" />
+    
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/llDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvEventDescription"
+        android:layout_below="@+id/llRSVP"
         android:gravity="center_vertical"
         android:layout_marginTop="10dp"
         android:orientation="horizontal" >
@@ -89,30 +106,30 @@
             android:text="SF State Auditorium" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/llRSVP"
+    <TextView
+        android:id="@+id/tvEventDescription"
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/llTime"
-        android:gravity="center_vertical"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:layout_below="@+id/llLocation" >
+        android:layout_below="@+id/llLocation"
+        android:text="Event Description" />
 
-	    <TextView
-	        android:id="@+id/tvRSVPStatus"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="You have not RSVPd" />
+    <TextView
+        android:id="@+id/tvPeopleTitle"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvEventDescription"
+        android:text="26 Girls Are Going" 
+        android:textColor="@color/chick_tech_green"
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
 
-	    <Button
-	        android:id="@+id/btnRSVP"
-	        style="?android:attr/buttonStyleSmall"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:visibility="gone"
-	        android:text="RSVP" />
+    <ListView
+        android:id="@+id/lvGirlsGoing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvPeopleTitle"
+        android:layout_below="@+id/tvPeopleTitle" >
+    </ListView>
     
-    </LinearLayout>
-
 </RelativeLayout>
