@@ -3,9 +3,6 @@ package org.chicktech.activities;
 import java.util.ArrayList;
 
 import org.chicktech.R;
-import org.chicktech.R.id;
-import org.chicktech.R.layout;
-import org.chicktech.R.menu;
 import org.chicktech.models.CTEvent;
 
 import android.app.Activity;

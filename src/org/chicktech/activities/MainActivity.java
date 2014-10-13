@@ -10,7 +10,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
 
@@ -50,7 +49,7 @@ public class MainActivity extends ActionBarActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
+		// MenuInflater inflater = getMenuInflater();
 		// Uncomment to inflate menu items to Action Bar      
 		// inflater.inflate(R.menu.main, menu);
 		return super.onCreateOptionsMenu(menu);
