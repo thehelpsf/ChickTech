@@ -37,7 +37,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:singleLine="true" />
+                android:singleLine="true"/>
 
             <EditText
                 android:layout_width="wrap_content"
@@ -63,7 +63,8 @@
                 android:layout_alignRight="@+id/imgPhoto"
                 style="?android:attr/borderlessButtonStyle"
                 android:textSize="12dp"
-                android:background="#888888"
+                android:background="@color/teal"
+                android:textColor="@android:color/white"
                 />
 
         </RelativeLayout>
@@ -92,8 +93,8 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:id="@+id/imgEmailIcon"
-                    android:background="#DDDDDD"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/ic_email_gray" />
 
                 <EditText
                     android:layout_width="match_parent"
@@ -119,8 +120,8 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:id="@+id/imgPhoneIcon"
-                    android:background="#DDDDDD"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/ic_phone_gray" />
 
                 <EditText
                     android:layout_width="match_parent"
@@ -146,8 +147,8 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:id="@+id/imgAddrIcon"
-                    android:background="#DDDDDD"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/ic_house_gray" />
 
                 <EditText
                     android:layout_width="match_parent"
@@ -213,6 +214,9 @@
             android:layout_height="wrap_content"
             android:text="Save"
             android:layout_marginTop="10dp"
-            android:id="@+id/btnSave"/>
+            android:id="@+id/btnSave"
+            style="?android:attr/borderlessButtonStyle"
+            android:textColor="@android:color/white"
+            android:background="@color/pink" />
     </LinearLayout>
 </ScrollView>

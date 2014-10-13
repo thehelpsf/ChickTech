@@ -22,7 +22,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:background="#DDDDDD" />
+            android:background="@color/lightGray" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -53,13 +53,13 @@
             android:layout_marginRight="10dp" />
 
         <Button
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:id="@+id/btnEdit"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             style="?android:attr/borderlessButtonStyle"
-            android:background="@android:drawable/ic_menu_edit"
+            android:background="@drawable/ic_edit"
             android:layout_centerVertical="true" />
 
     </RelativeLayout>
@@ -88,15 +88,16 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:id="@+id/imgEmailIcon"
-                    android:background="#DDDDDD"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/ic_email_gray" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="email@school.com"
                     android:id="@+id/tvEmail"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/darkGray" />
             </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
@@ -114,15 +115,16 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:id="@+id/imgPhoneIcon"
-                    android:background="#DDDDDD"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/ic_phone_gray" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="555-555-5555"
                     android:id="@+id/tvPhoneNumber"
-                    android:layout_gravity="center_vertical" />
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/darkGray" />
             </LinearLayout>
 
         <LinearLayout
@@ -140,15 +142,16 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:id="@+id/imgAddrIcon"
-                android:background="#DDDDDD"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_house_gray" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="100\nHome Lane\nSan Francisco, CA 00000"
                 android:id="@+id/tvAddress"
-                android:layout_gravity="center_vertical" />
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/darkGray" />
         </LinearLayout>
 
     </RelativeLayout>

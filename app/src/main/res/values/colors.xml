@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="brown" type="color">#736558</item>
+    <item name="pink" type="color">#F0659E</item>
+    <item name="teal" type="color">#4BBDC5</item>
+    <item name="lightGray" type="color">#E7E7E7</item>
+    <item name="darkGray" type="color">#9B9B9B</item>
+</resources>
