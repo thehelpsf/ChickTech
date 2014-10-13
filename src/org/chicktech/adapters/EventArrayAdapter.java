@@ -6,6 +6,7 @@ import org.chicktech.R;
 import org.chicktech.models.CTEvent;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +42,7 @@ public class EventArrayAdapter extends ArrayAdapter<CTEvent> {
 		}
 		
 		viewHolder.tvName.setText(event.getName());
-		viewHolder.tvDescription.setText(event.getDescription());
+		viewHolder.tvDescription.setText(Html.fromHtml(event.getDescription()));
 		
 		return convertView;
 	}

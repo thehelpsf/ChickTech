@@ -7,6 +7,7 @@ import org.chicktech.models.CTEvent;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -37,7 +38,7 @@ public class EventDetailActivity extends Activity {
 		lvGirlsGoing = (ListView) findViewById(R.id.lvGirlsGoing);
 		
 		tvName.setText(event.getName());
-		tvDescription.setText(event.getDescription());
+		tvDescription.setText(Html.fromHtml(event.getDescription()));
 		
 		girlsGoing = new ArrayList<String>();
 		girlsGoing.add("Bonnie");
