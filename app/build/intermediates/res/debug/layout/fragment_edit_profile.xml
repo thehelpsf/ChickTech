@@ -1,0 +1,218 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="org.chicktech.fragments.EditProfileFragment"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:id="@+id/imgPhoto"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:background="#DDDDDD" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:hint="My Name"
+                android:id="@+id/etName"
+                android:layout_alignTop="@+id/imgPhoto"
+                android:layout_toRightOf="@+id/imgPhoto"
+                android:layout_toEndOf="@+id/imgPhoto"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:singleLine="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="School Year"
+                android:id="@+id/etYear"
+                android:layout_toRightOf="@+id/imgPhoto"
+                android:layout_below="@+id/etName"
+                android:layout_alignBottom="@+id/imgPhoto"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:singleLine="true" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="Change"
+                android:id="@+id/btnChangeProfile"
+                android:layout_alignBottom="@+id/imgPhoto"
+                android:layout_alignLeft="@+id/imgPhoto"
+                android:layout_alignRight="@+id/imgPhoto"
+                style="?android:attr/borderlessButtonStyle"
+                android:textSize="12dp"
+                android:background="#888888"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="60dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/llEmail"
+                android:layout_marginBottom="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/imgEmailIcon"
+                    android:background="#DDDDDD"
+                    android:layout_marginRight="10dp"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="email@school.com"
+                    android:id="@+id/etEmail"
+                    android:layout_gravity="center_vertical"
+                    android:singleLine="true" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llEmail"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/llPhone">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/imgPhoneIcon"
+                    android:background="#DDDDDD"
+                    android:layout_marginRight="10dp"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="555-555-5555"
+                    android:id="@+id/etPhoneNumber"
+                    android:layout_gravity="center_vertical"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llPhone"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/imgAddrIcon"
+                    android:background="#DDDDDD"
+                    android:layout_marginRight="10dp"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="100\nHome Lane\nSan Francisco, CA 00000"
+                    android:id="@+id/etAddress"
+                    android:layout_gravity="center_vertical"
+                    android:maxLines="3" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Why are you interested in Tech?"
+                android:id="@+id/tvWhyLabel"
+                android:layout_marginBottom="10dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/etWhy"
+                android:hint="I am interested in tech because..." />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="What technologies are you interested in?"
+                android:id="@+id/tvWhatLabel"
+                android:layout_marginBottom="10dp"/>
+
+            <GridView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/gridView"
+                android:numColumns="3"
+                tools:listitem="@android:layout/simple_list_item_multiple_choice" />
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:layout_marginTop="10dp"
+            android:id="@+id/btnSave"/>
+    </LinearLayout>
+</ScrollView><!-- From: file:/Users/jingidy/Stuff/codepath/ChickTech/app/src/main/res/layout/fragment_edit_profile.xml -->
