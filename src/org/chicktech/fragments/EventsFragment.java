@@ -2,8 +2,8 @@ package org.chicktech.fragments;
 
 import java.util.ArrayList;
 
-import org.chicktech.EventDetailActivity;
 import org.chicktech.R;
+import org.chicktech.activities.EventDetailActivity;
 import org.chicktech.adapters.EventArrayAdapter;
 import org.chicktech.models.CTEvent;
 
@@ -46,7 +46,9 @@ public class EventsFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //				Toast.makeText(getActivity(), "See event detail", Toast.LENGTH_SHORT).show();
+				CTEvent event = (CTEvent) events.get(position);
 				Intent i = new Intent(getActivity(), EventDetailActivity.class);
+				i.putExtra("event", event);
 				startActivity(i);
 			}
 		});
@@ -56,11 +58,15 @@ public class EventsFragment extends Fragment {
 		CTEvent event;
 		events = new ArrayList<CTEvent>();
 		
-		event = new CTEvent("ChickTech Hoorah 1", "Come to the big kick-off event of the year! Have fun meeting new people and learning new things.");
+		event = new CTEvent("ChickTech Hoorah 1", "<b>Come to the big kick-off event</b> of the year! Have fun meeting new people and learning new things. ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit.");
 		events.add(event);
 		event = new CTEvent("ChickTech Hoorah 2", "Come to the big kick-off event of the year! Have fun meeting new people and learning new things.");
 		events.add(event);
 		event = new CTEvent("ChickTech Hoorah 3", "Come to the big kick-off event of the year! Have fun meeting new people and learning new things.");
+		events.add(event);
+		event = new CTEvent("ChickTech Hoorah 4", "Come to the big kick-off event of the year! Have fun meeting new people and learning new things. ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit.");
+		events.add(event);
+		event = new CTEvent("ChickTech Hoorah 5", "Come to the big kick-off event of the year! Have fun meeting new people and learning new things. ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit.");
 		events.add(event);
 	}
 	

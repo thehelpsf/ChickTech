@@ -8,24 +8,33 @@
         android:id="@+id/tvEventName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Event Name"
-        android:textColor="@color/chick_tech_green"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="@string/event_name_label"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/chick_tech_green" />
 
-    <TextView
-        android:id="@+id/tvEventDescription"
+    <LinearLayout
+        android:id="@+id/llRSVP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvEventName"
-        android:ellipsize="end"
-        android:maxLines="2"
-        android:text="Event Description" />
+        android:layout_alignLeft="@+id/llTime"
+        android:gravity="center_vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_below="@+id/tvEventName" >
 
+	    <TextView
+	        android:id="@+id/tvRSVPStatus"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/rsvp_not" />
+
+    </LinearLayout>
+    
     <LinearLayout
         android:id="@+id/llDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvEventDescription"
+        android:layout_below="@+id/llRSVP"
         android:gravity="center_vertical"
         android:layout_marginTop="10dp"
         android:orientation="horizontal" >
@@ -35,13 +44,14 @@
             android:layout_width="@dimen/icon_size"
             android:layout_height="@dimen/icon_size"
             android:layout_marginRight="5dp"
+            android:contentDescription="@string/calendar_icon"
             android:src="@drawable/ic_calendar" />
 
         <TextView
             android:id="@+id/tvDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="October 12, 2014" />
+            android:text="@string/date_label" />
     </LinearLayout>
 
     <LinearLayout
@@ -57,13 +67,14 @@
             android:layout_width="@dimen/icon_size"
             android:layout_height="@dimen/icon_size"
             android:layout_marginRight="5dp"
+            android:contentDescription="@string/clock_icon"
             android:src="@drawable/ic_clock" />
 
         <TextView
             android:id="@+id/tvTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="10am - 5pm" />
+            android:text="@string/time_label" />
         
     </LinearLayout>
 
@@ -80,39 +91,40 @@
             android:layout_width="@dimen/icon_size"
             android:layout_height="@dimen/icon_size"
             android:layout_marginRight="5dp"
+            android:contentDescription="@string/location_icon"
             android:src="@drawable/ic_location" />
 
         <TextView
             android:id="@+id/tvLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SF State Auditorium" />
+            android:text="@string/location_label" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/llRSVP"
+    <TextView
+        android:id="@+id/tvEventDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/llTime"
-        android:gravity="center_vertical"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:layout_below="@+id/llLocation" >
+        android:layout_below="@+id/llLocation"
+        android:layout_marginTop="10dp"
+        android:text="@string/event_desc_label" />
 
-	    <TextView
-	        android:id="@+id/tvRSVPStatus"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="You have not RSVPd" />
+    <TextView
+        android:id="@+id/tvPeopleTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvEventDescription"
+        android:layout_marginTop="10dp"
+        android:text="@string/girls_going_label"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/chick_tech_green" />
 
-	    <Button
-	        android:id="@+id/btnRSVP"
-	        style="?android:attr/buttonStyleSmall"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:visibility="gone"
-	        android:text="RSVP" />
+    <ListView
+        android:id="@+id/lvGirlsGoing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvPeopleTitle"
+        android:layout_below="@+id/tvPeopleTitle" >
+    </ListView>
     
-    </LinearLayout>
-
 </RelativeLayout>

@@ -6,6 +6,7 @@ import org.chicktech.R;
 import org.chicktech.models.CTEvent;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +14,16 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 public class EventArrayAdapter extends ArrayAdapter<CTEvent> {
-	TextView tvName;
-	TextView tvDescription;
+	ViewHolder viewHolder;
+	View view;
+
+	// View lookup cache
+	private static class ViewHolder {
+		TextView tvName;
+		TextView tvDescription;
+		TextView tvDate;
+		TextView tvLocation;
+	}
 
 	public EventArrayAdapter(Context context, List<CTEvent> events) {
 		super(context, R.layout.item_event, events);
@@ -25,14 +34,21 @@ public class EventArrayAdapter extends ArrayAdapter<CTEvent> {
 		CTEvent event = getItem(position);
 		
 		if (convertView == null) {
+			viewHolder = new ViewHolder();
 			convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_event, parent, false);
-		} 
+			viewHolder.tvName = (TextView) convertView.findViewById(R.id.tvEventName);
+			viewHolder.tvDescription = (TextView) convertView.findViewById(R.id.tvEventDescription);
+			viewHolder.tvDate = (TextView) convertView.findViewById(R.id.tvDate);
+			viewHolder.tvLocation = (TextView) convertView.findViewById(R.id.tvLocation);
+			convertView.setTag(viewHolder);
+		} else {
+			viewHolder = (ViewHolder) convertView.getTag();
+		}
 		
-		tvName = (TextView) convertView.findViewById(R.id.tvEventName);
-		tvDescription = (TextView) convertView.findViewById(R.id.tvEventDescription);
-		
-		tvName.setText(event.getName());
-		tvDescription.setText(event.getDescription());
+		viewHolder.tvName.setText(event.getName());
+		viewHolder.tvDescription.setText(Html.fromHtml(event.getDescription()));
+		viewHolder.tvDate.setText(event.getStartDate());
+		viewHolder.tvLocation.setText(event.getLocation());
 		
 		return convertView;
 	}
