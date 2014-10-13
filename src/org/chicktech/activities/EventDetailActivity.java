@@ -1,7 +1,11 @@
-package org.chicktech;
+package org.chicktech.activities;
 
 import java.util.ArrayList;
 
+import org.chicktech.R;
+import org.chicktech.R.id;
+import org.chicktech.R.layout;
+import org.chicktech.R.menu;
 import org.chicktech.models.CTEvent;
 
 import android.app.Activity;
@@ -31,7 +35,7 @@ public class EventDetailActivity extends Activity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		Intent i = getIntent();
-		event = (CTEvent) i.getSerializableExtra("event");
+		event = (CTEvent) i.getParcelableExtra("event");
 		
 		tvName = (TextView) findViewById(R.id.tvEventName);
 		tvDescription = (TextView) findViewById(R.id.tvEventDescription);

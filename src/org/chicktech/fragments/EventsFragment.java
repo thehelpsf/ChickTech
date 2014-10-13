@@ -2,8 +2,8 @@ package org.chicktech.fragments;
 
 import java.util.ArrayList;
 
-import org.chicktech.EventDetailActivity;
 import org.chicktech.R;
+import org.chicktech.activities.EventDetailActivity;
 import org.chicktech.adapters.EventArrayAdapter;
 import org.chicktech.models.CTEvent;
 
