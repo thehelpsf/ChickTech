@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ChickTech</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_main">ChickTech Connect</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="title_activity_event_detail">Event</string>
+    <string name="action_rsvp">RSVP</string>
+    <string name="event_name_label">Event Name</string>
+    <string name="rsvp_not">You have not RSVPd</string>
+    <string name="rsvp_yes">You have RSVPd YES</string>
+    <string name="rsvp_NO">You have RSVPd NO</string>
+    <string name="date_label">October 12, 2014</string>
+    <string name="time_label">10am - 5pm</string>
+    <string name="location_label">SF State Auditorium</string>
+    <string name="event_desc_label">Event Description</string>
+    <string name="girls_going_label">Girls Are Going</string>
+    <string name="calendar_icon">Calendar Icon</string>
+    <string name="clock_icon">Clock Icon</string>
+    <string name="location_icon">Location Icon</string>
+    <string name="hello_world">Hello world!</string>
+
+</resources>
