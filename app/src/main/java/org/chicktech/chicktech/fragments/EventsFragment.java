@@ -102,11 +102,11 @@ public class EventsFragment extends Fragment {
         lvEvents.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Toast.makeText(getActivity(), "See event detail", Toast.LENGTH_SHORT).show();
-//                Event event = (Event) events.get(position);
-//                Intent i = new Intent(getActivity(), EventDetailActivity.class);
-//                i.putExtra("event", event);
-//                startActivity(i);
+				//Toast.makeText(getActivity(), "See event detail", Toast.LENGTH_SHORT).show();
+                Event event = (Event) events.get(position);
+                Intent i = new Intent(getActivity(), EventDetailActivity.class);
+                i.putExtra("id", event.getObjectId());
+                startActivity(i);
             }
         });
     }

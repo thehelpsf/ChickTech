@@ -4,12 +4,18 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import org.chicktech.chicktech.R;
 import org.chicktech.chicktech.models.Event;
@@ -35,18 +41,30 @@ public class EventDetailActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent i = getIntent();
-        event = (Event) i.getSerializableExtra("event");
+        //event = (Event) i.getSerializableExtra("event");
+        String objectID = i.getStringExtra("id");
 
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
+        query.whereEqualTo("objectId", objectID);
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject event, ParseException e) {
+                if (event == null) {
+                    Log.d("score", "The getFirst request failed.");
+                } else {
+                    Log.d("score", "Retrieved the object.");
+                    fillTheForm(event);
+                }
+            }
+        });
+
+
+        // Get access to all the form controls
         tvName = (TextView) findViewById(R.id.tvEventName);
         tvDescription = (TextView) findViewById(R.id.tvEventDescription);
         lvGirlsGoing = (ListView) findViewById(R.id.lvGirlsGoing);
         tvDate  = (TextView) findViewById(R.id.tvDate);
         tvLocation = (TextView) findViewById(R.id.tvLocation);
-
-        tvName.setText(event.getTitle());
-        tvDescription.setText(Html.fromHtml(event.getDescription()));
-        tvDate.setText(event.getStartDate().toString());
-        //tvLocation.setText(event.getLocation());
 
         girlsGoing = new ArrayList<String>();
         girlsGoing.add("Bonnie");
@@ -60,6 +78,16 @@ public class EventDetailActivity extends Activity {
 
         aGirlsGoing = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, girlsGoing);
         lvGirlsGoing.setAdapter(aGirlsGoing);
+    }
+
+    private void fillTheForm(ParseObject object) {
+        Event event = (Event) object;
+        if (event != null) {
+            tvName.setText(event.getTitle());
+            tvDescription.setText(Html.fromHtml(event.getDescription()));
+            tvDate.setText(event.getStartDate().toString());
+            //tvLocation.setText(event.getLocation());
+        }
     }
 
     @Override

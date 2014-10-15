@@ -30,6 +30,7 @@ public class CTRestClient {
     public void getEventList(FindCallback<ParseObject> callback){
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
         //query.whereEqualTo("playerName", "Dan Stemkoski");
+        query.orderByAscending("startDate");
         query.findInBackground(callback);
     }
 
