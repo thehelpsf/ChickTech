@@ -12,13 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.chicktech.chicktech.R;
-import org.chicktech.chicktech.models.CTEvent;
+import org.chicktech.chicktech.models.Event;
 
 import java.util.ArrayList;
 
 public class EventDetailActivity extends Activity {
 
-    CTEvent event;
+    Event event;
     ArrayList<String> girlsGoing;
     ArrayAdapter<String> aGirlsGoing;
     ListView lvGirlsGoing;
@@ -35,7 +35,7 @@ public class EventDetailActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent i = getIntent();
-        event = (CTEvent) i.getParcelableExtra("event");
+        event = (Event) i.getSerializableExtra("event");
 
         tvName = (TextView) findViewById(R.id.tvEventName);
         tvDescription = (TextView) findViewById(R.id.tvEventDescription);
@@ -43,10 +43,10 @@ public class EventDetailActivity extends Activity {
         tvDate  = (TextView) findViewById(R.id.tvDate);
         tvLocation = (TextView) findViewById(R.id.tvLocation);
 
-        tvName.setText(event.getName());
+        tvName.setText(event.getTitle());
         tvDescription.setText(Html.fromHtml(event.getDescription()));
-        tvDate.setText(event.getStartDate());
-        tvLocation.setText(event.getLocation());
+        tvDate.setText(event.getStartDate().toString());
+        //tvLocation.setText(event.getLocation());
 
         girlsGoing = new ArrayList<String>();
         girlsGoing.add("Bonnie");

@@ -10,13 +10,14 @@ import android.widget.TextView;
 
 import org.chicktech.chicktech.R;
 import org.chicktech.chicktech.models.CTEvent;
+import org.chicktech.chicktech.models.Event;
 
 import java.util.List;
 
 /**
  * Created by kenanpulak on 10/14/14.
  */
-public class EventArrayAdapter extends ArrayAdapter<CTEvent> {
+public class EventArrayAdapter extends ArrayAdapter<Event> {
     ViewHolder viewHolder;
     View view;
 
@@ -28,13 +29,13 @@ public class EventArrayAdapter extends ArrayAdapter<CTEvent> {
         TextView tvLocation;
     }
 
-    public EventArrayAdapter(Context context, List<CTEvent> events) {
+    public EventArrayAdapter(Context context, List<Event> events) {
         super(context, R.layout.item_event, events);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        CTEvent event = getItem(position);
+        Event event = getItem(position);
 
         if (convertView == null) {
             viewHolder = new ViewHolder();
@@ -48,10 +49,10 @@ public class EventArrayAdapter extends ArrayAdapter<CTEvent> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.tvName.setText(event.getName());
+        viewHolder.tvName.setText(event.getTitle());
         viewHolder.tvDescription.setText(Html.fromHtml(event.getDescription()));
-        viewHolder.tvDate.setText(event.getStartDate());
-        viewHolder.tvLocation.setText(event.getLocation());
+        viewHolder.tvDate.setText(event.getStartDate().toString());
+        //viewHolder.tvLocation.setText(event.get);
 
         return convertView;
     }

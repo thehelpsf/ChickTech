@@ -25,6 +25,8 @@ import org.chicktech.chicktech.models.Person;
 import org.chicktech.chicktech.models.RSVP;
 import org.chicktech.chicktech.utils.FragmentNavigationDrawer;
 
+import java.util.Date;
+
 
 public class MainActivity extends ActionBarActivity {
 
@@ -41,9 +43,9 @@ public class MainActivity extends ActionBarActivity {
         dlDrawer.setupDrawerConfiguration((ListView) findViewById(R.id.lvDrawer),
                 R.layout.drawer_nav_item, R.id.flContent);
         // Add nav items
-        dlDrawer.addNavItem("Events", "Events Fragment", EventsFragment.class);
-        dlDrawer.addNavItem("Profile", "Profile Fragment", ProfileFragment.class);
-        dlDrawer.addNavItem("Chat", "Chat Fragment", ChatFragment.class);
+        dlDrawer.addNavItem("Events", "Events", EventsFragment.class);
+        dlDrawer.addNavItem("Profile", "Profile", ProfileFragment.class);
+        dlDrawer.addNavItem("Chat", "Chat", ChatFragment.class);
         // Select default
         if (savedInstanceState == null) {
             dlDrawer.selectDrawerItem(0);
@@ -68,12 +70,12 @@ public class MainActivity extends ActionBarActivity {
     private void sendModelsToParse(){
         Address tempAddress = new Address();
         ChatMessage tempChatMessage = new ChatMessage();
-        Event tempEvent = new Event();
+        //Event tempEvent = new Event("Event One", "This is the frist event of the year.", new Date(), new Date());
         Person tempPerson = new Person();
         RSVP tempRSVP = new RSVP();
         tempAddress.saveInBackground();
         tempChatMessage.saveInBackground();
-        tempEvent.saveInBackground();
+        //tempEvent.saveInBackground();
         tempPerson.saveInBackground();
         tempRSVP.saveInBackground();
     }

@@ -21,6 +21,17 @@ public class Event extends ParseObject {
     private Date endDate;
     */
 
+    public Event () {
+
+    }
+
+    public Event (String name, String description, Date startDate, Date endDate) {
+        setTitle(name);
+        setDescription(description);
+        setStartDate(startDate);
+        setEndDate(endDate);
+    }
+
     // Parse Getters
     public String getTitle() {
         return getString("title");
