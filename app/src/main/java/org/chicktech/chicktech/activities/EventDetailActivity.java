@@ -15,10 +15,10 @@ import android.widget.Toast;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
-import com.parse.ParseQuery;
 
 import org.chicktech.chicktech.R;
 import org.chicktech.chicktech.models.Event;
+import org.chicktech.chicktech.utils.CTRestClient;
 
 import java.util.ArrayList;
 
@@ -32,6 +32,7 @@ public class EventDetailActivity extends Activity {
     TextView tvDescription;
     TextView tvDate;
     TextView tvLocation;
+    CTRestClient parseClient;
 
 
     @Override
@@ -45,14 +46,14 @@ public class EventDetailActivity extends Activity {
         String objectID = i.getStringExtra("id");
 
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
-        query.whereEqualTo("objectId", objectID);
-        query.getFirstInBackground(new GetCallback<ParseObject>() {
+        parseClient = new CTRestClient();
+
+        parseClient.getPersonByID(objectID, new GetCallback<ParseObject>() {
             public void done(ParseObject event, ParseException e) {
                 if (event == null) {
-                    Log.d("score", "The getFirst request failed.");
+                    Log.d("event", "The getFirst request failed.");
                 } else {
-                    Log.d("score", "Retrieved the object.");
+                    //Log.d("event", "Retrieved the object.");
                     fillTheForm(event);
                 }
             }
@@ -86,7 +87,7 @@ public class EventDetailActivity extends Activity {
             tvName.setText(event.getTitle());
             tvDescription.setText(Html.fromHtml(event.getDescription()));
             tvDate.setText(event.getStartDate().toString());
-            //tvLocation.setText(event.getLocation());
+            tvLocation.setText(event.getAddressString());
         }
     }
 

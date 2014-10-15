@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import org.chicktech.chicktech.R;
-import org.chicktech.chicktech.models.CTEvent;
 import org.chicktech.chicktech.models.Event;
 
 import java.util.List;
@@ -52,7 +51,7 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
         viewHolder.tvName.setText(event.getTitle());
         viewHolder.tvDescription.setText(Html.fromHtml(event.getDescription()));
         viewHolder.tvDate.setText(event.getStartDate().toString());
-        //viewHolder.tvLocation.setText(event.get);
+        viewHolder.tvLocation.setText(event.getAddressString());
 
         return convertView;
     }

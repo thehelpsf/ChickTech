@@ -3,6 +3,7 @@ package org.chicktech.chicktech.utils;
 import android.util.Log;
 
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -30,6 +31,7 @@ public class CTRestClient {
     public void getEventList(FindCallback<ParseObject> callback){
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
         //query.whereEqualTo("playerName", "Dan Stemkoski");
+        query.include("location"); // the key which the associated object was stored
         query.orderByAscending("startDate");
         query.findInBackground(callback);
     }
@@ -42,8 +44,11 @@ public class CTRestClient {
 
     }
 
-    public void getPersonByID(String objectID){
-
+    public void getPersonByID(String objectID, GetCallback<ParseObject> callback){
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
+        query.whereEqualTo("objectId", objectID);
+        query.include("location"); // the key which the associated object was stored
+        query.getFirstInBackground(callback);
     }
 
     public void getPersonByPhoneNumber(String phoneNumber){

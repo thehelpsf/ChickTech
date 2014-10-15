@@ -22,11 +22,15 @@ import com.parse.ParseObject;
 import org.chicktech.chicktech.R;
 import org.chicktech.chicktech.activities.EventDetailActivity;
 import org.chicktech.chicktech.adapters.EventArrayAdapter;
+import org.chicktech.chicktech.models.Address;
 import org.chicktech.chicktech.models.Event;
 import org.chicktech.chicktech.utils.CTRestClient;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -92,10 +96,57 @@ public class EventsFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.action_new_event:
                 Toast.makeText(getActivity(), "launch new event activity", Toast.LENGTH_SHORT).show();
+                createNewEvent();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void createNewEvent() {
+
+//        Drone Workshop at Evergreen Museum
+//                ChickTech
+//        Saturday, August 9, 2014 from 8:00 AM to 7:00 PM (PDT)
+//        McMinnville, OR
+
+
+//        Address tempAddress = new Address("Intel Hawthorn Farm 3 Lobby",
+//                "5200 NE Elam Young Pkwy",
+//                "",
+//                "Hillsboro",
+//                "OR",
+//                "97214"
+//        );
+
+        Address tempAddress = new Address("Portland State University",
+            "1825 SW Broadway",
+            "Computer Lab EB 325 West",
+            "Portland",
+            "OR",
+            "97201"
+            );
+
+        //tempAddress.saveInBackground();
+
+        Date startDate;
+        Date endDate;
+
+        try {
+            startDate = new SimpleDateFormat("MMMM d, yyyy HH:mm", Locale.US).parse("October 18, 2014 10:00");
+            endDate = new SimpleDateFormat("MMMM d, yyyy HH:mm", Locale.US).parse("October 18, 2014 16:00");
+        } catch (java.text.ParseException pe) {
+            pe.printStackTrace();
+            return;
+        }
+
+        Event tempEvent = new Event("Explore Gaming Workshop",
+            "ChickTech and Pixel Arts are teaming up to provide a Gaming Comes to Life workshop on Saturday, October 18 from 10:00 am to 4:00 pm! Explore the important roles needed when creating games including storyteller, designer, programmer, artist, animator, and musician. You will gain hands-on experience by making a playable prototype as an individual or in groups. We will use fun, easy to pick-up game tools like Stencyl, Pixlr, Beepbox, and Twine. You don’t want to miss out!",
+            startDate,
+            endDate);
+        tempEvent.setLocation(tempAddress);
+        tempEvent.saveInBackground();
+
     }
 
     private void setupListeners() {
@@ -114,16 +165,5 @@ public class EventsFragment extends Fragment {
     private void createSampleEvents() {
         Event event;
         events = new ArrayList<Event>();
-
-//        event = new CTEvent("ChickTech Hoorah 1", "<b>Come to the big kick-off event</b> of the year! Have fun meeting new people and learning new things. ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit.");
-//        events.add(event);
-//        event = new CTEvent("ChickTech Hoorah 2", "Come to the big kick-off event of the year! Have fun meeting new people and learning new things.");
-//        events.add(event);
-//        event = new CTEvent("ChickTech Hoorah 3", "Come to the big kick-off event of the year! Have fun meeting new people and learning new things.");
-//        events.add(event);
-//        event = new CTEvent("ChickTech Hoorah 4", "Come to the big kick-off event of the year! Have fun meeting new people and learning new things. ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit.");
-//        events.add(event);
-//        event = new CTEvent("ChickTech Hoorah 5", "Come to the big kick-off event of the year! Have fun meeting new people and learning new things. ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit.");
-//        events.add(event);
     }
 }

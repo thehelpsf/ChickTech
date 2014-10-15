@@ -67,17 +67,27 @@ public class MainActivity extends ActionBarActivity {
     }
 
     // Temporary creation of models in parse for testing
-    private void sendModelsToParse(){
-        Address tempAddress = new Address();
-        ChatMessage tempChatMessage = new ChatMessage();
-        //Event tempEvent = new Event("Event One", "This is the frist event of the year.", new Date(), new Date());
-        Person tempPerson = new Person();
-        RSVP tempRSVP = new RSVP();
-        tempAddress.saveInBackground();
-        tempChatMessage.saveInBackground();
+    private void sendModelsToParse() {
+
+//        Address tempAddress = new Address("Portland State University",
+//                "1825 SW Broadway",
+//                "Computer Lab EB 325 West",
+//                "Portland",
+//                "OR",
+//                "97201"
+//                );
+//        tempAddress.saveInBackground();
+
+        //ChatMessage tempChatMessage = new ChatMessage();
+        //Event tempEvent = new Event("Event One", "This is the first event of the year.", new Date(), new Date());
+        //Person tempPerson = new Person();
+
+        //RSVP tempRSVP = new RSVP();
+
+        //tempChatMessage.saveInBackground();
         //tempEvent.saveInBackground();
-        tempPerson.saveInBackground();
-        tempRSVP.saveInBackground();
+        //tempPerson.saveInBackground();
+        //tempRSVP.saveInBackground();
     }
 
     @Override

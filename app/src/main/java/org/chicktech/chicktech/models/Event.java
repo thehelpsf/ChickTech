@@ -21,15 +21,23 @@ public class Event extends ParseObject {
     private Date endDate;
     */
 
-    public Event () {
+    public Event() {
 
     }
 
-    public Event (String name, String description, Date startDate, Date endDate) {
+    public Event(String name, String description, Date startDate, Date endDate) {
         setTitle(name);
         setDescription(description);
         setStartDate(startDate);
         setEndDate(endDate);
+    }
+
+    public String getAddressString() {
+        Address location = getLocation();
+        if (location != null) {
+            return location.toString();
+        }
+        return "unknown";
     }
 
     // Parse Getters
@@ -42,12 +50,17 @@ public class Event extends ParseObject {
     public String getImageURL() {
         return getString("imageURL");
     }
-    public String getAddressID() {return getString("addressID");}
+    public String getAddressID() {
+        return getString("addressID");
+    }
     public Date getStartDate() {
         return getDate("startDate");
     }
     public Date getEndDate() {
         return getDate("endDate");
+    }
+    public Address getLocation() {
+        return (Address) getParseObject("location");
     }
 
     // Parse Setters
@@ -68,6 +81,9 @@ public class Event extends ParseObject {
     }
     public void setEndDate(Date value) {
         put("endDate", value);
+    }
+    public void setLocation(Address value) {
+        put("location", value);
     }
 
 }
