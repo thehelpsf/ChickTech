@@ -21,5 +21,6 @@
     <string name="clock_icon">Clock Icon</string>
     <string name="location_icon">Location Icon</string>
     <string name="hello_world">Hello world!</string>
+    <string name="action_new_event">New Event</string>
 
 </resources>
