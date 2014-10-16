@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * Created by kenanpulak on 10/14/14.
  */
-@ParseClassName("Person")
+@ParseClassName("_User")
 public class Person extends ParseUser {
 
     //private int userID;
@@ -67,5 +67,6 @@ public class Person extends ParseUser {
     public void setLastLogin(Date value) {
         put("lastLogin", value);
     }
+
 
 }

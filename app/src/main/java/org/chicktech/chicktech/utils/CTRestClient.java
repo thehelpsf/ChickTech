@@ -1,14 +1,10 @@
 package org.chicktech.chicktech.utils;
 
-import android.util.Log;
-
 import com.parse.FindCallback;
 import com.parse.GetCallback;
-import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-
-import java.util.List;
+import com.parse.ParseUser;
 
 /**
  * Created by kenanpulak on 10/14/14.
@@ -51,8 +47,10 @@ public class CTRestClient {
         query.getFirstInBackground(callback);
     }
 
-    public void getPersonByPhoneNumber(String phoneNumber){
-
+    public static void getPersonByPhoneNumber(String phoneNumber, GetCallback<ParseUser> callback) {
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereEqualTo("phoneNumber", phoneNumber);
+        query.getFirstInBackground(callback);
     }
 
     public void sendChatMessage(int toPersonID, int fromPersonID, String message){

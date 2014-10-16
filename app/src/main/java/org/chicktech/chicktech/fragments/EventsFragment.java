@@ -18,12 +18,14 @@ import android.widget.Toast;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 import org.chicktech.chicktech.R;
 import org.chicktech.chicktech.activities.EventDetailActivity;
 import org.chicktech.chicktech.adapters.EventArrayAdapter;
 import org.chicktech.chicktech.models.Address;
 import org.chicktech.chicktech.models.Event;
+import org.chicktech.chicktech.models.Person;
 import org.chicktech.chicktech.utils.CTRestClient;
 
 import java.text.SimpleDateFormat;
@@ -48,6 +50,13 @@ public class EventsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+        Person user = (Person) ParseUser.getCurrentUser();
+        if (user != null) {
+            Toast.makeText(getActivity(), "got current user", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getActivity(), "no current user", Toast.LENGTH_SHORT).show();
+        }
     }
 
 

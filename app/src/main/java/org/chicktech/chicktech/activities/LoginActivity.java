@@ -13,11 +13,12 @@ import android.widget.Toast;
 import com.parse.GetCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
 import org.chicktech.chicktech.R;
+import org.chicktech.chicktech.models.Person;
+import org.chicktech.chicktech.utils.CTRestClient;
 
 public class LoginActivity extends Activity {
     private String mPhoneNumber;
@@ -31,12 +32,15 @@ public class LoginActivity extends Activity {
 
         etPhoneNumber = (EditText) findViewById(R.id.etPhoneNumber);
 
-        mPhoneNumber = getPhoneNumberFromSharedPrefs();
+        mSettings = getSharedPreferences("Settings", 0);
+
+        // See if phoneNumber is in Shared Prefs
+        mPhoneNumber = mSettings.getString("phoneNumber", "missing");
         if (!mPhoneNumber.equals("missing")) {
+            // Right now just fill in EditText and let user poke Get Started button
             etPhoneNumber.setText(mPhoneNumber);
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -65,9 +69,8 @@ public class LoginActivity extends Activity {
         editor.putString("phoneNumber", phoneNumber);
         editor.commit();
 
-        ParseQuery<ParseUser> query = ParseUser.getQuery();
-        query.whereEqualTo("phoneNumber", phoneNumber);
-        query.getFirstInBackground(new GetCallback<ParseUser>() {
+        // see if user exists on Parse yet.
+        CTRestClient.getPersonByPhoneNumber(phoneNumber, new GetCallback<ParseUser>() {
             public void done(ParseUser user, ParseException e) {
                 if (user == null) {
                     signUp(phoneNumber);
@@ -93,13 +96,12 @@ public class LoginActivity extends Activity {
     }
 
     private void signUp (String phoneNumber) {
-        ParseUser user = new ParseUser();
+        Person user = new Person();
         user.setUsername(phoneNumber);
         user.setPassword(phoneNumber);
         //user.setEmail(phoneNumber + "@example.com");
-
         // other fields can be set just like with ParseObject
-        user.put("phoneNumber", phoneNumber);
+        user.setPhoneNumber(phoneNumber);
 
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
@@ -111,11 +113,6 @@ public class LoginActivity extends Activity {
                 }
             }
         });
-    }
-
-    private String getPhoneNumberFromSharedPrefs() {
-        mSettings = getSharedPreferences("Settings", 0);
-        return mSettings.getString("phoneNumber", "missing");
     }
 
     private void moveOnToApp() {
