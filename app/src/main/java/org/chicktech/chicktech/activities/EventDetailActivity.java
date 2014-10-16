@@ -120,12 +120,9 @@ public class EventDetailActivity extends Activity {
             return;
         }
 
-        String latitude = "37.62";
-        String longitude = "-122.38";
         String zoomLevel = "18";
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
-        String dataOld = String.format("geo:%s,%s", latitude, longitude);
         String data = "geo:0,0?q=" + event.getAddressString();
         if (zoomLevel != null) {
             data = String.format("%s?z=%s", data, zoomLevel);
