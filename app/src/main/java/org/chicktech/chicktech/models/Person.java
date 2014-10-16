@@ -1,7 +1,7 @@
 package org.chicktech.chicktech.models;
 
 import com.parse.ParseClassName;
-import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 import java.util.Date;
 
@@ -9,7 +9,7 @@ import java.util.Date;
  * Created by kenanpulak on 10/14/14.
  */
 @ParseClassName("Person")
-public class Person extends ParseObject{
+public class Person extends ParseUser {
 
     //private int userID;
     //private Address address;
@@ -33,8 +33,7 @@ public class Person extends ParseObject{
     }
     public String getHandle() {
         return getString("handle");
-    }
-    public String getEmail() {return getString("email");}
+}
     public String getPhoneNumber() {return getString("phoneNumber");}
     public String getProfileImageUrl() {return getString("profileImageUrl");}
     public String getAddressID() {return getString("addressID");}
@@ -52,9 +51,6 @@ public class Person extends ParseObject{
     }
     public void setHandle(String value) {
         put("handle", value);
-    }
-    public void setEmail(String value) {
-        put("email", value);
     }
     public void setPhoneNumber(String value) {
         put("phoneNumber", value);
