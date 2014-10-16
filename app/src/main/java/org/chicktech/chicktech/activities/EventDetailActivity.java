@@ -2,6 +2,7 @@ package org.chicktech.chicktech.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -82,7 +83,7 @@ public class EventDetailActivity extends Activity {
     }
 
     private void fillTheForm(ParseObject object) {
-        Event event = (Event) object;
+        event = (Event) object;
         if (event != null) {
             tvName.setText(event.getTitle());
             tvDescription.setText(Html.fromHtml(event.getDescription()));
@@ -103,10 +104,33 @@ public class EventDetailActivity extends Activity {
             case android.R.id.home:
                 finish();
                 return true;
+            case R.id.action_goto_map:
+                gotoMaps();
+                return true;
             case R.id.action_rsvp:
                 Toast.makeText(this, "RSVP", Toast.LENGTH_SHORT).show();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void gotoMaps() {
+        if (event == null) {
+            Toast.makeText(this, "Don't have event object", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String latitude = "37.62";
+        String longitude = "-122.38";
+        String zoomLevel = "18";
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        String dataOld = String.format("geo:%s,%s", latitude, longitude);
+        String data = "geo:0,0?q=" + event.getAddressString();
+        if (zoomLevel != null) {
+            data = String.format("%s?z=%s", data, zoomLevel);
+        }
+        intent.setData(Uri.parse(data));
+        startActivity(intent);
     }
 }

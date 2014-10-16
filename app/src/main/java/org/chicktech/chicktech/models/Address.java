@@ -24,7 +24,7 @@ public class Address extends ParseObject {
 
     @Override
     public String toString() {
-        return getAddress1() + " in " + getCity() + ", " + getState();
+        return getAddress1() + ", " + getCity() + ", " + getState();
     }
 
     public String getName() {
