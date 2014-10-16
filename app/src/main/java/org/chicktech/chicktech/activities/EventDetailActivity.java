@@ -5,11 +5,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +34,7 @@ public class EventDetailActivity extends Activity {
     TextView tvDate;
     TextView tvLocation;
     CTRestClient parseClient;
+    ProgressBar pb;
 
 
     @Override
@@ -42,17 +43,19 @@ public class EventDetailActivity extends Activity {
         setContentView(R.layout.activity_event_detail);
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
+        pb = (ProgressBar) findViewById(R.id.pbLoading);
+
         Intent i = getIntent();
         //event = (Event) i.getSerializableExtra("event");
         String objectID = i.getStringExtra("id");
 
 
-        parseClient = new CTRestClient();
-
-        parseClient.getPersonByID(objectID, new GetCallback<ParseObject>() {
+        pb.setVisibility(ProgressBar.VISIBLE);
+        CTRestClient.getEventByID(objectID, new GetCallback<ParseObject>() {
             public void done(ParseObject event, ParseException e) {
+                pb.setVisibility(ProgressBar.INVISIBLE);
                 if (event == null) {
-                    Log.d("event", "The getFirst request failed.");
+                    Toast.makeText(EventDetailActivity.this, "Did not get event details", Toast.LENGTH_LONG).show();
                 } else {
                     //Log.d("event", "Retrieved the object.");
                     fillTheForm(event);

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -44,6 +45,7 @@ public class EventsFragment extends Fragment {
     EventArrayAdapter aEvents;
     ArrayList<Event> events;
     CTRestClient parseClient;
+    ProgressBar pb;
 
 
     @Override
@@ -53,7 +55,7 @@ public class EventsFragment extends Fragment {
 
         Person user = (Person) ParseUser.getCurrentUser();
         if (user != null) {
-            Toast.makeText(getActivity(), "got current user", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), "got current user", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getActivity(), "no current user", Toast.LENGTH_SHORT).show();
         }
@@ -68,6 +70,8 @@ public class EventsFragment extends Fragment {
         // Setup handles to view objects here
         // etFoo = (EditText) view.findViewById(R.id.etFoo);
 
+        pb = (ProgressBar) view.findViewById(R.id.pbLoading);
+
         createSampleEvents();
 
         aEvents = new EventArrayAdapter(getActivity(), events);
@@ -77,8 +81,11 @@ public class EventsFragment extends Fragment {
         setupListeners();
 
         parseClient = new CTRestClient();
+
+        pb.setVisibility(ProgressBar.VISIBLE);
         parseClient.getEventList(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> events, ParseException e) {
+                pb.setVisibility(ProgressBar.INVISIBLE);
                 if (e == null) {
                     aEvents.clear();
                     Log.d("events", "Retrieved " + events.size() + " events");
@@ -105,7 +112,7 @@ public class EventsFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.action_new_event:
                 Toast.makeText(getActivity(), "launch new event activity", Toast.LENGTH_SHORT).show();
-                createNewEvent();
+                //createNewEvent();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

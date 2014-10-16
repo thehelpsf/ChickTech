@@ -33,4 +33,14 @@
         android:onClick="onClickSignOn"
         android:layout_below="@+id/etPhoneNumber"
         android:layout_centerHorizontal="true" />
+
+    <ProgressBar
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pbWorking"
+        android:layout_alignTop="@+id/btnSignOn"
+        android:layout_toRightOf="@+id/btnSignOn"
+        android:layout_toEndOf="@+id/btnSignOn" />
+
 </RelativeLayout>

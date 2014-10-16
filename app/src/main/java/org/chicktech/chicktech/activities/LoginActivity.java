@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.parse.GetCallback;
@@ -24,6 +25,7 @@ public class LoginActivity extends Activity {
     private String mPhoneNumber;
     private SharedPreferences mSettings;
     EditText etPhoneNumber;
+    ProgressBar pb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,9 @@ public class LoginActivity extends Activity {
             // Right now just fill in EditText and let user poke Get Started button
             etPhoneNumber.setText(mPhoneNumber);
         }
+
+        pb = (ProgressBar) findViewById(R.id.pbWorking);
+
     }
 
     @Override
@@ -69,9 +74,12 @@ public class LoginActivity extends Activity {
         editor.putString("phoneNumber", phoneNumber);
         editor.commit();
 
+        pb.setVisibility(ProgressBar.VISIBLE);
+
         // see if user exists on Parse yet.
         CTRestClient.getPersonByPhoneNumber(phoneNumber, new GetCallback<ParseUser>() {
             public void done(ParseUser user, ParseException e) {
+                pb.setVisibility(ProgressBar.INVISIBLE);
                 if (user == null) {
                     signUp(phoneNumber);
                 } else {
@@ -83,8 +91,10 @@ public class LoginActivity extends Activity {
     }
 
     private void login (String phoneNumber) {
+        pb.setVisibility(ProgressBar.VISIBLE);
         ParseUser.logInInBackground(phoneNumber, phoneNumber, new LogInCallback() {
             public void done(ParseUser user, ParseException e) {
+                pb.setVisibility(ProgressBar.INVISIBLE);
                 if (user != null) {
                     Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
                     moveOnToApp();
@@ -96,6 +106,9 @@ public class LoginActivity extends Activity {
     }
 
     private void signUp (String phoneNumber) {
+
+        pb.setVisibility(ProgressBar.VISIBLE);
+
         Person user = new Person();
         user.setUsername(phoneNumber);
         user.setPassword(phoneNumber);
@@ -105,6 +118,7 @@ public class LoginActivity extends Activity {
 
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
+                pb.setVisibility(ProgressBar.INVISIBLE);
                 if (e == null) {
                     Toast.makeText(LoginActivity.this, "Sign Up Successful", Toast.LENGTH_LONG).show();
                     moveOnToApp();

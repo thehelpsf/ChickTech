@@ -40,7 +40,7 @@ public class CTRestClient {
 
     }
 
-    public void getPersonByID(String objectID, GetCallback<ParseObject> callback){
+    public static void getEventByID(String objectID, GetCallback<ParseObject> callback){
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
         query.whereEqualTo("objectId", objectID);
         query.include("location"); // the key which the associated object was stored
