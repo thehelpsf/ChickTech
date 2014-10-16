@@ -15,7 +15,7 @@ import org.chicktech.chicktech.models.ChatMessage;
 
 import java.util.ArrayList;
 
-public class ChatFragment extends Fragment {
+public class ChatFragment extends Fragment{
 
     Button btnSend;
     EditText etMessage;
@@ -51,6 +51,20 @@ public class ChatFragment extends Fragment {
         etMessage = (EditText) v.findViewById(R.id.etMessage);
         lvMessages = (ListView) v.findViewById(R.id.lvMessages);
 
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (etMessage.length() > 0){
+                    ChatMessage message = new ChatMessage();
+                    message.setToPersonID("49832");
+                    message.setFromPersonID("049392");
+                    message.setMessage(etMessage.getText().toString());
+                    aMessages.add(message);
+                    etMessage.setText("");
+                }
+            }
+        });
+
         messages = new ArrayList<ChatMessage>();
         ChatMessage testMessage = new ChatMessage();
         testMessage.setFromPersonID("49832");
@@ -70,5 +84,4 @@ public class ChatFragment extends Fragment {
 
         return v;
     }
-
 }
