@@ -32,14 +32,13 @@ Secondary
 * ChickTech.org Organizers
 
 ## Required User Stories:
-- [ ] Student signs on / app activation
-- [ ] (Use Parse backend to manually enter people and events and trigger push notifications)
-- [ ] Student receivies push notification when a new event has been added
-- [ ] Student views events list
-- [ ] Student taps event to see event detail
-- [ ] Student RSVPs for an event
-- [ ] Student edits profile (including photo)
+- [x] Student signs on / app activation
+- [ ] Student receivies push notification about upcoming event
+- [x] Student views events list
+- [x] Student taps event to see event detail
+- [x] Student RSVPs for an event
 - [ ] Student receives reminder notificaitons about going to event
+- [ ] Student edits profile (including photo)
 - [ ] Student gets directions to event
 - [ ] Student views matched user (student -> mentor, mentor -> student)
 - [ ] Student views organizer profile
