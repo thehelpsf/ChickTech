@@ -63,6 +63,28 @@ public class EventsFragment extends Fragment {
 
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        pb.setVisibility(ProgressBar.VISIBLE);
+        parseClient.getEventList(new FindCallback<ParseObject>() {
+            public void done(List<ParseObject> events, ParseException e) {
+            pb.setVisibility(ProgressBar.INVISIBLE);
+            if (e == null) {
+                aEvents.clear();
+                Log.d("events", "Retrieved " + events.size() + " events");
+                for (int i = 0; i < events.size(); i++) {
+                    aEvents.add((Event)events.get(i));
+                }
+            } else {
+                Log.d("events", "Error: " + e.getMessage());
+            }
+            }
+        });
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Defines the xml file for the fragment
 
@@ -81,22 +103,6 @@ public class EventsFragment extends Fragment {
         setupListeners();
 
         parseClient = new CTRestClient();
-
-        pb.setVisibility(ProgressBar.VISIBLE);
-        parseClient.getEventList(new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> events, ParseException e) {
-                pb.setVisibility(ProgressBar.INVISIBLE);
-                if (e == null) {
-                    aEvents.clear();
-                    Log.d("events", "Retrieved " + events.size() + " events");
-                    for (int i = 0; i < events.size(); i++) {
-                        aEvents.add((Event)events.get(i));
-                    }
-                } else {
-                    Log.d("events", "Error: " + e.getMessage());
-                }
-            }
-        });
 
         return view;
     }

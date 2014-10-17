@@ -16,9 +16,11 @@ import android.widget.Toast;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 import org.chicktech.chicktech.R;
 import org.chicktech.chicktech.models.Event;
+import org.chicktech.chicktech.models.Person;
 import org.chicktech.chicktech.utils.CTRestClient;
 
 import java.util.ArrayList;
@@ -33,8 +35,9 @@ public class EventDetailActivity extends Activity {
     TextView tvDescription;
     TextView tvDate;
     TextView tvLocation;
-    CTRestClient parseClient;
+    TextView tvRsvpStatus;
     ProgressBar pb;
+    Person person;
 
 
     @Override
@@ -44,6 +47,8 @@ public class EventDetailActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
         pb = (ProgressBar) findViewById(R.id.pbLoading);
+
+        person = (Person) ParseUser.getCurrentUser();
 
         Intent i = getIntent();
         //event = (Event) i.getSerializableExtra("event");
@@ -70,6 +75,7 @@ public class EventDetailActivity extends Activity {
         lvGirlsGoing = (ListView) findViewById(R.id.lvGirlsGoing);
         tvDate  = (TextView) findViewById(R.id.tvDate);
         tvLocation = (TextView) findViewById(R.id.tvLocation);
+        tvRsvpStatus = (TextView) findViewById(R.id.tvRSVPStatus);
 
         girlsGoing = new ArrayList<String>();
         girlsGoing.add("Bonnie");
@@ -92,7 +98,12 @@ public class EventDetailActivity extends Activity {
             tvDescription.setText(Html.fromHtml(event.getDescription()));
             tvDate.setText(event.getStartDate().toString());
             tvLocation.setText(event.getAddressString());
+            refreshRsvpOnScreen();
         }
+    }
+
+    private void refreshRsvpOnScreen() {
+        tvRsvpStatus.setText(event.getRsvpStatusString(person));
     }
 
     @Override
@@ -112,9 +123,19 @@ public class EventDetailActivity extends Activity {
                 return true;
             case R.id.action_rsvp:
                 Toast.makeText(this, "RSVP", Toast.LENGTH_SHORT).show();
+                updateRSVP();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void updateRSVP() {
+        if (event.isPersonGoing(person)) {
+            event.addRsvpNo(person);
+        } else {
+            event.addRsvpYes(person);
+        }
+        refreshRsvpOnScreen();
     }
 
     private void gotoMaps() {
