@@ -10,6 +10,13 @@ import java.util.Date;
  */
 @ParseClassName("_User")
 public class Person extends ParseUser {
+    private static final String ROLE_STUDENT = "student";
+    private static final String ROLE_MENTOR = "mentor";
+
+    public static enum Role {
+        STUDENT,
+        MENTOR
+    }
 
     //private int userID;
     //private Address address;
@@ -25,8 +32,13 @@ public class Person extends ParseUser {
     private Date lastLogin;*/
 
     // Parse Getters
-    public String getRole() {
-        return getString("role");
+    public Role getRole() {
+        String s = getString("role");
+        if (s.equals(ROLE_MENTOR)) {
+            return Role.MENTOR;
+        } else {
+            return Role.STUDENT;
+        }
     }
     public String getPersonName() {
         return getString("personName");
@@ -43,8 +55,15 @@ public class Person extends ParseUser {
     }
 
     // Parse Setters
-    public void setRole(String value) {
-        put("role", value);
+    public void setRole(Role role) {
+        switch(role) {
+            case MENTOR:
+                put("role", ROLE_MENTOR);
+                break;
+            case STUDENT:
+            default:
+                put("role", ROLE_STUDENT);
+        }
     }
     public void setPersonName(String value) {
         put("personName", value);
