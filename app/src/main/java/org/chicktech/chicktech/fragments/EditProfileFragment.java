@@ -3,22 +3,23 @@ package org.chicktech.chicktech.fragments;
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
-import com.mobsandgeeks.saripaar.annotation.NumberRule;
 import com.mobsandgeeks.saripaar.annotation.Required;
 import com.mobsandgeeks.saripaar.annotation.TextRule;
 import com.parse.ParseUser;
@@ -26,12 +27,17 @@ import com.parse.ParseUser;
 import org.chicktech.chicktech.R;
 import org.chicktech.chicktech.models.Address;
 import org.chicktech.chicktech.models.Person;
+import org.chicktech.chicktech.utils.BitmapUtils;
+import org.chicktech.chicktech.utils.CameraLaunchingActivity;
+import org.chicktech.chicktech.utils.CameraLaunchingListener;
 
 /**
  * A simple {@link Fragment} subclass.
  *
  */
-public class EditProfileFragment extends Fragment implements Validator.ValidationListener {
+public class EditProfileFragment extends Fragment implements Validator.ValidationListener, CameraLaunchingListener {
+    // 8dp view size * xxhdpi scale factor
+    private static final int PROFILE_PHOTO_DIMENSION = 80 * 3;
 
     private Person user;
 
@@ -195,10 +201,6 @@ public class EditProfileFragment extends Fragment implements Validator.Validatio
         validator.validate();
     }
 
-    private void chooseProfilePhoto() {
-        //TODO: Implement
-    }
-
     @Override
     public void onValidationSucceeded() {
         //TODO: Set photo
@@ -236,4 +238,24 @@ public class EditProfileFragment extends Fragment implements Validator.Validatio
         }
     }
 
+    private void chooseProfilePhoto() {
+        FragmentActivity activity = getActivity();
+        if (activity instanceof CameraLaunchingActivity) {
+            ((CameraLaunchingActivity) activity).launchCamera(this);
+        } else {
+            Log.d("profile", "Cannot take photo b/c activity isn't instance of CameraLaunchingActivity");
+        }
+    }
+
+    @Override
+    public void onCameraSuccess(Bitmap image) {
+        Bitmap scaledImage = BitmapUtils.scaleToCoverSide(image, PROFILE_PHOTO_DIMENSION);
+        imgPhoto.setImageBitmap(scaledImage);
+    }
+
+    @Override
+    public void onCameraFailure(int resultCode) {
+        Toast.makeText(getActivity(), "Oops, something went wrong and your picture isn't saved.", Toast.LENGTH_SHORT).show();
+        Log.d("profile", "Error: Camera launching result code " + resultCode );
+    }
 }
