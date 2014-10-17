@@ -112,6 +112,7 @@ public class LoginActivity extends Activity {
         Person user = new Person();
         user.setUsername(phoneNumber);
         user.setPassword(phoneNumber);
+        user.setRole(Person.Role.STUDENT);
         //user.setEmail(phoneNumber + "@example.com");
         // other fields can be set just like with ParseObject
         user.setPhoneNumber(phoneNumber);
