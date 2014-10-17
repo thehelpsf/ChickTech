@@ -33,6 +33,15 @@
             android:label="@string/title_activity_event_detail" >
         </activity>
 
+        <activity
+            android:name=".activities.LoginActivity"
+            android:label="@string/title_activity_login" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <!-- from Parse docs -->
         <!-- https://parse.com/tutorials/android-push-notifications -->
         <service android:name="com.parse.PushService" />
@@ -47,12 +56,14 @@
                 <category android:name="org.chicktech.chicktech" />
             </intent-filter>
         </receiver>
+
         <receiver android:name="com.parse.ParseBroadcastReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
+
         <receiver
             android:name="com.parse.ParsePushBroadcastReceiver"
             android:exported="false" >
@@ -67,14 +78,14 @@
             android:name="com.parse.push.notification_icon"
             android:resource="@drawable/ic_launcher" />
 
-        <activity
-            android:name=".activities.LoginActivity"
-            android:label="@string/title_activity_login" >
+        <receiver android:name="org.chicktech.chicktech.receivers.MyCustomReceiver" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="org.chicktech.chicktech.UPDATE_STATUS" />
             </intent-filter>
-        </activity>
+        </receiver>
+
     </application>
 
 </manifest>

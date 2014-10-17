@@ -3,29 +3,16 @@ package org.chicktech.chicktech.activities;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
-import android.widget.Toast;
-
-import com.parse.ParseException;
-import com.parse.ParsePush;
-import com.parse.SaveCallback;
 
 import org.chicktech.chicktech.R;
 import org.chicktech.chicktech.fragments.ChatFragment;
 import org.chicktech.chicktech.fragments.EventsFragment;
 import org.chicktech.chicktech.fragments.ProfileFragment;
-import org.chicktech.chicktech.models.Address;
-import org.chicktech.chicktech.models.ChatMessage;
-import org.chicktech.chicktech.models.Event;
-import org.chicktech.chicktech.models.Person;
-import org.chicktech.chicktech.models.RSVP;
 import org.chicktech.chicktech.utils.FragmentNavigationDrawer;
-
-import java.util.Date;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -54,16 +41,6 @@ public class MainActivity extends ActionBarActivity {
         // Temporary creation of models in parse for testing
         sendModelsToParse();
 
-        ParsePush.subscribeInBackground("", new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    Toast.makeText(MainActivity.this, "successfully subscribed to the broadcast channel.", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(MainActivity.this, "did not subscribe to broadcast channel", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
     }
 
     // Temporary creation of models in parse for testing
