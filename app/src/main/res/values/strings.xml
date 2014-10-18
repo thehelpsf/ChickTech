@@ -23,11 +23,7 @@
     <string name="location_icon">Location Icon</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_new_event">New Event</string>
-<<<<<<< HEAD
     <string name="title_activity_login">ChickTech</string>
-=======
-    <string name="title_activity_login">Welcome To ChickTech</string>
     <string name="button_send">Send</string>
->>>>>>> started chat ui
 
 </resources>
