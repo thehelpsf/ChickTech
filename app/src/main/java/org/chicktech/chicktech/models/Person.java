@@ -1,15 +1,22 @@
 package org.chicktech.chicktech.models;
 
 import com.parse.ParseClassName;
-import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 import java.util.Date;
 
 /**
  * Created by kenanpulak on 10/14/14.
  */
-@ParseClassName("Person")
-public class Person extends ParseObject{
+@ParseClassName("_User")
+public class Person extends ParseUser {
+    private static final String ROLE_STUDENT = "student";
+    private static final String ROLE_MENTOR = "mentor";
+
+    public static enum Role {
+        STUDENT,
+        MENTOR
+    }
 
     //private int userID;
     //private Address address;
@@ -20,32 +27,55 @@ public class Person extends ParseObject{
     private String email;
     private String phoneNumber;
     private String profileImageUrl;
-    private String addressID;
     private String emergencyContactID;
+    private String tagline;
+    private String interestReason;
+    private String interests;
     private Date lastLogin;*/
 
     // Parse Getters
-    public String getRole() {
-        return getString("role");
+    public Role getRole() {
+        String s = getString("role");
+        if (s.equals(ROLE_MENTOR)) {
+            return Role.MENTOR;
+        } else {
+            return Role.STUDENT;
+        }
     }
     public String getPersonName() {
         return getString("personName");
     }
     public String getHandle() {
         return getString("handle");
-    }
-    public String getEmail() {return getString("email");}
+}
     public String getPhoneNumber() {return getString("phoneNumber");}
     public String getProfileImageUrl() {return getString("profileImageUrl");}
-    public String getAddressID() {return getString("addressID");}
+    public Address getAddress() {return (Address)getParseObject("address");}
     public String getEmergencyContactID() {return getString("emergencyContactID");}
     public Date getLastLogin() {
         return getDate("lastLogin");
     }
+    public String getTagline() {
+        return getString("tagline");
+    }
+    public String getInterestReason() {
+        return getString("interestReason");
+    }
+    public String getInterests() {
+        return getString("interests");
+    }
+
 
     // Parse Setters
-    public void setRole(String value) {
-        put("role", value);
+    public void setRole(Role role) {
+        switch(role) {
+            case MENTOR:
+                put("role", ROLE_MENTOR);
+                break;
+            case STUDENT:
+            default:
+                put("role", ROLE_STUDENT);
+        }
     }
     public void setPersonName(String value) {
         put("personName", value);
@@ -53,17 +83,14 @@ public class Person extends ParseObject{
     public void setHandle(String value) {
         put("handle", value);
     }
-    public void setEmail(String value) {
-        put("email", value);
-    }
     public void setPhoneNumber(String value) {
         put("phoneNumber", value);
     }
     public void setProfileImageUrl(String value) {
         put("profileImageUrl", value);
     }
-    public void setAddressID(String value) {
-        put("addressID", value);
+    public void setAddress(Address value) {
+        put("address", value);
     }
     public void setEmergencyContactID(String value) {
         put("emergencyContactID", value);
@@ -71,5 +98,13 @@ public class Person extends ParseObject{
     public void setLastLogin(Date value) {
         put("lastLogin", value);
     }
-
+    public void setTagline(String value) {
+        put("tagline", value);
+    }
+    public void setInterestReason(String value) {
+        put("interestReason", value);
+    }
+    public void setInterests(String value) {
+        put("interests", value);
+    }
 }

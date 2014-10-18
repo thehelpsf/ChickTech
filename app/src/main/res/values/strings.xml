@@ -8,6 +8,7 @@
     <string name="drawer_close">Close navigation drawer</string>
     <string name="title_activity_event_detail">Event</string>
     <string name="action_rsvp">RSVP</string>
+    <string name="action_goto_map">Map</string>
     <string name="event_name_label">Event Name</string>
     <string name="rsvp_not">You have not RSVPd</string>
     <string name="rsvp_yes">You have RSVPd YES</string>
@@ -21,5 +22,8 @@
     <string name="clock_icon">Clock Icon</string>
     <string name="location_icon">Location Icon</string>
     <string name="hello_world">Hello world!</string>
+    <string name="action_new_event">New Event</string>
+    <string name="title_activity_login">ChickTech</string>
+    <string name="button_send">Send</string>
 
 </resources>
