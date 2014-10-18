@@ -1,51 +1,7 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rlchat"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="0dp"
-    android:textIsSelectable="true"
-    android:background="#DDDDDD"
     tools:context="org.chicktech.chicktech.fragments.ChatFragment">
 
-
-    <ListView
-        android:id="@+id/lvMessages"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:stackFromBottom="true"
-        android:transcriptMode="normal"
-        android:divider="@null"
-        android:padding="0dp"
-        android:layout_above="@+id/llComposeMessage" />
-
-    <LinearLayout
-        android:id="@+id/llComposeMessage"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#ffdddddd"
-        android:orientation="horizontal" >
-
-        <EditText
-            android:id="@+id/etMessage"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="textMultiLine"
-            android:lines="4"
-            android:minLines="1"
-            android:scrollbars="vertical" >
-        </EditText>
-
-        <Button
-            android:id="@+id/btnSend"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/button_send"
-            android:layout_gravity="bottom" >
-        </Button>
-    </LinearLayout>
-
-</RelativeLayout>
+</FrameLayout>

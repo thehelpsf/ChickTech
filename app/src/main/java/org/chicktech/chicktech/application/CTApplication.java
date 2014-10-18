@@ -31,18 +31,5 @@ public class CTApplication extends Application{
         ParseObject.registerSubclass(RSVP.class);
         Parse.initialize(this, "h24sgXF8i6c5bRFHteYrN7s6gh7fdqzXIwa8ocWw", "FpddZGkm1EEJT6aF2CXP2O89ihLWwlw5eg7kimUf");
 
-//        ParsePush.subscribeInBackground("test", new SaveCallback() {
-//            @Override
-//            public void done(ParseException e) {
-//                if (e == null) {
-//                    Log.d("debug", "successfully subscribed to the broadcast channel.");
-//                    //Toast.makeText(MainActivity.this, "successfully subscribed to the broadcast channel.", Toast.LENGTH_SHORT).show();
-//                } else {
-//                    Log.d("debug", "successfully subscribed to the broadcast channel.");
-//                    //Toast.makeText(MainActivity.this, "did not subscribe to broadcast channel", Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        });
-
     }
 }

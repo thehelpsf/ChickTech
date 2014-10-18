@@ -28,6 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="My Name"
                 android:id="@+id/etName"
                 android:layout_alignTop="@+id/imgPhoto"
                 android:layout_toRightOf="@+id/imgPhoto"
@@ -36,23 +37,20 @@
                 android:layout_toStartOf="@+id/btnEdit"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:hint="No Name"
-                android:singleLine="true" />
+                android:layout_marginBottom="10dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvDetails"
+                android:text="School Year"
+                android:id="@+id/tvYear"
                 android:layout_toRightOf="@+id/imgPhoto"
                 android:layout_alignRight="@+id/etName"
                 android:layout_alignEnd="@+id/etName"
                 android:layout_below="@+id/etName"
                 android:layout_alignBottom="@+id/imgPhoto"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:singleLine="false"
-                android:hint="School &amp; Year" />
+                android:layout_marginRight="10dp" />
 
             <Button
                 android:layout_width="40dp"
@@ -197,13 +195,12 @@
                 android:id="@+id/tvWhatLabel"
                 android:layout_marginBottom="10dp"/>
 
-            <com.wefika.flowlayout.FlowLayout
+            <GridView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="start|top"
-                android:id="@+id/flWhat">
-
-            </com.wefika.flowlayout.FlowLayout>
+                android:id="@+id/gridView"
+                android:numColumns="3"
+                tools:listitem="@android:layout/simple_list_item_1" />
 
         </LinearLayout>
     </LinearLayout>

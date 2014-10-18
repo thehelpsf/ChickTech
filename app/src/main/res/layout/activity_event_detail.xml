@@ -118,7 +118,6 @@
         android:layout_marginTop="10dp"
         android:text="@string/girls_going_label"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:visibility="gone"
         android:textColor="@color/chick_tech_green" />
 
     <ListView
@@ -126,16 +125,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tvPeopleTitle"
-        android:visibility="gone"
         android:layout_below="@+id/tvPeopleTitle" >
     </ListView>
-
-    <ProgressBar
-        android:id="@+id/pbLoading"
-        android:visibility="invisible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
