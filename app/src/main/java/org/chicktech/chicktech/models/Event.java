@@ -21,24 +21,6 @@ public class Event extends ParseObject {
     private Date endDate;
     */
 
-    public Event() {
-    }
-
-    public Event(String name, String description, Date startDate, Date endDate) {
-        setTitle(name);
-        setDescription(description);
-        setStartDate(startDate);
-        setEndDate(endDate);
-    }
-
-    public String getAddressString() {
-        Address location = getLocation();
-        if (location != null) {
-            return location.toString();
-        }
-        return "unknown";
-    }
-
     // Parse Getters
     public String getTitle() {
         return getString("title");
@@ -49,50 +31,12 @@ public class Event extends ParseObject {
     public String getImageURL() {
         return getString("imageURL");
     }
-    public String getAddressID() {
-        return getString("addressID");
-    }
+    public String getAddressID() {return getString("addressID");}
     public Date getStartDate() {
         return getDate("startDate");
     }
     public Date getEndDate() {
         return getDate("endDate");
-    }
-    public Address getLocation() {
-        return (Address) getParseObject("location");
-    }
-    public String getRsvpYes() {
-        return getString("rsvpYes");
-    }
-    public String getRsvpNo() {
-        return getString("rsvpNo");
-    }
-
-    public boolean isPersonGoing(Person person) {
-        String folks = getRsvpYes();
-        if (folks == null) {
-            return false;
-        }
-        return folks.contains(person.getObjectId());
-    }
-
-    public boolean isPersonNotGoing(Person person) {
-        String folks = getRsvpNo();
-        if (folks == null) {
-            return false;
-        }
-        return folks.contains(person.getObjectId());
-    }
-
-    public String getRsvpStatusString (Person person) {
-        String string = "";
-        if (isPersonGoing(person)) {
-            return "You are going to this event";
-        }
-        if (isPersonNotGoing(person)) {
-            return "You are not going to this event";
-        }
-        return "You have not RSVP'd to this event";
     }
 
     // Parse Setters
@@ -114,47 +58,5 @@ public class Event extends ParseObject {
     public void setEndDate(Date value) {
         put("endDate", value);
     }
-    public void setLocation(Address value) {
-        put("location", value);
-    }
-    public void setRsvpYes(String value) {
-        put("rsvpYes", value);
-    }
-    public void setRsvpNo(String value) {
-        put("rsvpNo", value);
-    }
 
-    public void addRsvpYes(Person person) {
-//        if (!isPersonGoing(person)) {
-            setRsvpYes(getRsvpYes() + "," + person.getObjectId());
-            removeRsvpNo(person);
-            saveInBackground();
-//        }
-    }
-
-    public void addRsvpNo(Person person) {
-//        if (!isPersonNotGoing(person)) {
-            setRsvpNo(getRsvpNo() + "," + person.getObjectId());
-            removeRsvpYes(person);
-            saveInBackground();
-//        }
-    }
-
-    private void removeRsvpNo(Person person) {
-        if (isPersonNotGoing(person)) {
-            String rsvp = getRsvpNo();
-            rsvp = rsvp.replace(person.getObjectId(), "");
-            rsvp = rsvp.replace(",,", ",");
-            setRsvpNo(rsvp);
-        }
-    }
-
-    private void removeRsvpYes(Person person) {
-        if (isPersonGoing(person)) {
-            String rsvp = getRsvpYes();
-            rsvp = rsvp.replace(person.getObjectId(), "");
-            rsvp = rsvp.replace(",,", ",");
-            setRsvpYes(rsvp);
-        }
-    }
 }

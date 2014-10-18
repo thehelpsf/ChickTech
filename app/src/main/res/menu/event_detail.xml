@@ -1,14 +1,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="org.chicktech.chicktech.activities.EventDetailActivity">
+    tools:context="org.chicktech.chicktech.activities.EventDetailActivity" >
     <item
         android:id="@+id/action_rsvp"
         android:orderInCategory="100"
         android:showAsAction="always"
         android:title="@string/action_rsvp"/>
-    <item
-        android:id="@+id/action_goto_map"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/action_goto_map"/>
 </menu>
