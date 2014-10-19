@@ -6,7 +6,11 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import org.chicktech.chicktech.models.ChatMessage;
 import org.chicktech.chicktech.models.Person;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by kenanpulak on 10/14/14.
@@ -60,7 +64,34 @@ public class CTRestClient {
         person.getParseObject("address").fetchIfNeededInBackground(callback);
     }
 
-    public void sendChatMessage(int toPersonID, int fromPersonID, String message){
+    public static void sendChatMessage(String toPersonID, String fromPersonID, String message){
+
+        ChatMessage chatMessage = new ChatMessage();
+        chatMessage.setToPersonID(toPersonID);
+        chatMessage.setFromPersonID(fromPersonID);
+        chatMessage.setMessage(message);
+        chatMessage.saveInBackground();
+
+
+    }
+
+    public void getAllChatMessages (Person person, FindCallback<ParseObject> callback){
+
+        ParseQuery<ParseObject> fromPersonQuery = ParseQuery.getQuery("ChatMessage");
+        fromPersonQuery.whereEqualTo("fromPersonID", person.getObjectId());
+
+        ParseQuery<ParseObject> toPersonQuery = ParseQuery.getQuery("ChatMessage");
+
+        toPersonQuery.whereEqualTo("toPersonID", person.getObjectId());
+
+        List<ParseQuery<ParseObject>> queries = new ArrayList<ParseQuery<ParseObject>>();
+        queries.add(fromPersonQuery);
+        queries.add(toPersonQuery);
+
+        ParseQuery<ParseObject> mainQuery = ParseQuery.or(queries);
+
+        mainQuery.orderByAscending("createdAT");
+        mainQuery.findInBackground(callback);
 
     }
 
