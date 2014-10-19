@@ -13,6 +13,16 @@ import java.util.Iterator;
 
 public class EventNotificationReceiver extends BroadcastReceiver {
     private static final String TAG = "MyCustomReceiver";
+
+
+    // JSON to send from Parse
+    /*
+    {
+        "action":"org.chicktech.chicktech.EVENT_REMINDER",
+            "message":"Girls Crazy Day is Coming Oct 3-th. Don't forget to RSVP!"
+    }
+    */
+
     @Override
     public void onReceive(Context context, Intent intent) {
 
