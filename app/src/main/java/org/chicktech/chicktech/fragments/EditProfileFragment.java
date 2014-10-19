@@ -156,13 +156,14 @@ public class EditProfileFragment extends Fragment implements Validator.Validatio
         etName.setText(user.getPersonName());
         String description = user.getTagline();
         if (description == null || description.isEmpty()) {
+            Context context = getActivity();
             switch(user.getRole()) {
                 case MENTOR:
-                    etDetails.setHint("Profession");
+                    etDetails.setHint(context.getString(R.string.mentor_tagline_hint));
                     break;
                 case STUDENT:
                 default:
-                    etDetails.setHint("School & Year");
+                    etDetails.setHint(context.getString(R.string.student_tagline_hint));
             }
         }
         etDetails.setText(description);

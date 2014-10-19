@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:hint="My Name"
+                android:hint="@string/name_hint"
                 android:id="@+id/etName"
                 android:layout_alignTop="@+id/imgPhoto"
                 android:layout_toRightOf="@+id/imgPhoto"
@@ -43,7 +43,6 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="School &amp; Year"
                 android:id="@+id/etDetails"
                 android:layout_toRightOf="@+id/imgPhoto"
                 android:layout_below="@+id/etName"
@@ -57,13 +56,13 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:text="Change"
+                android:text="@string/change_button_label"
                 android:id="@+id/btnChangeProfile"
                 android:layout_alignBottom="@+id/imgPhoto"
                 android:layout_alignLeft="@+id/imgPhoto"
                 android:layout_alignRight="@+id/imgPhoto"
                 style="?android:attr/borderlessButtonStyle"
-                android:textSize="12dp"
+                android:textSize="12sp"
                 android:background="@color/teal"
                 android:textColor="@android:color/white"
                 />
@@ -100,7 +99,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="email@school.com"
+                    android:hint="@string/email_hint"
                     android:id="@+id/etEmail"
                     android:layout_gravity="center_vertical"
                     android:singleLine="true"
@@ -128,7 +127,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="555-555-5555"
+                    android:hint="@string/phone_number_hint"
                     android:id="@+id/etPhoneNumber"
                     android:layout_gravity="center_vertical"
                     android:singleLine="true"
@@ -163,21 +162,21 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Address Line 1"
+                        android:hint="@string/address_line_1_hint"
                         android:id="@+id/etAddress1"
                         android:inputType="textPostalAddress"
                         android:singleLine="true"/>
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Address Line 2"
+                        android:hint="@string/address_line_2_hint"
                         android:id="@+id/etAddress2"
                         android:inputType="textPostalAddress"
                         android:singleLine="true"/>
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="City"
+                        android:hint="@string/city_hint"
                         android:id="@+id/etCity"
                         android:inputType="textPostalAddress"
                         android:singleLine="true"/>
@@ -194,7 +193,7 @@
                         <EditText
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:hint="State"
+                            android:hint="@string/state_hint"
                             android:id="@+id/etState"
                             android:inputType="textCapCharacters"
                             android:singleLine="true"
@@ -203,7 +202,7 @@
                         <EditText
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:hint=" Zip "
+                            android:hint="@string/zip_5_digit_hint"
                             android:id="@+id/etZip"
                             android:inputType="number"
                             android:singleLine="true"
@@ -228,7 +227,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Why did you join ChickTech?"
+                android:text="@string/why_chicktech_label"
                 android:id="@+id/tvWhyLabel"
                 android:layout_marginBottom="10dp"/>
 
@@ -237,7 +236,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/etWhy"
                 android:inputType="text"
-                android:hint="I joined ChickTech because..." />
+                android:hint="@string/why_chicktech_hint" />
         </LinearLayout>
 
         <LinearLayout
@@ -252,7 +251,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="What type of technologies are you interested in?"
+                android:text="@string/what_technologies_label"
                 android:id="@+id/tvWhatLabel"
                 android:layout_marginBottom="10dp"/>
 
@@ -260,7 +259,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/etWhat"
-                android:hint="Robots, web design, math"
+                android:hint="@string/what_technologies_hint"
                 android:inputType="text"
                 android:imeOptions="actionDone"/>
 
@@ -269,7 +268,7 @@
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Save"
+            android:text="@string/save_button_label"
             android:layout_marginTop="10dp"
             android:id="@+id/btnSave"
             style="?android:attr/borderlessButtonStyle"
