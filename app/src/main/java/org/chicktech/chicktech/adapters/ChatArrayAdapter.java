@@ -46,6 +46,7 @@ public class ChatArrayAdapter extends ArrayAdapter<ChatMessage> {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+
         viewHolder.tvMessage.setText(message.getMessage());
 
         return convertView;

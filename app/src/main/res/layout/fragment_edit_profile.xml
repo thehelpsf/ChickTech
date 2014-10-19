@@ -2,8 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.chicktech.chicktech.fragments.EditProfileFragment"
-    android:orientation="vertical">
+    tools:context="org.chicktech.chicktech.fragments.EditProfileFragment">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -37,13 +36,14 @@
                 android:layout_marginRight="10dp"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:singleLine="true"/>
+                android:singleLine="true"
+                android:inputType="textPersonName"/>
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="School Year"
-                android:id="@+id/etYear"
+                android:hint="School &amp; Year"
+                android:id="@+id/etDetails"
                 android:layout_toRightOf="@+id/imgPhoto"
                 android:layout_below="@+id/etName"
                 android:layout_alignBottom="@+id/imgPhoto"
@@ -102,7 +102,8 @@
                     android:hint="email@school.com"
                     android:id="@+id/etEmail"
                     android:layout_gravity="center_vertical"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:inputType="textEmailAddress"/>
             </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
@@ -129,7 +130,8 @@
                     android:hint="555-555-5555"
                     android:id="@+id/etPhoneNumber"
                     android:layout_gravity="center_vertical"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:inputType="phone"/>
             </LinearLayout>
 
             <LinearLayout
@@ -148,15 +150,75 @@
                     android:layout_height="30dp"
                     android:id="@+id/imgAddrIcon"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/ic_house_gray" />
+                    android:src="@drawable/ic_house_gray"
+                    android:layout_weight="1"/>
 
-                <EditText
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="100\nHome Lane\nSan Francisco, CA 00000"
-                    android:id="@+id/etAddress"
-                    android:layout_gravity="center_vertical"
-                    android:maxLines="3" />
+                    android:layout_weight="100">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Address Line 1"
+                        android:id="@+id/etAddress1"
+                        android:inputType="textPostalAddress"
+                        android:singleLine="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"/>
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Address Line 2"
+                        android:id="@+id/etAddress2"
+                        android:inputType="textPostalAddress"
+                        android:singleLine="true"
+                        android:layout_below="@id/etAddress1"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/etAddress2"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="City"
+                            android:id="@+id/etCity"
+                            android:inputType="textPostalAddress"
+                            android:singleLine="true"
+                            android:layout_weight="100"/>
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="State"
+                            android:id="@+id/etState"
+                            android:inputType="textCapCharacters"
+                            android:singleLine="true"
+                            android:maxLength="2"
+                            android:layout_weight="1"/>
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="Zip"
+                            android:id="@+id/etZip"
+                            android:inputType="number"
+                            android:singleLine="true"
+                            android:maxLength="5"
+                            android:layout_weight="1"/>
+                        </LinearLayout>
+
+                </RelativeLayout>
             </LinearLayout>
 
         </RelativeLayout>
@@ -173,7 +235,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Why are you interested in Tech?"
+                android:text="Why did you join ChickTech?"
                 android:id="@+id/tvWhyLabel"
                 android:layout_marginBottom="10dp"/>
 
@@ -181,7 +243,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/etWhy"
-                android:hint="I am interested in tech because..." />
+                android:inputType="text"
+                android:hint="I joined ChickTech because..." />
         </LinearLayout>
 
         <LinearLayout
@@ -196,16 +259,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="What technologies are you interested in?"
+                android:text="What type of technologies are you interested in?"
                 android:id="@+id/tvWhatLabel"
                 android:layout_marginBottom="10dp"/>
 
-            <GridView
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/gridView"
-                android:numColumns="3"
-                tools:listitem="@android:layout/simple_list_item_multiple_choice" />
+                android:id="@+id/etWhat"
+                android:hint="Robots, web design, math"
+                android:inputType="text"
+                android:imeOptions="actionDone"/>
 
         </LinearLayout>
 
@@ -217,7 +281,7 @@
             android:id="@+id/btnSave"
             style="?android:attr/borderlessButtonStyle"
             android:textColor="@android:color/white"
-            android:background="@color/pink" />
+            android:background="@color/pink"/>
     </LinearLayout>
 
 
