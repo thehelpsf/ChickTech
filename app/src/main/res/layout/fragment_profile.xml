@@ -22,7 +22,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:background="@color/lightGray" />
+                android:background="@color/lightGray"
+                android:scaleType="centerCrop" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -37,7 +38,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
-                android:hint="No Name"
+                android:hint="@string/name_hint"
                 android:singleLine="true" />
 
             <TextView
@@ -51,8 +52,7 @@
                 android:layout_alignBottom="@+id/imgPhoto"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:singleLine="false"
-                android:hint="School &amp; Year" />
+                android:singleLine="false" />
 
             <Button
                 android:layout_width="40dp"
@@ -96,7 +96,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="email@school.com"
+                    android:text="@string/email_hint"
                     android:id="@+id/tvEmail"
                     android:layout_gravity="center_vertical"
                     android:textColor="@color/darkGray"/>
@@ -123,7 +123,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="555-555-5555"
+                    android:text="@string/phone_number_hint"
                     android:id="@+id/tvPhoneNumber"
                     android:layout_gravity="center_vertical"
                     android:textColor="@color/darkGray" />
@@ -150,7 +150,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="100\nHome Lane\nSan Francisco, CA 00000"
+                    android:text="@string/address_hint"
                     android:id="@+id/tvAddress"
                     android:layout_gravity="center_vertical"
                     android:textColor="@color/darkGray" />
@@ -170,7 +170,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Why are you interested in Tech?"
+                android:text="@string/why_chicktech_label"
                 android:id="@+id/tvWhyLabel"
                 android:layout_marginBottom="10dp"/>
 
@@ -178,7 +178,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvWhy"
-                android:hint="I am interested in tech because..." />
+                android:hint="@string/why_chicktech_hint" />
         </LinearLayout>
 
         <LinearLayout
@@ -193,7 +193,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="What technologies are you interested in?"
+                android:text="@string/what_technologies_label"
                 android:id="@+id/tvWhatLabel"
                 android:layout_marginBottom="10dp"/>
 

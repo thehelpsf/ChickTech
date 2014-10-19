@@ -16,6 +16,7 @@ import org.chicktech.chicktech.models.RSVP;
  * Created by kenanpulak on 10/14/14.
  */
 public class CTApplication extends Application{
+    public static final String APP_TAG = "ChickTechApp";
 
     private static Context context;
 

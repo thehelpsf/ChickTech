@@ -1,8 +1,14 @@
 package org.chicktech.chicktech.activities;
 
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -12,12 +18,19 @@ import org.chicktech.chicktech.R;
 import org.chicktech.chicktech.fragments.ChatFragment;
 import org.chicktech.chicktech.fragments.EventsFragment;
 import org.chicktech.chicktech.fragments.ProfileFragment;
+import org.chicktech.chicktech.utils.BitmapUtils;
+import org.chicktech.chicktech.utils.CameraLaunchingActivity;
+import org.chicktech.chicktech.utils.CameraLaunchingListener;
+import org.chicktech.chicktech.utils.FileSystemUtils;
 import org.chicktech.chicktech.utils.FragmentNavigationDrawer;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements CameraLaunchingActivity {
+    private static final String PHOTO_FILENAME = "CTphoto.jpg";
 
     private FragmentNavigationDrawer dlDrawer;
+
+    private CameraLaunchingListener cameraListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,5 +121,40 @@ public class MainActivity extends ActionBarActivity {
         super.onConfigurationChanged(newConfig);
         // Pass any configuration change to the drawer toggles
         dlDrawer.getDrawerToggle().onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public void launchCamera(CameraLaunchingListener listener) {
+        if (cameraListener != null) {
+            Log.d("MainActivity", "Warn: Already launched camera, ignoring camera launch request");
+            return;
+        }
+        cameraListener = listener;
+        Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        i.putExtra(MediaStore.EXTRA_OUTPUT, FileSystemUtils.getPhotoFileUri(PHOTO_FILENAME));
+        startActivityForResult(i, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+            if (cameraListener == null) {
+                Log.d("MainActivity", "Warn: expected cameraListner but it's null");
+            } else if (resultCode != RESULT_OK) {
+                cameraListener.onCameraFailure(resultCode);
+            } else {
+                try {
+                    Uri takenPhotoUri = FileSystemUtils.getPhotoFileUri(PHOTO_FILENAME);
+                    Bitmap takenImage = BitmapUtils.rotateBitmapOrientation(takenPhotoUri.getPath());
+                    cameraListener.onCameraSuccess(takenImage);
+                } catch (Exception e) {
+                    Log.d("MainActivity", "Error rotating bitmap: " + e.getMessage());
+                    cameraListener.onCameraFailure(0);
+                }
+            }
+            cameraListener = null;
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }

@@ -26,5 +26,22 @@
     <string name="title_activity_login">ChickTech</string>
     <string name="button_send">Send</string>
     <string name="title_activity_show_pop_up">ShowPopUp</string>
+    <string name="name_hint">My Name</string>
+    <string name="change_button_label">Change</string>
+    <string name="email_hint">me@domain.com</string>
+    <string name="phone_number_hint">555-555-5555</string>
+    <string name="address_line_1_hint">Address Line 1</string>
+    <string name="address_line_2_hint">Address Line 2</string>
+    <string name="city_hint">City</string>
+    <string name="state_hint">State</string>
+    <string name="zip_5_digit_hint"> Zip </string>
+    <string name="why_chicktech_label">Why did you join ChickTech?</string>
+    <string name="why_chicktech_hint">I joined ChickTech because...</string>
+    <string name="what_technologies_label">What type of technologies are you interested in?</string>
+    <string name="what_technologies_hint">Robots, web design, math</string>
+    <string name="save_button_label">Save</string>
+    <string name="address_hint">100 Home Lane\n\nSan Francisco, CA 00000</string>
+    <string name="mentor_tagline_hint">Profession</string>
+    <string name="student_tagline_hint"><![CDATA[School & Year]]></string>
 
 </resources>

@@ -1,5 +1,6 @@
 package org.chicktech.chicktech.fragments;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -101,13 +102,35 @@ public class ProfileFragment extends Fragment implements EditProfileFragment.OnS
     }
 
     private void populateProfile() {
-        //TODO: Populate photo
+        user.getPhotoInBackground(new Person.GetPhotoCallback() {
+            @Override
+            public void done(Bitmap photo) {
+                if (photo != null) {
+                    imgPhoto.setImageBitmap(photo);
+                } else {
+                    imgPhoto.setImageResource(0);
+                }
+            }
+        });
+
         tvName.setText(user.getPersonName());
         tvDetails.setText(user.getTagline());
         tvEmail.setText(user.getEmail());
         tvPhoneNumber.setText(user.getPhoneNumber());
-        Address addr = user.getAddress();
-        //TODO: Populate addr
+        user.getAddressInBackground(new Person.GetAddressCallback() {
+            @Override
+            public void done(Address addr) {
+                if (addr == null) {
+                    tvAddress.setText("");
+                } else {
+                    tvAddress.setText(addr.getAddress1()
+                            + "\n" + addr.getAddress2()
+                            + "\n" + addr.getCity()
+                            + ", " + addr.getState()
+                            + " " + addr.getZipcode());
+                }
+            }
+        });
         tvWhy.setText(user.getInterestReason());
 
         flWhat.removeAllViews();
