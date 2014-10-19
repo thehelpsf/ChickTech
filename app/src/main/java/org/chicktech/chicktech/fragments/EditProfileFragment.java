@@ -141,7 +141,16 @@ public class EditProfileFragment extends Fragment implements Validator.Validatio
     }
 
     private void populateProfile() {
-        //TODO: Populate photo
+        user.getPhotoInBackground(new Person.GetPhotoCallback() {
+            @Override
+            public void done(Bitmap photo) {
+                if (photo != null) {
+                    imgPhoto.setImageBitmap(photo);
+                } else {
+                    imgPhoto.setImageResource(0);
+                }
+            }
+        });
         etName.setText(user.getPersonName());
         String description = user.getTagline();
         if (description == null || description.isEmpty()) {

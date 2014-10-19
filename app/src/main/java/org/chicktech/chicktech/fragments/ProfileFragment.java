@@ -107,6 +107,8 @@ public class ProfileFragment extends Fragment implements EditProfileFragment.OnS
             public void done(Bitmap photo) {
                 if (photo != null) {
                     imgPhoto.setImageBitmap(photo);
+                } else {
+                    imgPhoto.setImageResource(0);
                 }
             }
         });
