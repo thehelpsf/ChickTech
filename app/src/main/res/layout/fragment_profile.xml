@@ -151,7 +151,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="100\nHome Lane\nSan Francisco, CA 00000"
+                    android:text="100 Home Lane\n\nSan Francisco, CA 00000"
                     android:id="@+id/tvAddress"
                     android:layout_gravity="center_vertical"
                     android:textColor="@color/darkGray" />

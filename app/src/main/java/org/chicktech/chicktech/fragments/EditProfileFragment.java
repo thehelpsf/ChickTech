@@ -69,6 +69,8 @@ public class EditProfileFragment extends Fragment implements Validator.Validatio
     EditText etWhat;
     private Button btnSave;
 
+    Address cachedAddress;
+
     public interface OnSaveListener {
         public void onProfileSave(Person u);
     }
@@ -166,14 +168,24 @@ public class EditProfileFragment extends Fragment implements Validator.Validatio
         etDetails.setText(description);
         etEmail.setText(user.getEmail());
         etPhoneNumber.setText(user.getPhoneNumber());
-        populateAddress();
+        user.getAddressInBackground(new Person.GetAddressCallback() {
+            @Override
+            public void done(Address addr) {
+                populateAddress(addr);
+            }
+        });
         etWhy.setText(user.getInterestReason());
         etWhat.setText(user.getInterests());
     }
 
-    private void populateAddress() {
-        Address addr = user.getAddress();
+    private void populateAddress(Address addr) {
+        cachedAddress = addr;
         if (addr == null) {
+            etAddress1.setText("");
+            etAddress2.setText("");
+            etCity.setText("");
+            etState.setText("");
+            etZip.setText("");
             return;
         }
         etAddress1.setText(addr.getAddress1());
@@ -184,28 +196,29 @@ public class EditProfileFragment extends Fragment implements Validator.Validatio
     }
 
     private void saveAddress() {
-//        String addr1, addr2, city, state, zip;
-//        addr1 = etAddress1.getText().toString();
-//        addr2 = etAddress2.getText().toString();
-//        city = etCity.getText().toString();
-//        state = etState.getText().toString();
-//        zip = etZip.getText().toString();
-//
-//        if (addr1.isEmpty() && addr2.isEmpty() && city.isEmpty() && state.isEmpty() & zip.isEmpty() ) {
-//            user.setAddress(null);
-//            return;
-//        }
-//
-//        Address addr = user.getAddress();
-//        if (addr == null) {
-//            addr = new Address();
-//            user.setAddress(addr);
-//        }
-//        addr.setAddress1(addr1);
-//        addr.setAddress2(addr2);
-//        addr.setCity(city);
-//        addr.setState(state);
-//        addr.setZipcode(zip);
+        String addr1, addr2, city, state, zip;
+        addr1 = etAddress1.getText().toString();
+        addr2 = etAddress2.getText().toString();
+        city = etCity.getText().toString();
+        state = etState.getText().toString();
+        zip = etZip.getText().toString();
+
+        if (addr1.isEmpty() && addr2.isEmpty() && city.isEmpty() && state.isEmpty() & zip.isEmpty() ) {
+            cachedAddress = null;
+            user.setAddress(null);
+            return;
+        }
+
+        if (cachedAddress == null) {
+            cachedAddress = new Address();
+            user.setAddress(cachedAddress);
+        }
+        cachedAddress.setAddress1(addr1);
+        cachedAddress.setAddress2(addr2);
+        cachedAddress.setCity(city);
+        cachedAddress.setState(state);
+        cachedAddress.setZipcode(zip);
+        cachedAddress.saveInBackground();
     }
 
     private void saveUser() {

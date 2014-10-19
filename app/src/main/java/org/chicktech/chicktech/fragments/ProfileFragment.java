@@ -117,8 +117,20 @@ public class ProfileFragment extends Fragment implements EditProfileFragment.OnS
         tvDetails.setText(user.getTagline());
         tvEmail.setText(user.getEmail());
         tvPhoneNumber.setText(user.getPhoneNumber());
-        Address addr = user.getAddress();
-        //TODO: Populate addr
+        user.getAddressInBackground(new Person.GetAddressCallback() {
+            @Override
+            public void done(Address addr) {
+                if (addr == null) {
+                    tvAddress.setText("");
+                } else {
+                    tvAddress.setText(addr.getAddress1()
+                            + "\n" + addr.getAddress2()
+                            + "\n" + addr.getCity()
+                            + ", " + addr.getState()
+                            + " " + addr.getZipcode());
+                }
+            }
+        });
         tvWhy.setText(user.getInterestReason());
 
         flWhat.removeAllViews();
