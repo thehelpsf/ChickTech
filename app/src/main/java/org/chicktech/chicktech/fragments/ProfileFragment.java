@@ -1,5 +1,6 @@
 package org.chicktech.chicktech.fragments;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -101,7 +102,15 @@ public class ProfileFragment extends Fragment implements EditProfileFragment.OnS
     }
 
     private void populateProfile() {
-        //TODO: Populate photo
+        user.getPhotoInBackground(new Person.GetPhotoCallback() {
+            @Override
+            public void done(Bitmap photo) {
+                if (photo != null) {
+                    imgPhoto.setImageBitmap(photo);
+                }
+            }
+        });
+
         tvName.setText(user.getPersonName());
         tvDetails.setText(user.getTagline());
         tvEmail.setText(user.getEmail());

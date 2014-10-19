@@ -22,7 +22,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:background="@color/lightGray" />
+                android:background="@color/lightGray"
+                android:scaleType="centerCrop" />
 
             <TextView
                 android:layout_width="wrap_content"

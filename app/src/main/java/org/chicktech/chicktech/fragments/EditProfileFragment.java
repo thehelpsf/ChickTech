@@ -4,6 +4,8 @@ package org.chicktech.chicktech.fragments;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -58,7 +60,7 @@ public class EditProfileFragment extends Fragment implements Validator.Validatio
     EditText etAddress1;
     EditText etAddress2;
     EditText etCity;
-    @TextRule(order = 4, minLength = 2, maxLength = 2, message = "Must be 2 letter state name")
+    //TODO: Make a validation rule for State
     EditText etState;
     //TODO: Make a validation rule for zipcode
     EditText etZip;
@@ -203,7 +205,8 @@ public class EditProfileFragment extends Fragment implements Validator.Validatio
 
     @Override
     public void onValidationSucceeded() {
-        //TODO: Set photo
+        Drawable d = imgPhoto.getDrawable();
+        user.setPhoto(d == null ? null : ((BitmapDrawable)d).getBitmap());
         user.setPersonName(etName.getText().toString());
         user.setTagline(etDetails.getText().toString());
         user.setEmail(etEmail.getText().toString());
