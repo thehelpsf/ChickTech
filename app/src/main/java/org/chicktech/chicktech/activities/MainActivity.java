@@ -12,11 +12,6 @@ import org.chicktech.chicktech.R;
 import org.chicktech.chicktech.fragments.ChatFragment;
 import org.chicktech.chicktech.fragments.EventsFragment;
 import org.chicktech.chicktech.fragments.ProfileFragment;
-import org.chicktech.chicktech.models.Address;
-import org.chicktech.chicktech.models.ChatMessage;
-import org.chicktech.chicktech.models.Event;
-import org.chicktech.chicktech.models.Person;
-import org.chicktech.chicktech.models.RSVP;
 import org.chicktech.chicktech.utils.FragmentNavigationDrawer;
 
 
@@ -35,9 +30,9 @@ public class MainActivity extends ActionBarActivity {
         dlDrawer.setupDrawerConfiguration((ListView) findViewById(R.id.lvDrawer),
                 R.layout.drawer_nav_item, R.id.flContent);
         // Add nav items
-        dlDrawer.addNavItem("Events", "Events Fragment", EventsFragment.class);
-        dlDrawer.addNavItem("Profile", "Profile Fragment", ProfileFragment.class);
-        dlDrawer.addNavItem("Chat", "Chat Fragment", ChatFragment.class);
+        dlDrawer.addNavItem("Events", "Events", EventsFragment.class);
+        dlDrawer.addNavItem("Profile", "Profile", ProfileFragment.class);
+        dlDrawer.addNavItem("Chat", "Chat", ChatFragment.class);
         // Select default
         if (savedInstanceState == null) {
             dlDrawer.selectDrawerItem(0);
@@ -45,20 +40,31 @@ public class MainActivity extends ActionBarActivity {
 
         // Temporary creation of models in parse for testing
         sendModelsToParse();
+
     }
 
     // Temporary creation of models in parse for testing
-    private void sendModelsToParse(){
-        Address tempAddress = new Address();
-        ChatMessage tempChatMessage = new ChatMessage();
-        Event tempEvent = new Event();
-        Person tempPerson = new Person();
-        RSVP tempRSVP = new RSVP();
-        tempAddress.saveInBackground();
-        tempChatMessage.saveInBackground();
-        tempEvent.saveInBackground();
-        tempPerson.saveInBackground();
-        tempRSVP.saveInBackground();
+    private void sendModelsToParse() {
+
+//        Address tempAddress = new Address("Portland State University",
+//                "1825 SW Broadway",
+//                "Computer Lab EB 325 West",
+//                "Portland",
+//                "OR",
+//                "97201"
+//                );
+//        tempAddress.saveInBackground();
+
+        //ChatMessage tempChatMessage = new ChatMessage();
+        //Event tempEvent = new Event("Event One", "This is the first event of the year.", new Date(), new Date());
+        //Person tempPerson = new Person();
+
+        //RSVP tempRSVP = new RSVP();
+
+        //tempChatMessage.saveInBackground();
+        //tempEvent.saveInBackground();
+        //tempPerson.saveInBackground();
+        //tempRSVP.saveInBackground();
     }
 
     @Override
