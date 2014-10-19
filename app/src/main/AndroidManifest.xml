@@ -32,12 +32,12 @@
             android:name=".activities.EventDetailActivity"
             android:label="@string/title_activity_event_detail" >
         </activity>
-
         <activity
             android:name=".activities.LoginActivity"
             android:label="@string/title_activity_login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -56,14 +56,12 @@
                 <category android:name="org.chicktech.chicktech" />
             </intent-filter>
         </receiver>
-
         <receiver android:name="com.parse.ParseBroadcastReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
-
         <receiver
             android:name="com.parse.ParsePushBroadcastReceiver"
             android:exported="false" >
@@ -78,14 +76,18 @@
             android:name="com.parse.push.notification_icon"
             android:resource="@drawable/ic_launcher" />
 
-        <receiver android:name="org.chicktech.chicktech.receivers.MyCustomReceiver" >
+        <receiver android:name=".receivers.EventNotificationReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.USER_PRESENT" />
-                <action android:name="org.chicktech.chicktech.UPDATE_STATUS" />
+                <action android:name="org.chicktech.chicktech.EVENT_REMINDER" />
             </intent-filter>
         </receiver>
 
+        <activity
+            android:name=".activities.ShowPopUpActivity"
+            android:label="@string/title_activity_show_pop_up" >
+        </activity>
     </application>
 
 </manifest>

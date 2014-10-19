@@ -24,5 +24,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_new_event">New Event</string>
     <string name="title_activity_login">ChickTech</string>
+    <string name="title_activity_show_pop_up">ShowPopUp</string>
 
 </resources>
