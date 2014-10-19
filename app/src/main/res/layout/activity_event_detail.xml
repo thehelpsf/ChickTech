@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:text="@string/event_name_label"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/chick_tech_green" />
+        android:textColor="@color/teal" />
 
     <LinearLayout
         android:id="@+id/llRSVP"
@@ -119,7 +119,7 @@
         android:text="@string/girls_going_label"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:visibility="gone"
-        android:textColor="@color/chick_tech_green" />
+        android:textColor="@color/teal" />
 
     <ListView
         android:id="@+id/lvGirlsGoing"
