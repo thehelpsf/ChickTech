@@ -129,6 +129,7 @@ public class Person extends ParseUser {
         return getString("partnerID");
     }
 
+    public String getPartnerID () { return getString("partnerID");}
 
     // Parse Setters
     public void setRole(Role role) {
@@ -191,5 +192,6 @@ public class Person extends ParseUser {
     public void setPartnerId(String id) {
         put("partnerID", id);
     }
+    public void setPartnerID(String value) { put("partnerID", value); }
 
 }

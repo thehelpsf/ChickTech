@@ -2,7 +2,9 @@ package org.chicktech.chicktech.utils;
 
 import com.parse.FindCallback;
 import com.parse.GetCallback;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
@@ -77,6 +79,12 @@ public class CTRestClient {
         chatMessage.setMessage(message);
         chatMessage.saveInBackground();
 
+        // Send push notification to query
+        ParsePush push = new ParsePush();
+        ParseQuery pQuery = ParseInstallation.getQuery(); // <-- Installation query
+        pQuery.whereEqualTo("userID", toPersonID);
+
+        push.sendMessageInBackground(message,pQuery);
 
     }
 
@@ -95,7 +103,7 @@ public class CTRestClient {
 
         ParseQuery<ParseObject> mainQuery = ParseQuery.or(queries);
 
-        mainQuery.orderByAscending("createdAT");
+        mainQuery.orderByAscending("createdAt");
         mainQuery.findInBackground(callback);
 
     }
