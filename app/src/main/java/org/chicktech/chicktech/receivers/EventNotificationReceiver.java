@@ -54,6 +54,18 @@ public class EventNotificationReceiver extends BroadcastReceiver {
                         Log.d(TAG, "..." + key + " => " + json.getString(key));
                     }
                 }
+                else if (action.equals("org.chicktech.chicktech.CHAT_MESSAGE")){
+                    String channel = intent.getExtras().getString("com.parse.Channel");
+                    JSONObject json = new JSONObject(intent.getExtras().getString("com.parse.Data"));
+
+                    Intent i = new Intent("android.intent.action.CHAT");
+                    i.putExtra("fromPersonID", json.getString("fromPersonID"));
+                    i.putExtra("toPersonID", json.getString("toPersonID"));
+                    i.putExtra("message", json.getString("message"));
+
+                    context.getApplicationContext().sendBroadcast(i);
+
+                }
             }
         } catch (JSONException e) {
             Log.d(TAG, "JSONException: " + e.getMessage());

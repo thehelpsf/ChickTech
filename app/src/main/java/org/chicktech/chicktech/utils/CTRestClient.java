@@ -10,6 +10,8 @@ import com.parse.ParseUser;
 
 import org.chicktech.chicktech.models.ChatMessage;
 import org.chicktech.chicktech.models.Person;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +86,19 @@ public class CTRestClient {
         ParseQuery pQuery = ParseInstallation.getQuery(); // <-- Installation query
         pQuery.whereEqualTo("userID", toPersonID);
 
-        push.sendMessageInBackground(message,pQuery);
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("action","org.chicktech.chicktech.CHAT_MESSAGE");
+            jsonObject.put("message",message);
+            jsonObject.put("toPersonID",toPersonID);
+            jsonObject.put("fromPersonID",fromPersonID);
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
+        push.setData(jsonObject);
+        push.setQuery(pQuery);
+        push.sendInBackground();
 
     }
 

@@ -1,9 +1,11 @@
 package org.chicktech.chicktech.activities;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -19,6 +21,7 @@ import org.chicktech.chicktech.fragments.ChatFragment;
 import org.chicktech.chicktech.fragments.EventsFragment;
 import org.chicktech.chicktech.fragments.PeopleFragment;
 import org.chicktech.chicktech.fragments.ProfileFragment;
+import org.chicktech.chicktech.models.ChatMessage;
 import org.chicktech.chicktech.utils.BitmapUtils;
 import org.chicktech.chicktech.utils.CameraLaunchingActivity;
 import org.chicktech.chicktech.utils.CameraLaunchingListener;
@@ -32,6 +35,9 @@ public class MainActivity extends ActionBarActivity implements CameraLaunchingAc
     private FragmentNavigationDrawer dlDrawer;
 
     private CameraLaunchingListener cameraListener;
+
+    private BroadcastReceiver mReceiver;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +61,33 @@ public class MainActivity extends ActionBarActivity implements CameraLaunchingAc
         // Temporary creation of models in parse for testing
         sendModelsToParse();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        IntentFilter intentFilter = new IntentFilter(
+                "android.intent.action.CHAT");
+
+        mReceiver = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                //extract our message from intent
+                ChatMessage myMessage = new ChatMessage();
+                //log our message value
+                myMessage.setMessage(intent.getStringExtra("message"));
+                myMessage.setFromPersonID(intent.getStringExtra("fromPersonID"));
+                myMessage.setToPersonID(intent.getStringExtra("toPersonID"));
+                //myMessage.saveEventually();
+
+                dlDrawer.selectDrawerItem(2);
+
+            }
+        };
+        //registering our receiver
+        this.registerReceiver(mReceiver, intentFilter);
     }
 
     // Temporary creation of models in parse for testing
