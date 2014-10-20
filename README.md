@@ -1,5 +1,12 @@
 # ChickTech Connect for Android
 
+## User Story Walkthroughs
+
+### Student
+![Video Walkthrough](screencap_student.gif)
+
+### Mentor
+![Video Walkthrough](screencap_mentor.gif)
 
 ## Overview
 
@@ -33,22 +40,22 @@ Secondary
 
 ## Required User Stories:
 - [x] Student signs on / app activation
-- [ ] Student receivies push notification about upcoming event
+- [x] Student receivies push notification about upcoming event
 - [x] Student views events list
 - [x] Student taps event to see event detail
 - [x] Student RSVPs for an event
-- [ ] Student receives reminder notificaitons about going to event
-- [ ] Student edits profile (including photo)
-- [ ] Student gets directions to event
-- [ ] Student views matched user (student -> mentor, mentor -> student)
-- [ ] Student views organizer profile
+- [x] Student receives reminder notificaitons about going to event
+- [x] Student edits profile (including photo)
+- [x] Student gets directions to event
+- [x] Student views matched user (student -> mentor, mentor -> student)
+- [x] Student views organizer profile
 
 ## Optional User Stories (Organizer and Mentor functionality)
 
-- [ ] Mentor signs on / activiates app
-- [ ] Mentor sees events, details, RSVPs like student can
-- [ ] Mentor sees deatil about mentee
-- [ ] Mentor/Student chat
+- [x] Mentor signs on / activates app
+- [x] Mentor sees events, details, RSVPs like student can
+- [x] Mentor sees deatil about mentee
+- [x] Mentor/Student chat
 - [ ] Organizer signs on
 - [ ] Organizer Add/Edit/Delete Events
 - [ ] Organizer send message to all students
