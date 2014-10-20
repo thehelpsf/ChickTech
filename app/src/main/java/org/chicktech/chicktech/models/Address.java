@@ -29,13 +29,28 @@ public class Address extends ParseObject {
         return getAddress1() + ", " + getCity() + ", " + getState();
     }
     public String toFullString() {
-        String addr = getAddress1();
-        String s = getAddress2();
+        String addr = "";
+        String s = getAddress1();
+        if (s != null && !s.isEmpty()) {
+            addr += s;
+        }
+        s = getAddress2();
         if (s != null && !s.isEmpty()) {
             addr += "\n" + s;
         }
-        addr += "\n" + getCity() + "," + getState() + " " + getZipcode();
-        return addr;
+        s = getCity();
+        if (s != null && !s.isEmpty()) {
+            addr += "\n" + s;
+        }
+        s = getState();
+        if (s != null && !s.isEmpty()) {
+            addr += ", " + s;
+        }
+        s = getZipcode();
+        if (s != null && !s.isEmpty()) {
+            addr += " " + s;
+        }
+        return addr.trim();
     }
     public String getName() {
         return getString("name");
