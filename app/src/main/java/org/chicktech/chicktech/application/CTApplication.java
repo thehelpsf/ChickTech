@@ -35,9 +35,11 @@ public class CTApplication extends Application{
         ParseObject.registerSubclass(RSVP.class);
         ParseObject.registerSubclass(Organization.class);
         Parse.initialize(this, "h24sgXF8i6c5bRFHteYrN7s6gh7fdqzXIwa8ocWw", "FpddZGkm1EEJT6aF2CXP2O89ihLWwlw5eg7kimUf");
-        ParseInstallation installation = ParseInstallation.getCurrentInstallation();
-        installation.put("userID", ParseUser.getCurrentUser().getObjectId());
-        installation.saveInBackground();
+        if (ParseUser.getCurrentUser() != null){
+            ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+            installation.put("userID", ParseUser.getCurrentUser().getObjectId());
+            installation.saveInBackground();
+        }
 
 //        ParsePush.subscribeInBackground("test", new SaveCallback() {
 //            @Override
