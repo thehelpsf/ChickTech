@@ -59,6 +59,11 @@ public class CTRestClient {
         query.getFirstInBackground(callback);
     }
 
+    public static void getPersonById(String id, GetCallback<ParseUser> callback) {
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.getInBackground(id, callback);
+    }
+
     public static void getFullPersonInfo(Person person, GetCallback<Person> callback) {
         // Fetch any relational properties of Person here.
         person.getParseObject("address").fetchIfNeededInBackground(callback);

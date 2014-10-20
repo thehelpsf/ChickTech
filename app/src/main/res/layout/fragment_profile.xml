@@ -33,26 +33,24 @@
                 android:layout_alignTop="@+id/imgPhoto"
                 android:layout_toRightOf="@+id/imgPhoto"
                 android:layout_toEndOf="@+id/imgPhoto"
-                android:layout_toLeftOf="@+id/btnEdit"
                 android:layout_toStartOf="@+id/btnEdit"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
                 android:hint="@string/name_hint"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:layout_toLeftOf="@+id/btnEdit" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvDetails"
                 android:layout_toRightOf="@+id/imgPhoto"
-                android:layout_alignRight="@+id/etName"
-                android:layout_alignEnd="@+id/etName"
                 android:layout_below="@+id/etName"
                 android:layout_alignBottom="@+id/imgPhoto"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:singleLine="false" />
+                android:singleLine="false"
+                android:layout_toLeftOf="@+id/btnEdit"
+                android:layout_toStartOf="@+id/btnEdit" />
 
             <Button
                 android:layout_width="40dp"
