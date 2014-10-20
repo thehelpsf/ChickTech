@@ -8,16 +8,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.parse.GetCallback;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.wefika.flowlayout.FlowLayout;
 
@@ -26,10 +22,9 @@ import org.chicktech.chicktech.models.Address;
 import org.chicktech.chicktech.models.Person;
 import org.chicktech.chicktech.utils.CTRestClient;
 
-import java.util.ArrayList;
-
-public class ProfileFragment extends Fragment implements EditProfileFragment.OnSaveListener {
+public class ProfileFragment extends Fragment implements EditProfileFragment.EditProfileManager {
     private Person user;
+    private boolean isEditable = false;
 
     private ImageView imgPhoto;
     private TextView tvName;
@@ -56,10 +51,36 @@ public class ProfileFragment extends Fragment implements EditProfileFragment.OnS
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Person currentUser = (Person) ParseUser.getCurrentUser();
+        String passedUid = null;
         if (getArguments() != null) {
-            //TODO: Retrieve args here
+            passedUid = getArguments().getString(PeopleFragment.PERSON_ID_KEY);
         }
-        user = (Person) ParseUser.getCurrentUser();
+
+        if (passedUid == null) {
+            Log.d("Profile", "No person ID passed when initializing profile view!");
+        }else if (currentUser.getObjectId().equals(passedUid)) {
+            isEditable = true;
+            user = (Person) ParseUser.getCurrentUser();
+        } else {
+            //TODO: Better loading UI
+            CTRestClient.getPersonById(passedUid, new GetCallback<ParseUser>() {
+                @Override
+                public void done(ParseUser parseUser, ParseException e) {
+                    if (e != null) {
+                        Log.d("Profile", "Error getting user by id: " + e.getMessage());
+                    } else {
+                        user = (Person)parseUser;
+
+                        // If onCreateView has already been called, but couldn't populate profile
+                        // bc there was no user, populate profile now.
+                        if (imgPhoto != null) {
+                            populateProfile();
+                        }
+                    }
+                }
+            });
+        }
     }
 
     @Override
@@ -75,24 +96,32 @@ public class ProfileFragment extends Fragment implements EditProfileFragment.OnS
         tvWhy = (TextView) v.findViewById(R.id.tvWhy);
         flWhat = (FlowLayout) v.findViewById(R.id.flWhat);
         btnEdit = (Button) v.findViewById(R.id.btnEdit);
-        btnEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                editProfile();
-            }
-        });
+        if (isEditable) {
+            btnEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    editProfile();
+                }
+            });
+        } else {
+            btnEdit.setVisibility(View.GONE);
+        }
 
         populateProfile();
         return v;
     }
 
     public void editProfile() {
-        EditProfileFragment editProfileFragment = EditProfileFragment.newInstance();
-        editProfileFragment.setListener(this);
+        EditProfileFragment editProfileFragment = EditProfileFragment.newInstance(this);
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.flContent, editProfileFragment);
         ft.addToBackStack("Edit Profile");
         ft.commit();
+    }
+
+    @Override
+    public Person getPersonToEdit() {
+        return user;
     }
 
     @Override
@@ -102,6 +131,10 @@ public class ProfileFragment extends Fragment implements EditProfileFragment.OnS
     }
 
     private void populateProfile() {
+        if (user == null) {
+            return;
+        }
+
         user.getPhotoInBackground(new Person.GetPhotoCallback() {
             @Override
             public void done(Bitmap photo) {

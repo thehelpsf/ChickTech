@@ -23,7 +23,6 @@ import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.Required;
-import com.mobsandgeeks.saripaar.annotation.TextRule;
 import com.parse.ParseUser;
 
 import org.chicktech.chicktech.R;
@@ -43,7 +42,7 @@ public class EditProfileFragment extends Fragment implements Validator.Validatio
 
     private Person user;
 
-    private OnSaveListener listener;
+    private EditProfileManager manager;
     private Validator validator;
 
     @Required(order = 1)
@@ -71,36 +70,32 @@ public class EditProfileFragment extends Fragment implements Validator.Validatio
 
     Address cachedAddress;
 
-    public interface OnSaveListener {
+    public interface EditProfileManager {
+        public Person getPersonToEdit();
         public void onProfileSave(Person u);
     }
 
-    public static EditProfileFragment newInstance() {
+    public static EditProfileFragment newInstance(EditProfileManager manager) {
         EditProfileFragment fragment = new EditProfileFragment();
-        Bundle args = new Bundle();
-        //TODO: Add args here
-        fragment.setArguments(args);
+        fragment.setManager(manager);
         return fragment;
     }
     public EditProfileFragment() {
         // Required empty public constructor
     }
 
-    public OnSaveListener getListener() {
-        return listener;
+    public EditProfileManager getManager() {
+        return manager;
     }
 
-    public void setListener(OnSaveListener listener) {
-        this.listener = listener;
+    public void setManager(EditProfileManager manager) {
+        this.manager = manager;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            //TODO: Retrieve args here
-        }
-        user = (Person) ParseUser.getCurrentUser();
+        user = manager.getPersonToEdit();
         validator = new Validator(this);
         validator.setValidationListener(this);
     }
@@ -143,6 +138,10 @@ public class EditProfileFragment extends Fragment implements Validator.Validatio
     }
 
     private void populateProfile() {
+        if (user == null) {
+            return;
+        }
+
         user.getPhotoInBackground(new Person.GetPhotoCallback() {
             @Override
             public void done(Bitmap photo) {
@@ -228,20 +227,22 @@ public class EditProfileFragment extends Fragment implements Validator.Validatio
 
     @Override
     public void onValidationSucceeded() {
-        Drawable d = imgPhoto.getDrawable();
-        user.setPhoto(d == null ? null : ((BitmapDrawable)d).getBitmap());
-        user.setPersonName(etName.getText().toString());
-        user.setTagline(etDetails.getText().toString());
-        user.setEmail(etEmail.getText().toString());
-        user.setPhoneNumber(etPhoneNumber.getText().toString());
-        saveAddress();
-        user.setInterestReason(etWhy.getText().toString());
-        user.setInterests(etWhat.getText().toString());
+        if (user != null) {
+            Drawable d = imgPhoto.getDrawable();
+            user.setPhoto(d == null ? null : ((BitmapDrawable) d).getBitmap());
+            user.setPersonName(etName.getText().toString());
+            user.setTagline(etDetails.getText().toString());
+            user.setEmail(etEmail.getText().toString());
+            user.setPhoneNumber(etPhoneNumber.getText().toString());
+            saveAddress();
+            user.setInterestReason(etWhy.getText().toString());
+            user.setInterests(etWhat.getText().toString());
 
-        user.saveInBackground();
+            user.saveInBackground();
 
-        if (listener != null) {
-            listener.onProfileSave(user);
+            if (manager != null) {
+                manager.onProfileSave(user);
+            }
         }
 
         // Hide the keyboard
@@ -255,6 +256,10 @@ public class EditProfileFragment extends Fragment implements Validator.Validatio
 
     @Override
     public void onValidationFailed(View failedView, Rule<?> failedRule) {
+        if (user == null) {
+            return;
+        }
+
         String message = failedRule.getFailureMessage();
         if (failedView instanceof EditText) {
             failedView.requestFocus();

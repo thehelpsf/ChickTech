@@ -17,6 +17,7 @@ import android.widget.ListView;
 import org.chicktech.chicktech.R;
 import org.chicktech.chicktech.fragments.ChatFragment;
 import org.chicktech.chicktech.fragments.EventsFragment;
+import org.chicktech.chicktech.fragments.PeopleFragment;
 import org.chicktech.chicktech.fragments.ProfileFragment;
 import org.chicktech.chicktech.utils.BitmapUtils;
 import org.chicktech.chicktech.utils.CameraLaunchingActivity;
@@ -44,7 +45,7 @@ public class MainActivity extends ActionBarActivity implements CameraLaunchingAc
                 R.layout.drawer_nav_item, R.id.flContent);
         // Add nav items
         dlDrawer.addNavItem("Events", "Events", EventsFragment.class);
-        dlDrawer.addNavItem("Profile", "Profile", ProfileFragment.class);
+        dlDrawer.addNavItem("Profile", "Profile", PeopleFragment.class);
         dlDrawer.addNavItem("Chat", "Chat", ChatFragment.class);
         // Select default
         if (savedInstanceState == null) {

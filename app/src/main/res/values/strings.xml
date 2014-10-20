@@ -26,7 +26,7 @@
     <string name="title_activity_login">ChickTech</string>
     <string name="button_send">Send</string>
     <string name="title_activity_show_pop_up">ShowPopUp</string>
-    <string name="name_hint">My Name</string>
+    <string name="name_hint">Name</string>
     <string name="change_button_label">Change</string>
     <string name="email_hint">me@domain.com</string>
     <string name="phone_number_hint">555-555-5555</string>
@@ -43,5 +43,8 @@
     <string name="address_hint">100 Home Lane\n\nSan Francisco, CA 00000</string>
     <string name="mentor_tagline_hint">Profession</string>
     <string name="student_tagline_hint"><![CDATA[School & Year]]></string>
+    <string name="student_profile_tab_label">My Student</string>
+    <string name="my_profile_tab_label">My Profile</string>
+    <string name="mentor_profile_tab_label">My Mentor</string>
 
 </resources>

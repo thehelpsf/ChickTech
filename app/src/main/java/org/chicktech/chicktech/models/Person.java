@@ -55,6 +55,7 @@ public class Person extends ParseUser {
     private String interests;
     private Date lastLogin;
     private Bitmap photo;
+    private String partnerId;
     */
 
     // Parse Getters
@@ -124,6 +125,9 @@ public class Person extends ParseUser {
             }
         });
     }
+    public String getPartnerId() {
+        return getString("partnerID");
+    }
 
 
     // Parse Setters
@@ -183,6 +187,9 @@ public class Person extends ParseUser {
         ParseFile file = new ParseFile("profilePhoto.jpg", photoBytes);
         file.saveInBackground();
         put("photo", file);
+    }
+    public void setPartnerId(String id) {
+        put("partnerID", id);
     }
 
 }
