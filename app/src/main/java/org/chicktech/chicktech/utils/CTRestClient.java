@@ -73,6 +73,12 @@ public class CTRestClient {
         person.getParseObject("address").fetchIfNeededInBackground(callback);
     }
 
+    public static void getOrganizationInfo(GetCallback<ParseObject> callback) {
+        // Right now there's only 1 organization, so just retrieve the first one
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Organization");
+        query.getFirstInBackground(callback);
+    }
+
     public static void sendChatMessage(String toPersonID, String fromPersonID, String message){
 
         ChatMessage chatMessage = new ChatMessage();

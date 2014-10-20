@@ -11,6 +11,7 @@ import com.parse.ParseUser;
 import org.chicktech.chicktech.models.Address;
 import org.chicktech.chicktech.models.ChatMessage;
 import org.chicktech.chicktech.models.Event;
+import org.chicktech.chicktech.models.Organization;
 import org.chicktech.chicktech.models.Person;
 import org.chicktech.chicktech.models.RSVP;
 
@@ -32,6 +33,7 @@ public class CTApplication extends Application{
         ParseObject.registerSubclass(Event.class);
         ParseObject.registerSubclass(Person.class);
         ParseObject.registerSubclass(RSVP.class);
+        ParseObject.registerSubclass(Organization.class);
         Parse.initialize(this, "h24sgXF8i6c5bRFHteYrN7s6gh7fdqzXIwa8ocWw", "FpddZGkm1EEJT6aF2CXP2O89ihLWwlw5eg7kimUf");
         ParseInstallation installation = ParseInstallation.getCurrentInstallation();
         installation.put("userID", ParseUser.getCurrentUser().getObjectId());

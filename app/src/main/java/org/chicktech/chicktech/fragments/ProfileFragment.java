@@ -156,11 +156,7 @@ public class ProfileFragment extends Fragment implements EditProfileFragment.Edi
                 if (addr == null) {
                     tvAddress.setText("");
                 } else {
-                    tvAddress.setText(addr.getAddress1()
-                            + "\n" + addr.getAddress2()
-                            + "\n" + addr.getCity()
-                            + ", " + addr.getState()
-                            + " " + addr.getZipcode());
+                    tvAddress.setText(addr.toFullString());
                 }
             }
         });

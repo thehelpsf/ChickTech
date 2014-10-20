@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.widget.ListView;
 
 import org.chicktech.chicktech.R;
+import org.chicktech.chicktech.fragments.AboutFragment;
 import org.chicktech.chicktech.fragments.ChatFragment;
 import org.chicktech.chicktech.fragments.EventsFragment;
 import org.chicktech.chicktech.fragments.PeopleFragment;
@@ -53,6 +54,7 @@ public class MainActivity extends ActionBarActivity implements CameraLaunchingAc
         dlDrawer.addNavItem("Events", "Events", EventsFragment.class);
         dlDrawer.addNavItem("Profile", "Profile", PeopleFragment.class);
         dlDrawer.addNavItem("Chat", "Chat", ChatFragment.class);
+        dlDrawer.addNavItem("ChickTech", "About ChichTech", AboutFragment.class);
         // Select default
         if (savedInstanceState == null) {
             dlDrawer.selectDrawerItem(0);

@@ -46,5 +46,6 @@
     <string name="student_profile_tab_label">My Student</string>
     <string name="my_profile_tab_label">My Profile</string>
     <string name="mentor_profile_tab_label">My Mentor</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
