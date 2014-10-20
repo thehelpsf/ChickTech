@@ -3,11 +3,13 @@ package org.chicktech.chicktech.models;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
+import java.io.Serializable;
+
 /**
  * Created by kenanpulak on 10/14/14.
  */
 @ParseClassName("ChatMessage")
-public class ChatMessage extends ParseObject{
+public class ChatMessage extends ParseObject implements Serializable{
 
     // might need
     //private int messageID;

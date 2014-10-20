@@ -82,6 +82,7 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.USER_PRESENT" />
                 <action android:name="org.chicktech.chicktech.EVENT_REMINDER" />
+                <action android:name="org.chicktech.chicktech.CHAT_MESSAGE"/>
             </intent-filter>
         </receiver>
 

@@ -2,12 +2,16 @@ package org.chicktech.chicktech.utils;
 
 import com.parse.FindCallback;
 import com.parse.GetCallback;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import org.chicktech.chicktech.models.ChatMessage;
 import org.chicktech.chicktech.models.Person;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,6 +81,24 @@ public class CTRestClient {
         chatMessage.setMessage(message);
         chatMessage.saveInBackground();
 
+        // Send push notification to query
+        ParsePush push = new ParsePush();
+        ParseQuery pQuery = ParseInstallation.getQuery(); // <-- Installation query
+        pQuery.whereEqualTo("userID", toPersonID);
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("action","org.chicktech.chicktech.CHAT_MESSAGE");
+            jsonObject.put("message",message);
+            jsonObject.put("toPersonID",toPersonID);
+            jsonObject.put("fromPersonID",fromPersonID);
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
+        push.setData(jsonObject);
+        push.setQuery(pQuery);
+        push.sendInBackground();
 
     }
 
@@ -95,7 +117,7 @@ public class CTRestClient {
 
         ParseQuery<ParseObject> mainQuery = ParseQuery.or(queries);
 
-        mainQuery.orderByAscending("createdAT");
+        mainQuery.orderByAscending("createdAt");
         mainQuery.findInBackground(callback);
 
     }

@@ -90,11 +90,12 @@ public class ChatFragment extends Fragment{
             public void onClick(View view) {
                 if (etMessage.length() > 0){
                     ChatMessage message = new ChatMessage();
-                    message.setToPersonID("216blDpSwJ");
+                    message.setToPersonID(currentUser.getPartnerID());
                     message.setFromPersonID(currentUser.getObjectId());
                     message.setMessage(etMessage.getText().toString());
                     parseClient.sendChatMessage(message.getToPersonID(),message.getFromPersonID(),message.getMessage());
-                    aMessages.add(message);
+                    messages.add(message);
+                    aMessages.notifyDataSetChanged();
                     etMessage.setText("");
                 }
             }

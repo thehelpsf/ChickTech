@@ -29,7 +29,7 @@ public class ChatArrayAdapter extends ArrayAdapter<ChatMessage> {
     }
 
     public ChatArrayAdapter(Context context, List<ChatMessage> messages) {
-        super(context, R.layout.item_chat, messages);
+        super(context, 0, messages);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class ChatArrayAdapter extends ArrayAdapter<ChatMessage> {
 
         ChatMessage message = getItem(position);
 
-        if (convertView == null) {
+        if (convertView != getInflatedLayoutForType(message.getFromPersonID())) {
             viewHolder = new ViewHolder();
             convertView = getInflatedLayoutForType(message.getFromPersonID());
             viewHolder.tvMessage = (TextView) convertView.findViewById(R.id.tvMessage);

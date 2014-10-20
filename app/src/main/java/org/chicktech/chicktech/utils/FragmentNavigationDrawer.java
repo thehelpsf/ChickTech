@@ -98,7 +98,6 @@ public class FragmentNavigationDrawer extends DrawerLayout {
         closeDrawer(lvDrawer);
     }
 
-
     public ActionBarDrawerToggle getDrawerToggle() {
         return drawerToggle;
     }
