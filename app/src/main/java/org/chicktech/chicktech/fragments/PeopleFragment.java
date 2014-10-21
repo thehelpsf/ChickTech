@@ -1,18 +1,24 @@
 package org.chicktech.chicktech.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.parse.ParseUser;
 
 import org.chicktech.chicktech.R;
+import org.chicktech.chicktech.activities.LoginActivity;
 import org.chicktech.chicktech.models.Person;
+import org.chicktech.chicktech.utils.LoginUtils;
 
 /**
  * Created by Jing Jin on 10/19/14.
@@ -21,6 +27,12 @@ public class PeopleFragment extends Fragment {
     public static final String PERSON_ID_KEY = "personId";
 
     private FragmentTabHost tabHost;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,5 +59,21 @@ public class PeopleFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         tabHost = null;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.profile, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_logout:
+                LoginUtils.logout(getActivity());
+                return true;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

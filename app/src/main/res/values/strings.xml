@@ -8,6 +8,7 @@
     <string name="drawer_close">Close navigation drawer</string>
     <string name="title_activity_event_detail">Event</string>
     <string name="action_rsvp">RSVP</string>
+    <string name="action_logout">Logout</string>
     <string name="action_goto_map">Map</string>
     <string name="event_name_label">Event Name</string>
     <string name="rsvp_not">You have not RSVPd</string>
