@@ -43,14 +43,14 @@ public class Event extends ParseObject {
 
     public String getDayOfWeek() {
         Date d = getStartDate();
-        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE");
         String dayOfTheWeek = sdf.format(d).toUpperCase(Locale.US);
         return dayOfTheWeek;
     }
 
     public String getMonth() {
         Date d = getStartDate();
-        SimpleDateFormat sdf = new SimpleDateFormat("MMMM");
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM");
         String month = sdf.format(d).toUpperCase(Locale.US);
         return month;
     }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="325dp"
+    android:layout_height="225dp"
     android:layout_gravity="top"
     android:paddingBottom="2dp"
     android:background="@android:color/black"
@@ -26,7 +26,7 @@
         android:text="@string/event_name_label"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:textSize="30sp"
+        android:textSize="24sp"
         android:layout_alignParentTop="true"
         android:background="@color/brown_transparent"
         android:padding="10dp"
@@ -45,11 +45,11 @@
 
         <TextView
             android:id="@+id/tvDay"
-            android:layout_width="100dp"
+            android:layout_width="@dimen/badge_width"
             android:gravity="center_horizontal"
             android:layout_height="wrap_content"
             android:text="SUNDAY"
-            android:textSize="40sp"
+            android:textSize="36sp"
             android:textColor="@color/badgeText"
             android:background="@color/teal_transparent"
             android:layout_centerHorizontal="true"
@@ -60,7 +60,7 @@
 
     <RelativeLayout
         android:id="@+id/rlBadge"
-        android:layout_width="100dp"
+        android:layout_width="@dimen/badge_width"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:gravity="center_vertical"
@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="DECEMBER"
-            android:textSize="24sp"
+            android:textSize="36sp"
             android:textColor="@color/badgeText"
             android:paddingBottom="10dp"
             android:layout_centerHorizontal="true"
