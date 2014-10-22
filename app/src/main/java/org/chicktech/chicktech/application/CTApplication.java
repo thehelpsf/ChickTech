@@ -3,6 +3,9 @@ package org.chicktech.chicktech.application;
 import android.app.Application;
 import android.content.Context;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.parse.Parse;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
@@ -27,6 +30,15 @@ public class CTApplication extends Application{
     public void onCreate() {
         super.onCreate();
         CTApplication.context = this;
+
+        // Create global configuration and initialize ImageLoader with this configuration
+        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().
+                cacheInMemory().cacheOnDisc().build();
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
+                .defaultDisplayImageOptions(defaultOptions)
+                .build();
+        ImageLoader.getInstance().init(config);
+
 
         ParseObject.registerSubclass(Address.class);
         ParseObject.registerSubclass(ChatMessage.class);
@@ -54,5 +66,9 @@ public class CTApplication extends Application{
 //            }
 //        });
 
+    }
+
+    public static Context getContext() {
+        return context;
     }
 }

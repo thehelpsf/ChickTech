@@ -3,7 +3,9 @@ package org.chicktech.chicktech.models;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by kenanpulak on 10/14/14.
@@ -39,6 +41,28 @@ public class Event extends ParseObject {
         return "unknown";
     }
 
+    public String getDayOfWeek() {
+        Date d = getStartDate();
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+        String dayOfTheWeek = sdf.format(d).toUpperCase(Locale.US);
+        return dayOfTheWeek;
+    }
+
+    public String getMonth() {
+        Date d = getStartDate();
+        SimpleDateFormat sdf = new SimpleDateFormat("MMMM");
+        String month = sdf.format(d).toUpperCase(Locale.US);
+        return month;
+    }
+
+    public String getDateNumber() {
+        Date d = getStartDate();
+        SimpleDateFormat sdf = new SimpleDateFormat("d");
+        String date = sdf.format(d).toUpperCase(Locale.US);
+        return date;
+    }
+
+
     // Parse Getters
     public String getTitle() {
         return getString("title");
@@ -47,7 +71,7 @@ public class Event extends ParseObject {
         return getString("description");
     }
     public String getImageURL() {
-        return getString("imageURL");
+        return getString("imageUrl");
     }
     public String getAddressID() {
         return getString("addressID");
@@ -157,4 +181,5 @@ public class Event extends ParseObject {
             setRsvpYes(rsvp);
         }
     }
+
 }

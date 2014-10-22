@@ -1,9 +1,7 @@
 package org.chicktech.chicktech.models;
 
-import com.parse.GetCallback;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
-import com.parse.ParseQuery;
 
 /**
  * Created by kenanpulak on 10/14/14.
@@ -26,8 +24,9 @@ public class Address extends ParseObject {
 
     @Override
     public String toString() {
-        return getAddress1() + ", " + getCity() + ", " + getState();
+        return getName() + ", " + getAddress1() + ", " + getCity() + ", " + getState();
     }
+
     public String toFullString() {
         String addr = "";
         String s = getAddress1();
