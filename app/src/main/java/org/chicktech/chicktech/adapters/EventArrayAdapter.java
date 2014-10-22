@@ -1,14 +1,17 @@
 package org.chicktech.chicktech.adapters;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -41,6 +44,8 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
         TextView tvDateNumber;
         TextView tvMonth;
         ImageView ivImage;
+        RelativeLayout rlBadge;
+        RelativeLayout rlBody;
         Person person;
     }
 
@@ -56,6 +61,7 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
         imageLoader = ImageLoader.getInstance();
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Event event = getItem(position);
@@ -79,10 +85,28 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
             viewHolder.tvDateNumber.setTypeface(displayFont);
             viewHolder.tvMonth.setTypeface(displayFont);
 
+            viewHolder.rlBadge = (RelativeLayout) convertView.findViewById(R.id.rlBadge);
+
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) viewHolder.rlBadge.getLayoutParams();
+
+        if (position % 2 == 0) {
+            // even
+            params.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            //params.addRule(RelativeLayout.LEFT_OF, R.id.id_to_be_left_of);
+        } else {
+            params.removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            //params.addRule(RelativeLayout.LEFT_OF, R.id.id_to_be_left_of);
+        }
+
+        viewHolder.rlBadge.setLayoutParams(params); //causes layout update
+
 
 
         String imageUrl = event.getImageURL();

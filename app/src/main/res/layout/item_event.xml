@@ -12,7 +12,7 @@
         android:id="@+id/ivImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:adjustViewBounds="true"
+        android:adjustViewBounds="false"
         android:scaleType="centerCrop"
         android:layout_alignParentTop="true"
         android:alpha="1"
@@ -37,25 +37,27 @@
         android:id="@+id/rlBadge"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:gravity="center_vertical"
         android:layout_below="@+id/tvEventName"
         >
 
         <TextView
+            android:id="@+id/tvDay"
             android:layout_width="fill_parent"
             android:gravity="center_horizontal"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="SUNDAY"
-            android:textSize="48sp"
-            android:id="@+id/tvDay"
+            android:textSize="40sp"
             android:textColor="#ffffff"
             android:background="@color/teal_transparent"
-            android:layout_marginTop="0dp"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
 
         <TextView
             android:id="@+id/tvDateNumber"
+            android:layout_alignParentTop="true"
             android:layout_width="fill_parent"
             android:gravity="center_horizontal"
             android:layout_height="wrap_content"
@@ -80,7 +82,9 @@
             android:textColor="#Ffffff"
             android:background="@color/pink_transparent"
             android:paddingBottom="10dp"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/tvDay"
+            />
 
     </RelativeLayout>
 
