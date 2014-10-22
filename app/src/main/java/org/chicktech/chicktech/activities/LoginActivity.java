@@ -2,13 +2,14 @@ package org.chicktech.chicktech.activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.parse.GetCallback;
@@ -18,33 +19,34 @@ import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
 import org.chicktech.chicktech.R;
-import org.chicktech.chicktech.models.Person;
 import org.chicktech.chicktech.utils.CTRestClient;
+import org.chicktech.chicktech.utils.LoginUtils;
 
 public class LoginActivity extends Activity {
     private String mPhoneNumber;
-    private SharedPreferences mSettings;
     EditText etPhoneNumber;
+    Button btnSignOn;
     ProgressBar pb;
+    RelativeLayout rlMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        rlMain = (RelativeLayout) findViewById(R.id.rlMain);
         etPhoneNumber = (EditText) findViewById(R.id.etPhoneNumber);
-
-        mSettings = getSharedPreferences("Settings", 0);
-
-        // See if phoneNumber is in Shared Prefs
-        mPhoneNumber = mSettings.getString("phoneNumber", "missing");
-        if (!mPhoneNumber.equals("missing")) {
-            // Right now just fill in EditText and let user poke Get Started button
-            etPhoneNumber.setText(mPhoneNumber);
-        }
+        btnSignOn = (Button) findViewById(R.id.btnSignOn);
 
         pb = (ProgressBar) findViewById(R.id.pbWorking);
 
+        mPhoneNumber = LoginUtils.getSavedPhoneNumber(this);
+        if (mPhoneNumber != null) {
+            etPhoneNumber.setText(mPhoneNumber);
+            login(mPhoneNumber);
+        } else {
+            rlMain.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -70,9 +72,7 @@ public class LoginActivity extends Activity {
 
         // get phone number from EditText and put into SharedPrefs
         final String phoneNumber = etPhoneNumber.getText().toString();
-        SharedPreferences.Editor editor = mSettings.edit();
-        editor.putString("phoneNumber", phoneNumber);
-        editor.commit();
+        LoginUtils.setSharedPrefs(this, phoneNumber);
 
         pb.setVisibility(ProgressBar.VISIBLE);
 
@@ -92,11 +92,10 @@ public class LoginActivity extends Activity {
 
     private void login (String phoneNumber) {
         pb.setVisibility(ProgressBar.VISIBLE);
-        ParseUser.logInInBackground(phoneNumber, phoneNumber, new LogInCallback() {
+        LoginUtils.login(phoneNumber, new LogInCallback() {
             public void done(ParseUser user, ParseException e) {
                 pb.setVisibility(ProgressBar.INVISIBLE);
                 if (user != null) {
-                    Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
                     moveOnToApp();
                 } else {
                     Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_LONG).show();
@@ -109,19 +108,11 @@ public class LoginActivity extends Activity {
 
         pb.setVisibility(ProgressBar.VISIBLE);
 
-        Person user = new Person();
-        user.setUsername(phoneNumber);
-        user.setPassword(phoneNumber);
-        user.setRole(Person.Role.STUDENT);
-        //user.setEmail(phoneNumber + "@example.com");
-        // other fields can be set just like with ParseObject
-        user.setPhoneNumber(phoneNumber);
-
-        user.signUpInBackground(new SignUpCallback() {
+        LoginUtils.signUp(phoneNumber, new SignUpCallback() {
             public void done(ParseException e) {
                 pb.setVisibility(ProgressBar.INVISIBLE);
                 if (e == null) {
-                    Toast.makeText(LoginActivity.this, "Sign Up Successful", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Welcome to ChickTech!", Toast.LENGTH_LONG).show();
                     moveOnToApp();
                 } else {
                     Toast.makeText(LoginActivity.this, "Sign Up Failed", Toast.LENGTH_LONG).show();

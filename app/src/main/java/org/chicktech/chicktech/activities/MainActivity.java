@@ -21,7 +21,6 @@ import org.chicktech.chicktech.fragments.AboutFragment;
 import org.chicktech.chicktech.fragments.ChatFragment;
 import org.chicktech.chicktech.fragments.EventsFragment;
 import org.chicktech.chicktech.fragments.PeopleFragment;
-import org.chicktech.chicktech.fragments.ProfileFragment;
 import org.chicktech.chicktech.models.ChatMessage;
 import org.chicktech.chicktech.utils.BitmapUtils;
 import org.chicktech.chicktech.utils.CameraLaunchingActivity;
@@ -89,6 +88,7 @@ public class MainActivity extends ActionBarActivity implements CameraLaunchingAc
             }
         };
         //registering our receiver
+        // TODO: Fix this receiver link. Need to unregister in onPause()
         this.registerReceiver(mReceiver, intentFilter);
     }
 
