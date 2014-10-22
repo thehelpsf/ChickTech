@@ -45,6 +45,7 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
         TextView tvMonth;
         ImageView ivImage;
         RelativeLayout rlBadge;
+        RelativeLayout rlDay;
         RelativeLayout rlBody;
         Person person;
     }
@@ -86,6 +87,7 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
             viewHolder.tvMonth.setTypeface(displayFont);
 
             viewHolder.rlBadge = (RelativeLayout) convertView.findViewById(R.id.rlBadge);
+            viewHolder.rlDay = (RelativeLayout) convertView.findViewById(R.id.rlDay);
 
             convertView.setTag(viewHolder);
         } else {
@@ -93,20 +95,26 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
         }
 
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) viewHolder.rlBadge.getLayoutParams();
+        RelativeLayout.LayoutParams params2 = (RelativeLayout.LayoutParams) viewHolder.rlDay.getLayoutParams();
 
         if (position % 2 == 0) {
             // even
             params.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            params2.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            params2.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
             //params.addRule(RelativeLayout.LEFT_OF, R.id.id_to_be_left_of);
         } else {
             params.removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
             params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            params2.removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            params2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+
             //params.addRule(RelativeLayout.LEFT_OF, R.id.id_to_be_left_of);
         }
 
         viewHolder.rlBadge.setLayoutParams(params); //causes layout update
-
+        viewHolder.rlDay.setLayoutParams(params2);
 
 
         String imageUrl = event.getImageURL();
