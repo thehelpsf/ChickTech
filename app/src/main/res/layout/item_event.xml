@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:text="SUNDAY"
             android:textSize="40sp"
-            android:textColor="#ffffff"
+            android:textColor="@color/badgeText"
             android:background="@color/teal_transparent"
             android:layout_centerHorizontal="true"
             />
@@ -78,7 +78,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="23"
             android:textSize="72sp"
-            android:textColor="#Ffffff"
+            android:textColor="@color/badgeText"
             android:paddingTop="10dp"
             android:layout_centerHorizontal="true" />
 
@@ -91,7 +91,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="DECEMBER"
             android:textSize="24sp"
-            android:textColor="#Ffffff"
+            android:textColor="@color/badgeText"
             android:paddingBottom="10dp"
             android:layout_centerHorizontal="true"
 

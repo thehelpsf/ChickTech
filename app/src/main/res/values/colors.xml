@@ -7,7 +7,10 @@
     <item name="teal" type="color">#4BBDC5</item>
     <item name="teal_transparent" type="color">#994BBDC5</item>
     <item name="white" type="color">#FFFFFF</item>
+    <item name="white_transparent" type="color">#99FFFFFF</item>
     <item name="lightGray" type="color">#E7E7E7</item>
     <item name="darkGray" type="color">#9B9B9B</item>
+    <item name="badgeText" type="color">#000000</item>
+
 
 </resources>
