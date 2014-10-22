@@ -28,7 +28,7 @@
         android:textStyle="bold"
         android:textSize="30sp"
         android:layout_alignParentTop="true"
-        android:background="@color/brown_transparent"
+        android:background="@color/pink_transparent"
         android:padding="10dp"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 

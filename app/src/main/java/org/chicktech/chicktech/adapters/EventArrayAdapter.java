@@ -6,6 +6,7 @@ import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.text.Html;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,13 +104,14 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
             params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
             params2.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             params2.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            viewHolder.tvName.setGravity(Gravity.RIGHT);
             //params.addRule(RelativeLayout.LEFT_OF, R.id.id_to_be_left_of);
         } else {
             params.removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
             params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             params2.removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
             params2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-
+            viewHolder.tvName.setGravity(Gravity.LEFT);
             //params.addRule(RelativeLayout.LEFT_OF, R.id.id_to_be_left_of);
         }
 
