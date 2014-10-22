@@ -36,6 +36,7 @@ public class EventDetailActivity extends Activity {
     TextView tvDate;
     TextView tvLocation;
     TextView tvRsvpStatus;
+    TextView tvTime;
     ProgressBar pb;
     Person person;
 
@@ -76,6 +77,7 @@ public class EventDetailActivity extends Activity {
         tvDate  = (TextView) findViewById(R.id.tvDate);
         tvLocation = (TextView) findViewById(R.id.tvLocation);
         tvRsvpStatus = (TextView) findViewById(R.id.tvRSVPStatus);
+        tvTime = (TextView) findViewById(R.id.tvTime);
 
         girlsGoing = new ArrayList<String>();
         girlsGoing.add("Bonnie");
@@ -96,8 +98,9 @@ public class EventDetailActivity extends Activity {
         if (event != null) {
             tvName.setText(event.getTitle());
             tvDescription.setText(Html.fromHtml(event.getDescription()));
-            tvDate.setText(event.getStartDate().toString());
+            tvDate.setText(event.getStartDateString());
             tvLocation.setText(event.getAddressString());
+            tvTime.setText(event.getTimeString());
             refreshRsvpOnScreen();
         }
     }

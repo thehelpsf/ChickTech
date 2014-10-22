@@ -44,6 +44,7 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
         TextView tvDay;
         TextView tvDateNumber;
         TextView tvMonth;
+        TextView tvTime;
         ImageView ivImage;
         RelativeLayout rlBadge;
         RelativeLayout rlDay;
@@ -78,6 +79,7 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
             viewHolder.tvDateNumber = (TextView) convertView.findViewById(R.id.tvDateNumber);
             viewHolder.tvMonth = (TextView) convertView.findViewById(R.id.tvMonth);
             viewHolder.tvLocation = (TextView) convertView.findViewById(R.id.tvLocation);
+            viewHolder.tvTime = (TextView) convertView.findViewById(R.id.tvTime);
             viewHolder.tvRsvpStatus = (TextView) convertView.findViewById(R.id.tvRSVPStatus);
             viewHolder.ivImage = (ImageView) convertView.findViewById(R.id.ivImage);
             viewHolder.person = (Person) ParseUser.getCurrentUser();
@@ -135,6 +137,7 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
         viewHolder.tvDay.setText(event.getDayOfWeek());
         viewHolder.tvDateNumber.setText(event.getDateNumber());
         viewHolder.tvMonth.setText(event.getMonth());
+        viewHolder.tvTime.setText(event.getTimeString());
 
         return convertView;
     }

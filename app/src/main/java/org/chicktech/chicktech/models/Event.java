@@ -62,6 +62,19 @@ public class Event extends ParseObject {
         return date;
     }
 
+    public String getTimeString() {
+        Date sd = getStartDate();
+        Date ed = getEndDate();
+        SimpleDateFormat sdfStart = new SimpleDateFormat("ha");
+        SimpleDateFormat sdfEnd = new SimpleDateFormat("ha");
+        String time = sdfStart.format(sd).toUpperCase(Locale.US) + " - "
+                + sdfStart.format(ed).toUpperCase(Locale.US);
+        return time;
+    }
+
+    public String getStartDateString() {
+        return getMonth() + " " + getDateNumber();
+    }
 
     // Parse Getters
     public String getTitle() {

@@ -14,10 +14,10 @@
     <string name="rsvp_not">You have not RSVPd</string>
     <string name="rsvp_yes">You have RSVPd YES</string>
     <string name="rsvp_NO">You have RSVPd NO</string>
-    <string name="date_label">October 12, 2014</string>
-    <string name="time_label">10am - 5pm</string>
-    <string name="location_label">SF State Auditorium</string>
-    <string name="event_desc_label">Event Description</string>
+    <string name="date_label"></string>
+    <string name="time_label"></string>
+    <string name="location_label"></string>
+    <string name="event_desc_label"></string>
     <string name="girls_going_label">Girls Are Going</string>
     <string name="calendar_icon">Calendar Icon</string>
     <string name="clock_icon">Clock Icon</string>

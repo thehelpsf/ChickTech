@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="275dp"
+    android:layout_height="325dp"
     android:layout_gravity="top"
     android:paddingBottom="2dp"
     android:background="@android:color/black"
@@ -28,7 +28,7 @@
         android:textStyle="bold"
         android:textSize="30sp"
         android:layout_alignParentTop="true"
-        android:background="@color/pink_transparent"
+        android:background="@color/brown_transparent"
         android:padding="10dp"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -102,10 +102,12 @@
 
 
     <RelativeLayout
-        android:layout_toRightOf="@+id/rlBadge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_below="@id/tvEventName"
+        android:layout_alignTop="@+id/rlBadge"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:background="#ff0000"
         >
 
         <TextView
