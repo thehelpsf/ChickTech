@@ -28,7 +28,7 @@
         android:textStyle="bold"
         android:textSize="24sp"
         android:layout_alignParentTop="true"
-        android:background="@color/brown_transparent"
+        android:background="@color/brown"
         android:padding="10dp"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -40,7 +40,7 @@
         android:gravity="center_vertical"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:background="@color/pink_transparent"
+        android:background="@color/pink"
         >
 
         <TextView
@@ -51,7 +51,7 @@
             android:text="SUNDAY"
             android:textSize="36sp"
             android:textColor="@color/badgeText"
-            android:background="@color/teal_transparent"
+            android:background="@color/teal"
             android:layout_centerHorizontal="true"
             />
 
@@ -66,7 +66,7 @@
         android:gravity="center_vertical"
         android:layout_below="@+id/tvEventName"
         android:layout_above="@+id/rlDay"
-        android:background="@color/pink_transparent"
+        android:background="@color/pink"
         >
 
         <TextView

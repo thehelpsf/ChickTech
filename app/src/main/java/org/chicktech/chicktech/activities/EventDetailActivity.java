@@ -93,6 +93,12 @@ public class EventDetailActivity extends Activity {
         lvGirlsGoing.setAdapter(aGirlsGoing);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+
     private void fillTheForm(ParseObject object) {
         event = (Event) object;
         if (event != null) {
@@ -119,7 +125,7 @@ public class EventDetailActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                onBackPressed();
                 return true;
             case R.id.action_goto_map:
                 gotoMaps();

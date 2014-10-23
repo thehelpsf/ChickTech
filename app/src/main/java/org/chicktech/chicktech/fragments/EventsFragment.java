@@ -180,6 +180,7 @@ public class EventsFragment extends Fragment {
                 Intent i = new Intent(getActivity(), EventDetailActivity.class);
                 i.putExtra("id", event.getObjectId());
                 startActivity(i);
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
     }
