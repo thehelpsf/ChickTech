@@ -2,26 +2,107 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
+    android:padding="0dp"
     tools:context="org.chicktech.chicktech.activities.EventDetailActivity">
+
+    <ImageView
+        android:id="@+id/ivImage"
+        android:layout_width="match_parent"
+        android:layout_height="225dp"
+        android:adjustViewBounds="false"
+        android:scaleType="centerCrop"
+        android:layout_alignParentTop="true"
+        android:layout_below="@+id/tvEventName"
+        android:alpha="1"
+        />
 
     <TextView
         android:id="@+id/tvEventName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/event_name_label"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/teal" />
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:layout_alignParentTop="true"
+        android:background="@color/brown"
+        android:padding="10dp"
+        android:gravity="center_horizontal"
+         />
+
+    <RelativeLayout
+        android:id="@+id/rlDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ivImage"
+        android:gravity="center_vertical"
+        android:layout_alignParentLeft="true"
+        android:background="@color/pink"
+        >
+
+        <TextView
+            android:id="@+id/tvDay"
+            android:layout_width="@dimen/badge_width"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="36sp"
+            android:textColor="@color/badgeText"
+            android:background="@color/teal"
+            android:layout_centerHorizontal="true"
+            />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rlBadge"
+        android:layout_width="@dimen/badge_width"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/tvEventName"
+        android:layout_above="@+id/rlDay"
+        android:background="@color/pink"
+        >
+
+        <TextView
+            android:id="@+id/tvDateNumber"
+            android:layout_alignParentTop="true"
+            android:layout_width="fill_parent"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text=""
+            android:textSize="72sp"
+            android:textColor="@color/badgeText"
+            android:paddingTop="10dp"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/tvMonth"
+            android:layout_below="@+id/tvDateNumber"
+            android:layout_width="fill_parent"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text=""
+            android:textSize="36sp"
+            android:textColor="@color/badgeText"
+            android:paddingBottom="10dp"
+            android:layout_centerHorizontal="true"
+            />
+
+    </RelativeLayout>
+
 
     <LinearLayout
         android:id="@+id/llRSVP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/llTime"
         android:gravity="center_vertical"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:layout_below="@+id/tvEventName" >
+        android:layout_below="@+id/ivImage" >
 
         <TextView
             android:id="@+id/tvRSVPStatus"
@@ -31,90 +112,106 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/llDate"
-        android:layout_width="match_parent"
+    <ScrollView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/svDetails"
+        android:layout_alignParentBottom="true"
         android:layout_below="@+id/llRSVP"
-        android:gravity="center_vertical"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal" >
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
-        <ImageView
-            android:id="@+id/ivCalendar"
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="@dimen/icon_size"
-            android:layout_marginRight="5dp"
-            android:contentDescription="@string/calendar_icon"
-            android:src="@drawable/ic_calendar" />
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/rlDetails">
 
-        <TextView
-            android:id="@+id/tvDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/date_label" />
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
 
-    <LinearLayout
-        android:id="@+id/llTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/llDate"
-        android:gravity="center_vertical"
-        android:layout_below="@+id/llDate" >
+                <ImageView
+                    android:id="@+id/ivCalendar"
+                    android:layout_width="@dimen/icon_size"
+                    android:layout_height="@dimen/icon_size"
+                    android:layout_marginRight="5dp"
+                    android:contentDescription="@string/calendar_icon"
+                    android:src="@drawable/ic_calendar" />
 
-        <ImageView
-            android:id="@+id/ivClock"
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="@dimen/icon_size"
-            android:layout_marginRight="5dp"
-            android:contentDescription="@string/clock_icon"
-            android:src="@drawable/ic_clock" />
+                <TextView
+                    android:id="@+id/tvDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/date_label" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/time_label" />
+            <LinearLayout
+                android:id="@+id/llTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/llDate"
+                android:gravity="center_vertical"
+                android:layout_below="@+id/llDate" >
 
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/ivClock"
+                    android:layout_width="@dimen/icon_size"
+                    android:layout_height="@dimen/icon_size"
+                    android:layout_marginRight="5dp"
+                    android:contentDescription="@string/clock_icon"
+                    android:src="@drawable/ic_clock" />
 
-    <LinearLayout
-        android:id="@+id/llLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/llTime"
-        android:gravity="center_vertical"
-        android:layout_below="@+id/llTime" >
+                <TextView
+                    android:id="@+id/tvTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/time_label" />
 
-        <ImageView
-            android:id="@+id/ivLocation"
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="@dimen/icon_size"
-            android:layout_marginRight="5dp"
-            android:contentDescription="@string/location_icon"
-            android:src="@drawable/ic_location" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvLocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/location_label" />
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/llTime"
+                android:gravity="center_vertical"
+                android:layout_below="@+id/llTime" >
 
-    <TextView
-        android:id="@+id/tvEventDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/llLocation"
-        android:layout_marginTop="10dp"
-        android:text="@string/event_desc_label" />
+                <ImageView
+                    android:id="@+id/ivLocation"
+                    android:layout_width="@dimen/icon_size"
+                    android:layout_height="@dimen/icon_size"
+                    android:layout_marginRight="5dp"
+                    android:contentDescription="@string/location_icon"
+                    android:src="@drawable/ic_location" />
+
+                <TextView
+                    android:id="@+id/tvLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/location_label" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvEventDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llLocation"
+                android:layout_marginTop="10dp"
+                android:text="@string/event_desc_label" />
+        </RelativeLayout>
+    </ScrollView>
 
     <TextView
         android:id="@+id/tvPeopleTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvEventDescription"
         android:layout_marginTop="10dp"
         android:text="@string/girls_going_label"
         android:textAppearance="?android:attr/textAppearanceLarge"

@@ -30,9 +30,8 @@ import java.util.List;
  */
 public class EventArrayAdapter extends ArrayAdapter<Event> {
     Typeface displayFont, displayFont2;
-    ViewHolder viewHolder;
-    View view;
     ImageLoader imageLoader;
+    ViewHolder viewHolder;
 
     // View lookup cache
     private static class ViewHolder {
@@ -106,14 +105,14 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
             params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
             params2.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             params2.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-            viewHolder.tvName.setGravity(Gravity.RIGHT);
+            viewHolder.tvName.setGravity(Gravity.CENTER_HORIZONTAL);
             //params.addRule(RelativeLayout.LEFT_OF, R.id.id_to_be_left_of);
         } else {
             params.removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
             params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             params2.removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
             params2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-            viewHolder.tvName.setGravity(Gravity.LEFT);
+            viewHolder.tvName.setGravity(Gravity.CENTER_HORIZONTAL);
             //params.addRule(RelativeLayout.LEFT_OF, R.id.id_to_be_left_of);
         }
 

@@ -2,23 +2,28 @@ package org.chicktech.chicktech.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import org.chicktech.chicktech.R;
+import org.chicktech.chicktech.application.CTApplication;
 import org.chicktech.chicktech.models.Event;
 import org.chicktech.chicktech.models.Person;
 import org.chicktech.chicktech.utils.CTRestClient;
@@ -26,6 +31,9 @@ import org.chicktech.chicktech.utils.CTRestClient;
 import java.util.ArrayList;
 
 public class EventDetailActivity extends Activity {
+
+    Typeface displayFont, displayFont2;
+    ImageLoader imageLoader;
 
     Event event;
     ArrayList<String> girlsGoing;
@@ -37,6 +45,10 @@ public class EventDetailActivity extends Activity {
     TextView tvLocation;
     TextView tvRsvpStatus;
     TextView tvTime;
+    TextView tvDay;
+    TextView tvDateNumber;
+    TextView tvMonth;
+    ImageView ivImage;
     ProgressBar pb;
     Person person;
 
@@ -47,6 +59,12 @@ public class EventDetailActivity extends Activity {
         setContentView(R.layout.activity_event_detail);
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
+        // Create the TypeFace from the TTF asset
+        AssetManager assetMgr = CTApplication.getContext().getAssets();
+        displayFont = Typeface.createFromAsset(CTApplication.getContext().getAssets(), "fonts/ostrich-black.ttf");
+        displayFont2 = Typeface.createFromAsset(CTApplication.getContext().getAssets(), "fonts/droid.otf");
+
+        imageLoader = ImageLoader.getInstance();
         pb = (ProgressBar) findViewById(R.id.pbLoading);
 
         person = (Person) ParseUser.getCurrentUser();
@@ -78,6 +96,15 @@ public class EventDetailActivity extends Activity {
         tvLocation = (TextView) findViewById(R.id.tvLocation);
         tvRsvpStatus = (TextView) findViewById(R.id.tvRSVPStatus);
         tvTime = (TextView) findViewById(R.id.tvTime);
+        tvDay = (TextView) findViewById(R.id.tvDay);
+        tvDateNumber = (TextView) findViewById(R.id.tvDateNumber);
+        tvMonth = (TextView) findViewById(R.id.tvMonth);
+        ivImage = (ImageView) findViewById(R.id.ivImage);
+
+        tvName.setTypeface(displayFont);
+        tvDay.setTypeface(displayFont2);
+        tvDateNumber.setTypeface(displayFont);
+        tvMonth.setTypeface(displayFont);
 
         girlsGoing = new ArrayList<String>();
         girlsGoing.add("Bonnie");
@@ -106,7 +133,19 @@ public class EventDetailActivity extends Activity {
             tvDescription.setText(Html.fromHtml(event.getDescription()));
             tvDate.setText(event.getStartDateString());
             tvLocation.setText(event.getAddressString());
+            tvDay.setText(event.getDayOfWeek());
+            tvDateNumber.setText(event.getDateNumber());
+            tvMonth.setText(event.getMonth());
             tvTime.setText(event.getTimeString());
+
+
+            String imageUrl = event.getImageURL();
+            if (imageUrl != null && imageUrl != "") {
+                imageLoader.displayImage(imageUrl, ivImage);
+            } else {
+                ivImage.setImageResource(android.R.color.transparent);
+            }
+
             refreshRsvpOnScreen();
         }
     }
