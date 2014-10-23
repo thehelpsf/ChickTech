@@ -10,7 +10,5 @@
     <item name="white_transparent" type="color">#99FFFFFF</item>
     <item name="lightGray" type="color">#E7E7E7</item>
     <item name="darkGray" type="color">#9B9B9B</item>
-    <item name="badgeText" type="color">#000000</item>
-
-
+    <item name="badgeText" type="color">#FFFFFF</item>
 </resources>

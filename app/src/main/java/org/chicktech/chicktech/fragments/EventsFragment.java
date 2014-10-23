@@ -183,6 +183,7 @@ public class EventsFragment extends Fragment {
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
+        // TODO: Add long touch here to bring up action items?
     }
 
     private void createSampleEvents() {
