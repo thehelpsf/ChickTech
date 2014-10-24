@@ -48,11 +48,13 @@
             android:layout_width="@dimen/badge_width"
             android:gravity="center_horizontal"
             android:layout_height="wrap_content"
-            android:text="SUNDAY"
+            android:text="SUN"
             android:textSize="36sp"
             android:textColor="@color/badgeText"
             android:background="@color/pink"
             android:layout_centerHorizontal="true"
+            android:paddingTop="10dp"
+            android:paddingBottom="7dp"
             />
 
     </RelativeLayout>

@@ -84,7 +84,7 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
             viewHolder.person = (Person) ParseUser.getCurrentUser();
 
             viewHolder.tvName.setTypeface(displayFont);
-            viewHolder.tvDay.setTypeface(displayFont2);
+            viewHolder.tvDay.setTypeface(displayFont);
             viewHolder.tvDateNumber.setTypeface(displayFont);
             viewHolder.tvMonth.setTypeface(displayFont);
 
