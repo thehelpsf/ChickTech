@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,6 +59,9 @@ public class EventDetailActivity extends Activity {
     ImageView ivRsvp;
     ProgressBar pb;
     Person person;
+    ScrollView svDetails;
+
+    private Animation animFadeIn;
 
 
     @Override
@@ -70,6 +74,8 @@ public class EventDetailActivity extends Activity {
         AssetManager assetMgr = CTApplication.getContext().getAssets();
         displayFont = Typeface.createFromAsset(CTApplication.getContext().getAssets(), "fonts/ostrich-black.ttf");
         displayFont2 = Typeface.createFromAsset(CTApplication.getContext().getAssets(), "fonts/droid.otf");
+
+        setupAnimations();
 
         imageLoader = ImageLoader.getInstance();
         pb = (ProgressBar) findViewById(R.id.pbLoading);
@@ -90,6 +96,7 @@ public class EventDetailActivity extends Activity {
                 } else {
                     //Log.d("event", "Retrieved the object.");
                     fillTheForm(event);
+                    svDetails.startAnimation(animFadeIn);
                 }
             }
         });
@@ -111,9 +118,10 @@ public class EventDetailActivity extends Activity {
         tvChat = (TextView) findViewById(R.id.tvChat);
         ivImage = (ImageView) findViewById(R.id.ivImage);
         ivRsvp = (ImageView) findViewById(R.id.ivRsvp);
+        svDetails = (ScrollView) findViewById(R.id.svDetails);
 
         tvName.setTypeface(displayFont);
-        tvDay.setTypeface(displayFont2);
+        tvDay.setTypeface(displayFont);
         tvDateNumber.setTypeface(displayFont);
         tvMonth.setTypeface(displayFont);
         tvTime.setTypeface(displayFont);
@@ -134,6 +142,27 @@ public class EventDetailActivity extends Activity {
 
         aGirlsGoing = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, girlsGoing);
         lvGirlsGoing.setAdapter(aGirlsGoing);
+    }
+
+    private void setupAnimations() {
+        // Inflate animation from XML
+        animFadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        animFadeIn.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                svDetails.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
     }
 
     @Override
@@ -272,6 +301,7 @@ public class EventDetailActivity extends Activity {
         }
         intent.setData(Uri.parse(data));
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
     public void onClickChat (View button) {

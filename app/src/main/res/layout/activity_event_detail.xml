@@ -145,6 +145,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/rlBadge"
+        android:visibility="invisible"
         >
 
         <RelativeLayout
@@ -180,8 +181,6 @@
                     android:layout_marginRight="5dp"
                     android:contentDescription="@string/location_icon"
                     android:src="@drawable/ic_rsvp"
-                    android:onClick="onClickGetThere"
-                    android:clickable="true"
                     />
 
                 <TextView
