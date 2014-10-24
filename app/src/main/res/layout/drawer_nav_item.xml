@@ -1,14 +1,31 @@
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@android:id/text1"
+<org.chicktech.chicktech.views.DrawerMenuItemView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:drawable/list_selector_background"
-    android:gravity="center_vertical"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:minHeight="?android:attr/listPreferredItemHeightSmall"
-    android:textAppearance="?android:attr/textAppearanceListItemSmall"
-    android:textSize="16sp"
-    android:textColor="#111" />
+    style="@style/CTDrawerMenuItem"
+    android:orientation="horizontal">
+
+
+    <TextView
+        android:id="@+id/tvMenuLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/CTDrawerMenuItemText"
+        android:layout_weight="100"/>
+    
+    <ImageView
+        android:id="@+id/imgMenuIcon"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        style="@style/CTDrawerIcon"/>
+
+
+    <TextView
+        android:id="@+id/tvSpacer"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+
+</org.chicktech.chicktech.views.DrawerMenuItemView>
 
     
