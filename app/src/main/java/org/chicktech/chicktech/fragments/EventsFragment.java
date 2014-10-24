@@ -51,7 +51,7 @@ public class EventsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
+        //setHasOptionsMenu(true);
 
         Person user = (Person) ParseUser.getCurrentUser();
         if (user != null) {
