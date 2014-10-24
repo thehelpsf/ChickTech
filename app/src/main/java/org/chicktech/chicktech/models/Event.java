@@ -99,10 +99,18 @@ public class Event extends ParseObject {
         return (Address) getParseObject("location");
     }
     public String getRsvpYes() {
-        return getString("rsvpYes");
+        String str = getString("rsvpYes");
+        if (str == null) {
+            return "";
+        }
+        return str;
     }
     public String getRsvpNo() {
-        return getString("rsvpNo");
+        String str = getString("rsvpNo");
+        if (str == null) {
+            return "";
+        }
+        return str;
     }
 
     public boolean isPersonGoing(Person person) {

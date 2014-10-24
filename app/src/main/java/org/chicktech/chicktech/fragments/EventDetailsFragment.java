@@ -85,7 +85,9 @@ public class EventDetailsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         objectID = getArguments().getString("id");
-        // TODO: react to invalid objectID
+        if (objectID == null || objectID.length() < 1) {
+            Toast.makeText(getActivity(), "Invalid event ID", Toast.LENGTH_LONG).show();
+        }
     }
 
 
@@ -305,12 +307,6 @@ public class EventDetailsFragment extends Fragment {
             }
         });
         llMenu.startAnimation(anim);
-    }
-
-
-    private void onBackPressed() {
-        // TODO: ask parent activity to process back button?
-        Toast.makeText(getLocalContext(), "back", Toast.LENGTH_SHORT).show();
     }
 
 

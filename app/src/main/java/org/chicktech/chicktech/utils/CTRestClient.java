@@ -9,11 +9,13 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import org.chicktech.chicktech.models.ChatMessage;
+import org.chicktech.chicktech.models.Event;
 import org.chicktech.chicktech.models.Person;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -48,8 +50,18 @@ public class CTRestClient {
         query.findInBackground(callback);
     }
 
-    public void getRSVPList(int eventid){
+    public static void getRSVPList(Event event, FindCallback<ParseUser> callback){
+        String yeses = event.getRsvpYes();
+        if (yeses.length() < 1) {
+            return; // no rsvps in this list.
+        }
 
+        yeses = yeses.substring(1);
+        String []ids = yeses.split(",");
+
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereContainedIn("objectId", Arrays.asList(ids));
+        query.findInBackground(callback);
     }
 
     public void setEventRSVP(int eventid, int personid, Boolean going){

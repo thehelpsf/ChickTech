@@ -53,10 +53,10 @@ public class EventDetailActivity extends ActionBarActivity {
 
         ActionBar.Tab tab1 = actionBar
                 .newTab()
-                .setText("Detail")
+                .setText("DETAILS")
                 //.setIcon(R.drawable.ic_rsvp)
                 .setTabListener(
-                        new FragmentTabListener<EventDetailsFragment>(R.id.flContent, this, "Detail",
+                        new FragmentTabListener<EventDetailsFragment>(R.id.flContent, this, "DETAILS",
                                 EventDetailsFragment.class, args));
 
         actionBar.addTab(tab1);
@@ -64,7 +64,7 @@ public class EventDetailActivity extends ActionBarActivity {
 
         ActionBar.Tab tab2 = actionBar
                 .newTab()
-                .setText("People")
+                .setText("RSVPs")
                 //.setIcon(R.drawable.ic_location)
                 .setTabListener(
                         new FragmentTabListener<PeopleListFragment>(R.id.flContent, this, "RSVPs",

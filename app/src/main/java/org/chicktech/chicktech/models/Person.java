@@ -40,6 +40,11 @@ public class Person extends ParseUser {
         MENTOR
     }
 
+    @Override
+    public String toString() {
+        return getUsername();
+    }
+
     //private int userID;
     //private Address address;
     //private Person emergencyContact;
