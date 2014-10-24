@@ -1,8 +1,49 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="CTActionBarTitleText" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ActionBar.Solid.Ctactionbar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@drawable/ab_solid_ctactionbar</item>
+        <item name="android:backgroundStacked">@drawable/ab_stacked_solid_ctactionbar</item>
+        <item name="android:backgroundSplit">@drawable/ab_bottom_solid_ctactionbar</item>
+        <item name="android:progressBarStyle">@style/ProgressBar.Ctactionbar</item>
+        <item name="android:titleTextStyle">@style/CTActionBarTitleText</item>
+        <item name="android:icon">@android:color/transparent</item>
+    </style>
+
+    <style name="PopupMenu.Ctactionbar" parent="@style/Widget.AppCompat.PopupMenu">
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_ctactionbar</item>
+    </style>
+
+    <style name="DropDownListView.Ctactionbar" parent="@style/Widget.AppCompat.ListView.DropDown">
+        <item name="android:listSelector">@drawable/selectable_background_ctactionbar</item>
+    </style>
+
+    <style name="ActionBarTabStyle.Ctactionbar" parent="@style/Widget.AppCompat.ActionBar.TabView">
+        <item name="android:background">@drawable/tab_indicator_ab_ctactionbar</item>
+    </style>
+
+    <style name="DropDownNav.Ctactionbar" parent="@style/Widget.AppCompat.Spinner.DropDown.ActionBar">
+        <item name="android:background">@drawable/spinner_background_ab_ctactionbar</item>
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_ctactionbar</item>
+        <item name="android:dropDownSelector">@drawable/selectable_background_ctactionbar</item>
+    </style>
+
+    <style name="ProgressBar.Ctactionbar" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal_ctactionbar</item>
+    </style>
+
+    <style name="ActionButton.CloseMode.Ctactionbar" parent="@style/Widget.AppCompat.ActionButton.CloseMode">
+        <item name="android:background">@drawable/btn_cab_done_ctactionbar</item>
+    </style>
+
+    <style name="Theme.Ctactionbar.Widget" parent="@style/Theme.AppCompat">
+        <item name="android:popupMenuStyle">@style/PopupMenu.Ctactionbar</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Ctactionbar</item>
     </style>
 
     <style name="InterestTag">
