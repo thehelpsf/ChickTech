@@ -14,6 +14,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
@@ -60,6 +61,7 @@ public class EventDetailActivity extends Activity {
     ProgressBar pb;
     Person person;
     ScrollView svDetails;
+    LinearLayout llMenu;
 
     private Animation animFadeIn;
 
@@ -97,6 +99,7 @@ public class EventDetailActivity extends Activity {
                     //Log.d("event", "Retrieved the object.");
                     fillTheForm(event);
                     svDetails.startAnimation(animFadeIn);
+                    slideMenuIn();
                 }
             }
         });
@@ -119,6 +122,7 @@ public class EventDetailActivity extends Activity {
         ivImage = (ImageView) findViewById(R.id.ivImage);
         ivRsvp = (ImageView) findViewById(R.id.ivRsvp);
         svDetails = (ScrollView) findViewById(R.id.svDetails);
+        llMenu = (LinearLayout) findViewById(R.id.llMenu);
 
         tvName.setTypeface(displayFont);
         tvDay.setTypeface(displayFont);
@@ -240,8 +244,29 @@ public class EventDetailActivity extends Activity {
         } else {
             tvRsvpStatus.setText(event.getRsvpStatusString(person));
         }
+    }
 
 
+    public void slideMenuIn() {
+        // Inflate animation from XML
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.slide_in_left);
+        // Setup listeners (optional)
+        anim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                llMenu.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
+        llMenu.startAnimation(anim);
     }
 
 
