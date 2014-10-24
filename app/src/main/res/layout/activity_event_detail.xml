@@ -2,140 +2,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
+    android:padding="0dp"
     tools:context="org.chicktech.chicktech.activities.EventDetailActivity">
 
-    <TextView
-        android:id="@+id/tvEventName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/event_name_label"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/teal" />
 
-    <LinearLayout
-        android:id="@+id/llRSVP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/llTime"
-        android:gravity="center_vertical"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:layout_below="@+id/tvEventName" >
-
-        <TextView
-            android:id="@+id/tvRSVPStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/rsvp_not" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/llDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/llRSVP"
-        android:gravity="center_vertical"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal" >
-
-        <ImageView
-            android:id="@+id/ivCalendar"
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="@dimen/icon_size"
-            android:layout_marginRight="5dp"
-            android:contentDescription="@string/calendar_icon"
-            android:src="@drawable/ic_calendar" />
-
-        <TextView
-            android:id="@+id/tvDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/date_label" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/llTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/llDate"
-        android:gravity="center_vertical"
-        android:layout_below="@+id/llDate" >
-
-        <ImageView
-            android:id="@+id/ivClock"
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="@dimen/icon_size"
-            android:layout_marginRight="5dp"
-            android:contentDescription="@string/clock_icon"
-            android:src="@drawable/ic_clock" />
-
-        <TextView
-            android:id="@+id/tvTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/time_label" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/llLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/llTime"
-        android:gravity="center_vertical"
-        android:layout_below="@+id/llTime" >
-
-        <ImageView
-            android:id="@+id/ivLocation"
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="@dimen/icon_size"
-            android:layout_marginRight="5dp"
-            android:contentDescription="@string/location_icon"
-            android:src="@drawable/ic_location" />
-
-        <TextView
-            android:id="@+id/tvLocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/location_label" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/tvEventDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/llLocation"
-        android:layout_marginTop="10dp"
-        android:text="@string/event_desc_label" />
-
-    <TextView
-        android:id="@+id/tvPeopleTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvEventDescription"
-        android:layout_marginTop="10dp"
-        android:text="@string/girls_going_label"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:visibility="gone"
-        android:textColor="@color/teal" />
-
-    <ListView
-        android:id="@+id/lvGirlsGoing"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvPeopleTitle"
-        android:visibility="gone"
-        android:layout_below="@+id/tvPeopleTitle" >
-    </ListView>
-
-    <ProgressBar
-        android:id="@+id/pbLoading"
-        android:visibility="invisible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-
+    <FrameLayout
+        android:id="@+id/flContent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"></FrameLayout>
 </RelativeLayout>

@@ -39,6 +39,7 @@ public class CTApplication extends Application{
                 .build();
         ImageLoader.getInstance().init(config);
 
+        Parse.enableLocalDatastore(this);
 
         ParseObject.registerSubclass(Address.class);
         ParseObject.registerSubclass(ChatMessage.class);

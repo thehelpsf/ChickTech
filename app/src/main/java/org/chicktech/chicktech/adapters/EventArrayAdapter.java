@@ -30,9 +30,8 @@ import java.util.List;
  */
 public class EventArrayAdapter extends ArrayAdapter<Event> {
     Typeface displayFont, displayFont2;
-    ViewHolder viewHolder;
-    View view;
     ImageLoader imageLoader;
+    ViewHolder viewHolder;
 
     // View lookup cache
     private static class ViewHolder {
@@ -85,9 +84,10 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
             viewHolder.person = (Person) ParseUser.getCurrentUser();
 
             viewHolder.tvName.setTypeface(displayFont);
-            viewHolder.tvDay.setTypeface(displayFont2);
+            viewHolder.tvDay.setTypeface(displayFont);
             viewHolder.tvDateNumber.setTypeface(displayFont);
             viewHolder.tvMonth.setTypeface(displayFont);
+            viewHolder.tvRsvpStatus.setTypeface(displayFont);
 
             viewHolder.rlBadge = (RelativeLayout) convertView.findViewById(R.id.rlBadge);
             viewHolder.rlDay = (RelativeLayout) convertView.findViewById(R.id.rlDay);
@@ -106,14 +106,14 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
             params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
             params2.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             params2.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-            viewHolder.tvName.setGravity(Gravity.RIGHT);
+            viewHolder.tvName.setGravity(Gravity.CENTER_HORIZONTAL);
             //params.addRule(RelativeLayout.LEFT_OF, R.id.id_to_be_left_of);
         } else {
             params.removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
             params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             params2.removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
             params2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-            viewHolder.tvName.setGravity(Gravity.LEFT);
+            viewHolder.tvName.setGravity(Gravity.CENTER_HORIZONTAL);
             //params.addRule(RelativeLayout.LEFT_OF, R.id.id_to_be_left_of);
         }
 
@@ -133,7 +133,7 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
         viewHolder.tvDescription.setText(Html.fromHtml(event.getDescription()));
         viewHolder.tvDate.setText(event.getStartDate().toString());
         viewHolder.tvLocation.setText(event.getAddressString());
-        viewHolder.tvRsvpStatus.setText(event.getRsvpStatusString(viewHolder.person));
+        viewHolder.tvRsvpStatus.setText(event.getRsvpStatusLabelShort(viewHolder.person));
         viewHolder.tvDay.setText(event.getDayOfWeek());
         viewHolder.tvDateNumber.setText(event.getDateNumber());
         viewHolder.tvMonth.setText(event.getMonth());

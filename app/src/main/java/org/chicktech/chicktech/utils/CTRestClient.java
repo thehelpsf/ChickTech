@@ -9,17 +9,22 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import org.chicktech.chicktech.models.ChatMessage;
+import org.chicktech.chicktech.models.Event;
 import org.chicktech.chicktech.models.Person;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * Created by kenanpulak on 10/14/14.
  */
 public class CTRestClient {
+
+    final public static boolean QUERY_LOCAL = true;
+    final public static boolean QUERY_SERVER = false;
 
     /*
 
@@ -34,24 +39,40 @@ public class CTRestClient {
    * Notification Handler for incoming notifications
 
      */
-    public void getEventList(FindCallback<ParseObject> callback){
+    public void getEventList(boolean queryLocal, FindCallback<ParseObject> callback){
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
         //query.whereEqualTo("playerName", "Dan Stemkoski");
+        if (queryLocal) {
+            query.fromLocalDatastore();
+        }
         query.include("location"); // the key which the associated object was stored
         query.orderByAscending("startDate");
         query.findInBackground(callback);
     }
 
-    public void getRSVPList(int eventid){
+    public static void getRSVPList(Event event, FindCallback<ParseUser> callback){
+        String yeses = event.getRsvpYes();
+        if (yeses.length() < 1) {
+            return; // no rsvps in this list.
+        }
 
+        yeses = yeses.substring(1);
+        String []ids = yeses.split(",");
+
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereContainedIn("objectId", Arrays.asList(ids));
+        query.findInBackground(callback);
     }
 
     public void setEventRSVP(int eventid, int personid, Boolean going){
 
     }
 
-    public static void getEventByID(String objectID, GetCallback<ParseObject> callback){
+    public static void getEventByID(boolean queryLocal, String objectID, GetCallback<ParseObject> callback){
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
+        if (queryLocal) {
+            query.fromLocalDatastore();
+        }
         query.whereEqualTo("objectId", objectID);
         query.include("location"); // the key which the associated object was stored
         query.getFirstInBackground(callback);

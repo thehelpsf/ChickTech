@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="225dp"
+    android:layout_height="250dp"
     android:layout_gravity="top"
-    android:paddingBottom="2dp"
-    android:background="@android:color/black"
+    android:paddingBottom="0dp"
+    android:background="@android:color/white"
     >
-
 
     <ImageView
         android:id="@+id/ivImage"
@@ -24,12 +23,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/event_name_label"
-        android:textColor="@color/white"
+        android:textColor="@color/brown"
         android:textStyle="bold"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:layout_alignParentTop="true"
-        android:background="@color/brown"
-        android:padding="10dp"
+        android:background="@drawable/gradient_white"
+        android:maxLines="1"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 
@@ -40,7 +41,6 @@
         android:gravity="center_vertical"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:background="@color/pink"
         >
 
         <TextView
@@ -48,11 +48,28 @@
             android:layout_width="@dimen/badge_width"
             android:gravity="center_horizontal"
             android:layout_height="wrap_content"
-            android:text="SUNDAY"
+            android:text="SUN"
             android:textSize="36sp"
             android:textColor="@color/badgeText"
-            android:background="@color/teal"
+            android:background="@drawable/gradient_pink"
             android:layout_centerHorizontal="true"
+            android:paddingTop="10dp"
+            android:paddingBottom="7dp"
+            />
+
+        <TextView
+            android:id="@+id/tvRSVPStatus"
+            android:layout_width="@dimen/badge_width"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:text="YES"
+            android:textSize="26sp"
+            android:textColor="@color/badgeText"
+            android:background="@drawable/gradient_brown"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="10dp"
+            android:paddingBottom="7dp"
+            android:layout_below="@+id/tvDay"
             />
 
     </RelativeLayout>
@@ -66,7 +83,7 @@
         android:gravity="center_vertical"
         android:layout_below="@+id/tvEventName"
         android:layout_above="@+id/rlDay"
-        android:background="@color/pink"
+        android:background="@drawable/gradient_teal"
         >
 
         <TextView
@@ -89,7 +106,7 @@
             android:gravity="center_horizontal"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="DECEMBER"
+            android:text="DEC"
             android:textSize="36sp"
             android:textColor="@color/badgeText"
             android:paddingBottom="10dp"
@@ -107,7 +124,6 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:background="#ff0000"
         >
 
         <TextView
@@ -203,12 +219,6 @@
             android:paddingBottom="10dp"
             android:visibility="gone"
             android:layout_below="@+id/llLocation" >
-
-            <TextView
-                android:id="@+id/tvRSVPStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/rsvp_not" />
 
             <Button
                 android:id="@+id/btnRSVP"

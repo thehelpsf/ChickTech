@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="brown" type="color">#736558</item>
+    <item name="brown_light" type="color">#ffb2a494</item>
     <item name="brown_transparent" type="color">#AA736558</item>
     <item name="pink" type="color">#F0659E</item>
     <item name="pink_light" type="color">#F383B2</item>
@@ -12,7 +13,5 @@
     <item name="white_transparent" type="color">#CCFFFFFF</item>
     <item name="lightGray" type="color">#E7E7E7</item>
     <item name="darkGray" type="color">#9B9B9B</item>
-    <item name="badgeText" type="color">#000000</item>
-
-
+    <item name="badgeText" type="color">#FFFFFF</item>
 </resources>
