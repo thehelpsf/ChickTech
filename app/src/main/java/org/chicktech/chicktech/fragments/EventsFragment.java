@@ -65,23 +65,52 @@ public class EventsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        fetchLocalEvents();
+    }
 
+    private void fetchLocalEvents() {
         pb.setVisibility(ProgressBar.VISIBLE);
-        parseClient.getEventList(new FindCallback<ParseObject>() {
+        parseClient.getEventList(CTRestClient.QUERY_LOCAL, new FindCallback<ParseObject>() {
             public void done(List<ParseObject> events, ParseException e) {
-            pb.setVisibility(ProgressBar.INVISIBLE);
-            if (e == null) {
-                aEvents.clear();
-                Log.d("events", "Retrieved " + events.size() + " events");
-                for (int i = 0; i < events.size(); i++) {
-                    aEvents.add((Event)events.get(i));
+                pb.setVisibility(ProgressBar.INVISIBLE);
+                if (e == null) {
+                    if (events.size() == 0) {
+                        fetchServerEvents();
+                    } else {
+                        //Toast.makeText(getActivity(), "got events locally", Toast.LENGTH_SHORT).show();
+                        aEvents.clear();
+                        Log.d("events", "Retrieved " + events.size() + " events");
+                        for (int i = 0; i < events.size(); i++) {
+                            aEvents.add((Event) events.get(i));
+                        }
+                    }
+                } else {
+                    //Toast.makeText(getActivity(), "no events saved locally", Toast.LENGTH_SHORT).show();
+                    fetchServerEvents();
                 }
-            } else {
-                Log.d("events", "Error: " + e.getMessage());
-            }
             }
         });
+    }
 
+    public void fetchServerEvents() {
+        Toast.makeText(getActivity(), "fetching events from server", Toast.LENGTH_SHORT).show();
+
+        pb.setVisibility(ProgressBar.VISIBLE);
+        parseClient.getEventList(CTRestClient.QUERY_SERVER, new FindCallback<ParseObject>() {
+            public void done(List<ParseObject> events, ParseException e) {
+                pb.setVisibility(ProgressBar.INVISIBLE);
+                if (e == null) {
+                    aEvents.clear();
+                    Log.d("events", "Retrieved " + events.size() + " events");
+                    for (int i = 0; i < events.size(); i++) {
+                        aEvents.add((Event)events.get(i));
+                    }
+                    ParseObject.pinAllInBackground(events);
+                } else {
+                    Toast.makeText(getActivity(), "could not get events from server", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     @Override

@@ -62,6 +62,7 @@ public class EventDetailActivity extends Activity {
     Person person;
     ScrollView svDetails;
     LinearLayout llMenu;
+    String objectID;
 
     private Animation animFadeIn;
 
@@ -85,25 +86,7 @@ public class EventDetailActivity extends Activity {
         person = (Person) ParseUser.getCurrentUser();
 
         Intent i = getIntent();
-        //event = (Event) i.getSerializableExtra("event");
-        String objectID = i.getStringExtra("id");
-
-
-        pb.setVisibility(ProgressBar.VISIBLE);
-        CTRestClient.getEventByID(objectID, new GetCallback<ParseObject>() {
-            public void done(ParseObject event, ParseException e) {
-                pb.setVisibility(ProgressBar.INVISIBLE);
-                if (event == null) {
-                    Toast.makeText(EventDetailActivity.this, "Did not get event details", Toast.LENGTH_LONG).show();
-                } else {
-                    //Log.d("event", "Retrieved the object.");
-                    fillTheForm(event);
-                    svDetails.startAnimation(animFadeIn);
-                    slideMenuIn();
-                }
-            }
-        });
-
+        objectID = i.getStringExtra("id");
 
         // Get access to all the form controls
         tvName = (TextView) findViewById(R.id.tvEventName);
@@ -146,6 +129,27 @@ public class EventDetailActivity extends Activity {
 
         aGirlsGoing = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, girlsGoing);
         lvGirlsGoing.setAdapter(aGirlsGoing);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        pb.setVisibility(ProgressBar.VISIBLE);
+        CTRestClient.getEventByID(CTRestClient.QUERY_LOCAL, objectID, new GetCallback<ParseObject>() {
+            public void done(ParseObject event, ParseException e) {
+                pb.setVisibility(ProgressBar.INVISIBLE);
+                if (event == null) {
+                    Toast.makeText(EventDetailActivity.this, "Did not get event details", Toast.LENGTH_LONG).show();
+                } else {
+                    //Log.d("event", "Retrieved the object.");
+                    fillTheForm(event);
+                    svDetails.startAnimation(animFadeIn);
+                    slideMenuIn();
+                }
+            }
+        });
+
     }
 
     private void setupAnimations() {
@@ -251,6 +255,7 @@ public class EventDetailActivity extends Activity {
         // Inflate animation from XML
         Animation anim = AnimationUtils.loadAnimation(this, R.anim.slide_in_left);
         // Setup listeners (optional)
+        anim.setDuration(1000L);
         anim.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {

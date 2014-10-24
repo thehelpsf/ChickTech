@@ -21,6 +21,9 @@ import java.util.List;
  */
 public class CTRestClient {
 
+    final public static boolean QUERY_LOCAL = true;
+    final public static boolean QUERY_SERVER = false;
+
     /*
 
 
@@ -34,9 +37,12 @@ public class CTRestClient {
    * Notification Handler for incoming notifications
 
      */
-    public void getEventList(FindCallback<ParseObject> callback){
+    public void getEventList(boolean queryLocal, FindCallback<ParseObject> callback){
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
         //query.whereEqualTo("playerName", "Dan Stemkoski");
+        if (queryLocal) {
+            query.fromLocalDatastore();
+        }
         query.include("location"); // the key which the associated object was stored
         query.orderByAscending("startDate");
         query.findInBackground(callback);
@@ -50,8 +56,11 @@ public class CTRestClient {
 
     }
 
-    public static void getEventByID(String objectID, GetCallback<ParseObject> callback){
+    public static void getEventByID(boolean queryLocal, String objectID, GetCallback<ParseObject> callback){
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
+        if (queryLocal) {
+            query.fromLocalDatastore();
+        }
         query.whereEqualTo("objectId", objectID);
         query.include("location"); // the key which the associated object was stored
         query.getFirstInBackground(callback);
