@@ -13,7 +13,7 @@
         android:textColor="@color/brown"
         android:textSize="20sp"
         android:layout_alignParentTop="true"
-        android:background="@color/white"
+        android:background="@drawable/gradient_white"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
         android:maxLines="1"
