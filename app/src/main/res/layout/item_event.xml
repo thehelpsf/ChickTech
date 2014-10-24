@@ -41,7 +41,6 @@
         android:gravity="center_vertical"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:background="@color/teal"
         >
 
         <TextView
@@ -52,7 +51,7 @@
             android:text="SUN"
             android:textSize="36sp"
             android:textColor="@color/badgeText"
-            android:background="@color/pink"
+            android:background="@drawable/gradient_pink"
             android:layout_centerHorizontal="true"
             android:paddingTop="10dp"
             android:paddingBottom="7dp"
@@ -66,7 +65,7 @@
             android:text="YES"
             android:textSize="26sp"
             android:textColor="@color/badgeText"
-            android:background="@color/brown"
+            android:background="@drawable/gradient_brown"
             android:layout_centerHorizontal="true"
             android:paddingTop="10dp"
             android:paddingBottom="7dp"
@@ -84,7 +83,7 @@
         android:gravity="center_vertical"
         android:layout_below="@+id/tvEventName"
         android:layout_above="@+id/rlDay"
-        android:background="@color/teal"
+        android:background="@drawable/gradient_teal"
         >
 
         <TextView
@@ -107,7 +106,7 @@
             android:gravity="center_horizontal"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="DECEMBER"
+            android:text="DEC"
             android:textSize="36sp"
             android:textColor="@color/badgeText"
             android:paddingBottom="10dp"
@@ -125,7 +124,6 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:background="#ff0000"
         >
 
         <TextView
