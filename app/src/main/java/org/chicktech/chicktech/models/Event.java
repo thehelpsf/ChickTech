@@ -67,7 +67,7 @@ public class Event extends ParseObject {
         Date ed = getEndDate();
         SimpleDateFormat sdfStart = new SimpleDateFormat("ha");
         SimpleDateFormat sdfEnd = new SimpleDateFormat("ha");
-        String time = sdfStart.format(sd).toUpperCase(Locale.US) + " - "
+        String time = sdfStart.format(sd).toUpperCase(Locale.US) + "-"
                 + sdfStart.format(ed).toUpperCase(Locale.US);
         return time;
     }
@@ -124,12 +124,23 @@ public class Event extends ParseObject {
     public String getRsvpStatusString (Person person) {
         String string = "";
         if (isPersonGoing(person)) {
-            return "You are going to this event";
+            return "You plan to attend!";
         }
         if (isPersonNotGoing(person)) {
-            return "You are not going to this event";
+            return "You plan to miss";
         }
-        return "You have not RSVP'd to this event";
+        return "You have not RSVP'D yet";
+    }
+
+    public String getRsvpStatusStringShort (Person person) {
+        String string = "";
+        if (isPersonGoing(person)) {
+            return "CANCEL RSVP";
+        }
+        if (isPersonNotGoing(person)) {
+            return "RSVP\nYES";
+        }
+        return "RSVP\nNOW";
     }
 
     // Parse Setters

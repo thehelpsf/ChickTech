@@ -5,64 +5,28 @@
     android:padding="0dp"
     tools:context="org.chicktech.chicktech.activities.EventDetailActivity">
 
-    <ImageView
-        android:id="@+id/ivImage"
-        android:layout_width="match_parent"
-        android:layout_height="225dp"
-        android:adjustViewBounds="false"
-        android:scaleType="centerCrop"
-        android:layout_alignParentTop="true"
-        android:layout_below="@+id/tvEventName"
-        android:alpha="1"
-        />
-
     <TextView
         android:id="@+id/tvEventName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/event_name_label"
-        android:textColor="@color/white"
-        android:textSize="24sp"
+        android:textColor="@color/brown"
+        android:textSize="20sp"
         android:layout_alignParentTop="true"
-        android:background="@color/brown"
+        android:background="@color/white"
         android:padding="10dp"
+        android:maxLines="1"
         android:gravity="center_horizontal"
-         />
-
-    <RelativeLayout
-        android:id="@+id/rlDay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/ivImage"
-        android:gravity="center_vertical"
-        android:layout_alignParentLeft="true"
-        android:background="@color/pink"
-        >
-
-        <TextView
-            android:id="@+id/tvDay"
-            android:layout_width="@dimen/badge_width"
-            android:gravity="center_horizontal"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="36sp"
-            android:textColor="@color/badgeText"
-            android:background="@color/teal"
-            android:layout_centerHorizontal="true"
-            />
-
-    </RelativeLayout>
-
+        />
 
     <RelativeLayout
         android:id="@+id/rlBadge"
         android:layout_width="@dimen/badge_width"
-        android:layout_height="wrap_content"
+        android:layout_height="130dp"
         android:layout_alignParentLeft="true"
         android:gravity="center_vertical"
         android:layout_below="@+id/tvEventName"
-        android:layout_above="@+id/rlDay"
-        android:background="@color/pink"
+        android:background="@color/teal"
         >
 
         <TextView
@@ -71,7 +35,6 @@
             android:layout_width="fill_parent"
             android:gravity="center_horizontal"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
             android:text=""
             android:textSize="72sp"
             android:textColor="@color/badgeText"
@@ -84,7 +47,6 @@
             android:layout_width="fill_parent"
             android:gravity="center_horizontal"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
             android:text=""
             android:textSize="36sp"
             android:textColor="@color/badgeText"
@@ -95,45 +57,155 @@
     </RelativeLayout>
 
 
-    <LinearLayout
-        android:id="@+id/llRSVP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <RelativeLayout
+        android:id="@+id/rlBadgeLower"
+        android:layout_width="@dimen/badge_width"
+        android:layout_height="70dp"
+        android:layout_alignParentLeft="true"
         android:gravity="center_vertical"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:layout_below="@+id/ivImage" >
+        android:layout_below="@+id/rlBadge"
+        android:background="@color/pink"
+        >
 
         <TextView
-            android:id="@+id/tvRSVPStatus"
-            android:layout_width="wrap_content"
+            android:id="@+id/tvDay"
+            android:layout_width="@dimen/badge_width"
+            android:gravity="center_horizontal"
             android:layout_height="wrap_content"
-            android:text="@string/rsvp_not" />
+            android:text=""
+            android:textSize="36sp"
+            android:textColor="@color/badgeText"
+            android:layout_centerHorizontal="true"
+            />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="@dimen/badge_width"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="18sp"
+            android:textColor="@color/badgeText"
+            android:layout_below="@+id/tvDay"
+            android:layout_centerHorizontal="true"
+            />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvRSVP"
+        android:layout_width="@dimen/badge_width"
+        android:gravity="center"
+        android:layout_height="@dimen/badge_item_height"
+        android:text=""
+        android:textSize="@dimen/badge_item_text_size"
+        android:textColor="@color/badgeText"
+        android:background="@color/brown"
+        android:layout_below="@+id/rlBadgeLower"
+        android:layout_alignParentLeft="true"
+        android:onClick="onClickRSVP"
+        android:clickable="true"
+        />
+
+    <TextView
+        android:id="@+id/tvGetThere"
+        android:layout_width="@dimen/badge_width"
+        android:gravity="center"
+        android:layout_height="@dimen/badge_item_height"
+        android:text="GET THERE"
+        android:textSize="@dimen/badge_item_text_size"
+        android:textColor="@color/badgeText"
+        android:background="@color/teal"
+        android:layout_below="@+id/tvRSVP"
+        android:layout_alignParentLeft="true"
+        android:onClick="onClickGetThere"
+        android:clickable="true"
+        />
+
+    <TextView
+        android:id="@+id/tvChat"
+        android:layout_width="@dimen/badge_width"
+        android:gravity="center"
+        android:layout_height="@dimen/badge_item_height"
+        android:text="CHAT"
+        android:textSize="@dimen/badge_item_text_size"
+        android:textColor="@color/badgeText"
+        android:background="@color/pink"
+        android:layout_below="@+id/tvGetThere"
+        android:layout_alignParentLeft="true"
+        android:onClick="onClickChat"
+        android:clickable="true"
+        />
 
     <ScrollView
+        android:id="@+id/svDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/svDetails"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/llRSVP"
+        android:layout_below="@+id/tvEventName"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/rlBadge"
+        >
 
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/rlDetails">
+            android:id="@+id/rlDetails"
+            >
+
+            <ImageView
+                android:id="@+id/ivImage"
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"
+                android:adjustViewBounds="false"
+                android:scaleType="centerCrop"
+                android:layout_alignParentTop="true"
+                android:alpha="1"
+                />
+
+            <LinearLayout
+                android:id="@+id/llRsvp"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/badge_item_height"
+                android:layout_alignLeft="@+id/llTime"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:layout_below="@+id/ivImage" >
+
+                <ImageView
+                    android:id="@+id/ivRsvp"
+                    android:layout_width="@dimen/icon_size"
+                    android:layout_height="@dimen/icon_size"
+                    android:layout_marginRight="5dp"
+                    android:contentDescription="@string/location_icon"
+                    android:src="@drawable/ic_rsvp"
+                    android:onClick="onClickGetThere"
+                    android:clickable="true"
+                    />
+
+                <TextView
+                    android:id="@+id/tvRSVPStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/badge_item_height"
+                    android:layout_below="@+id/ivRsvp"
+                    android:textColor="@color/brown"
+                    android:textSize="20sp"
+                    android:maxLines="1"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    />
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/llDate"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="25dp"
                 android:gravity="center_vertical"
-                android:layout_marginTop="10dp"
+                android:layout_below="@+id/llRsvp"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:visibility="gone"
                 android:orientation="horizontal" >
 
                 <ImageView
@@ -157,6 +229,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/llDate"
                 android:gravity="center_vertical"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:visibility="gone"
                 android:layout_below="@+id/llDate" >
 
                 <ImageView
@@ -167,20 +242,18 @@
                     android:contentDescription="@string/clock_icon"
                     android:src="@drawable/ic_clock" />
 
-                <TextView
-                    android:id="@+id/tvTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/time_label" />
+
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/llLocation"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/badge_item_height"
                 android:layout_alignLeft="@+id/llTime"
                 android:gravity="center_vertical"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
                 android:layout_below="@+id/llTime" >
 
                 <ImageView
@@ -189,13 +262,20 @@
                     android:layout_height="@dimen/icon_size"
                     android:layout_marginRight="5dp"
                     android:contentDescription="@string/location_icon"
-                    android:src="@drawable/ic_location" />
+                    android:src="@drawable/ic_location"
+                    android:onClick="onClickGetThere"
+                    android:clickable="true"
+                    />
 
                 <TextView
                     android:id="@+id/tvLocation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/location_label" />
+                    android:textColor="@color/teal"
+                    android:text="@string/location_label"
+                    android:onClick="onClickGetThere"
+                    android:clickable="true"
+                    />
             </LinearLayout>
 
             <TextView
@@ -204,28 +284,34 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/llLocation"
                 android:layout_marginTop="10dp"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
                 android:text="@string/event_desc_label" />
+
+            <TextView
+                android:id="@+id/tvPeopleTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/girls_going_label"
+                android:layout_below="@+id/tvEventDescription"
+                android:visibility="gone"
+                android:textColor="@color/teal" />
+
+            <ListView
+                android:id="@+id/lvGirlsGoing"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/tvPeopleTitle"
+                >
+            </ListView>
+
+
         </RelativeLayout>
+
     </ScrollView>
-
-    <TextView
-        android:id="@+id/tvPeopleTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/girls_going_label"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:visibility="gone"
-        android:textColor="@color/teal" />
-
-    <ListView
-        android:id="@+id/lvGirlsGoing"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvPeopleTitle"
-        android:visibility="gone"
-        android:layout_below="@+id/tvPeopleTitle" >
-    </ListView>
 
     <ProgressBar
         android:id="@+id/pbLoading"

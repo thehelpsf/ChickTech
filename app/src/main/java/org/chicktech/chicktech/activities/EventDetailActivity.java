@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -48,7 +51,11 @@ public class EventDetailActivity extends Activity {
     TextView tvDay;
     TextView tvDateNumber;
     TextView tvMonth;
+    TextView tvRSVP;
+    TextView tvGetThere;
+    TextView tvChat;
     ImageView ivImage;
+    ImageView ivRsvp;
     ProgressBar pb;
     Person person;
 
@@ -99,12 +106,21 @@ public class EventDetailActivity extends Activity {
         tvDay = (TextView) findViewById(R.id.tvDay);
         tvDateNumber = (TextView) findViewById(R.id.tvDateNumber);
         tvMonth = (TextView) findViewById(R.id.tvMonth);
+        tvRSVP = (TextView) findViewById(R.id.tvRSVP);
+        tvGetThere = (TextView) findViewById(R.id.tvGetThere);
+        tvChat = (TextView) findViewById(R.id.tvChat);
         ivImage = (ImageView) findViewById(R.id.ivImage);
+        ivRsvp = (ImageView) findViewById(R.id.ivRsvp);
 
         tvName.setTypeface(displayFont);
         tvDay.setTypeface(displayFont2);
         tvDateNumber.setTypeface(displayFont);
         tvMonth.setTypeface(displayFont);
+        tvTime.setTypeface(displayFont);
+        tvRsvpStatus.setTypeface(displayFont);
+        tvRSVP.setTypeface(displayFont);
+        tvGetThere.setTypeface(displayFont);
+        tvChat.setTypeface(displayFont);
 
         girlsGoing = new ArrayList<String>();
         girlsGoing.add("Bonnie");
@@ -138,7 +154,6 @@ public class EventDetailActivity extends Activity {
             tvMonth.setText(event.getMonth());
             tvTime.setText(event.getTimeString());
 
-
             String imageUrl = event.getImageURL();
             if (imageUrl != null && imageUrl != "") {
                 imageLoader.displayImage(imageUrl, ivImage);
@@ -146,17 +161,65 @@ public class EventDetailActivity extends Activity {
                 ivImage.setImageResource(android.R.color.transparent);
             }
 
-            refreshRsvpOnScreen();
+            refreshRsvpOnScreen(false);
         }
     }
 
-    private void refreshRsvpOnScreen() {
-        tvRsvpStatus.setText(event.getRsvpStatusString(person));
+    private void refreshRsvpOnScreen(boolean performAnimation) {
+
+        tvRSVP.setText(event.getRsvpStatusStringShort(person));
+
+        // Inflate animation from XML
+        final Animation animSlideIn = AnimationUtils.loadAnimation(this, R.anim.slide_in_right_bounce);
+        animSlideIn.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
+
+        // Inflate animation from XML
+        Animation slideOut = AnimationUtils.loadAnimation(this, R.anim.slide_out_right);
+        // Setup listeners (optional)
+        slideOut.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                // Fires when animation starts
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                tvRsvpStatus.setText(event.getRsvpStatusString(person));
+                //Toast.makeText(EventDetailActivity.this, "done", Toast.LENGTH_SHORT).show();
+                tvRsvpStatus.startAnimation(animSlideIn);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
+
+        if (performAnimation) {
+            tvRsvpStatus.startAnimation(slideOut);
+        } else {
+            tvRsvpStatus.setText(event.getRsvpStatusString(person));
+        }
+
+
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.event_detail, menu);
+        //getMenuInflater().inflate(R.menu.event_detail, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -177,13 +240,21 @@ public class EventDetailActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void onClickRSVP(View button) {
+        updateRSVP();
+    }
+
     private void updateRSVP() {
         if (event.isPersonGoing(person)) {
             event.addRsvpNo(person);
         } else {
             event.addRsvpYes(person);
         }
-        refreshRsvpOnScreen();
+        refreshRsvpOnScreen(true);
+    }
+
+    public void onClickGetThere (View button) {
+        gotoMaps();
     }
 
     private void gotoMaps() {
@@ -201,5 +272,9 @@ public class EventDetailActivity extends Activity {
         }
         intent.setData(Uri.parse(data));
         startActivity(intent);
+    }
+
+    public void onClickChat (View button) {
+        Toast.makeText(this, "Send Chat to Mentor about event", Toast.LENGTH_LONG).show();
     }
 }
