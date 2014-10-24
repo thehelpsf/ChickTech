@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -86,6 +87,7 @@ public class EventDetailsFragment extends Fragment {
         objectID = getArguments().getString("id");
         // TODO: react to invalid objectID
     }
+
 
     @Nullable
     @Override
@@ -185,6 +187,7 @@ public class EventDetailsFragment extends Fragment {
     private Activity getLocalContext () {
         return getActivity();
     }
+
 
     private void setupAnimations() {
         // Inflate animation from XML
@@ -350,12 +353,18 @@ public class EventDetailsFragment extends Fragment {
         }
         intent.setData(Uri.parse(data));
         startActivity(intent);
-        // TODO: Get transition animation back in!
         getLocalContext().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
 
     public void sendChat() {
         Toast.makeText(getLocalContext(), "Send Chat to Mentor about event", Toast.LENGTH_LONG).show();
+        PeopleListFragment fragment = PeopleListFragment.newInstance();
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
+        ft.replace(R.id.flContent, fragment);
+        ft.addToBackStack("People");
+        ft.commit();
+
     }
 }
