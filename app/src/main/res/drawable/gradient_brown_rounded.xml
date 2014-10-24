@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
-        android:shape="rectangle" >
+    android:shape="rectangle" >
+    <corners android:bottomRightRadius="@dimen/badge_item_height_half"
+        android:topRightRadius="@dimen/badge_item_height_half"
+        />
     <gradient
         android:startColor="@color/brown" android:endColor="@color/brown_light"
         android:angle="90"/>

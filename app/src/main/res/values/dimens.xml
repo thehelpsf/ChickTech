@@ -4,6 +4,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="icon_size">50dp</dimen>
     <dimen name="badge_item_height">65dp</dimen>
+    <dimen name="badge_item_height_half">32.5dp</dimen>
     <dimen name="badge_item_text_size">20sp</dimen>
     <dimen name="badge_width">70dp</dimen>
 

@@ -117,6 +117,24 @@ public class EventDetailActivity extends Activity {
         tvGetThere.setTypeface(displayFont);
         tvChat.setTypeface(displayFont);
 
+
+        pb.setVisibility(ProgressBar.VISIBLE);
+        CTRestClient.getEventByID(CTRestClient.QUERY_LOCAL, objectID, new GetCallback<ParseObject>() {
+            public void done(ParseObject event, ParseException e) {
+                pb.setVisibility(ProgressBar.INVISIBLE);
+                if (event == null) {
+                    Toast.makeText(EventDetailActivity.this, "Did not get event details", Toast.LENGTH_LONG).show();
+                } else {
+                    //Log.d("event", "Retrieved the object.");
+                    fillTheForm(event);
+                    svDetails.startAnimation(animFadeIn);
+                    slideMenuIn();
+                }
+            }
+        });
+
+
+
         girlsGoing = new ArrayList<String>();
         girlsGoing.add("Bonnie");
         girlsGoing.add("Steph");
@@ -134,22 +152,6 @@ public class EventDetailActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-
-        pb.setVisibility(ProgressBar.VISIBLE);
-        CTRestClient.getEventByID(CTRestClient.QUERY_LOCAL, objectID, new GetCallback<ParseObject>() {
-            public void done(ParseObject event, ParseException e) {
-                pb.setVisibility(ProgressBar.INVISIBLE);
-                if (event == null) {
-                    Toast.makeText(EventDetailActivity.this, "Did not get event details", Toast.LENGTH_LONG).show();
-                } else {
-                    //Log.d("event", "Retrieved the object.");
-                    fillTheForm(event);
-                    svDetails.startAnimation(animFadeIn);
-                    slideMenuIn();
-                }
-            }
-        });
-
     }
 
     private void setupAnimations() {
