@@ -1,8 +1,8 @@
 package org.chicktech.chicktech.activities;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +11,8 @@ import com.parse.ParseUser;
 
 import org.chicktech.chicktech.R;
 import org.chicktech.chicktech.fragments.EventDetailsFragment;
+import org.chicktech.chicktech.fragments.PeopleListFragment;
+import org.chicktech.chicktech.listeners.FragmentTabListener;
 import org.chicktech.chicktech.models.Person;
 
 public class EventDetailActivity extends ActionBarActivity {
@@ -30,13 +32,46 @@ public class EventDetailActivity extends ActionBarActivity {
         Intent i = getIntent();
         objectID = i.getStringExtra("id");
 
-        EventDetailsFragment fragment = EventDetailsFragment.newInstance(objectID);
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.flContent, fragment);
-        //ft.addToBackStack("EventDetails");
-        ft.commit();
+        setupTabs();
+
+//        EventDetailsFragment fragment = EventDetailsFragment.newInstance(objectID);
+//        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//        ft.replace(R.id.flContent, fragment);
+//        //ft.addToBackStack("EventDetails");
+//        ft.commit();
     }
 
+
+
+    private void setupTabs() {
+        ActionBar actionBar = getActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        actionBar.setDisplayShowTitleEnabled(true);
+
+        Bundle args = new Bundle();
+        args.putString("id", objectID);
+
+        ActionBar.Tab tab1 = actionBar
+                .newTab()
+                .setText("Detail")
+                //.setIcon(R.drawable.ic_rsvp)
+                .setTabListener(
+                        new FragmentTabListener<EventDetailsFragment>(R.id.flContent, this, "Detail",
+                                EventDetailsFragment.class, args));
+
+        actionBar.addTab(tab1);
+        actionBar.selectTab(tab1);
+
+        ActionBar.Tab tab2 = actionBar
+                .newTab()
+                .setText("People")
+                //.setIcon(R.drawable.ic_location)
+                .setTabListener(
+                        new FragmentTabListener<PeopleListFragment>(R.id.flContent, this, "RSVPs",
+                                PeopleListFragment.class, args));
+
+        actionBar.addTab(tab2);
+    }
 
 
     @Override
@@ -44,8 +79,6 @@ public class EventDetailActivity extends ActionBarActivity {
         super.onBackPressed();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
-
-
 
 
     @Override
@@ -64,8 +97,5 @@ public class EventDetailActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-
 
 }
