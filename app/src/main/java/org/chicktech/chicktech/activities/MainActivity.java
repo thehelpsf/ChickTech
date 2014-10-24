@@ -47,13 +47,13 @@ public class MainActivity extends ActionBarActivity implements CameraLaunchingAc
         // Find our drawer view
         dlDrawer = (FragmentNavigationDrawer) findViewById(R.id.drawer_layout);
         // Setup drawer view
-        dlDrawer.setupDrawerConfiguration((ListView) findViewById(R.id.lvDrawer),
+        dlDrawer.setupDrawerConfiguration(findViewById(R.id.rlDrawerContainer), (ListView) findViewById(R.id.lvDrawer),
                 R.layout.drawer_nav_item, R.id.flContent);
         // Add nav items
-        dlDrawer.addNavItem("Events", "Events", EventsFragment.class);
-        dlDrawer.addNavItem("Profile", "Profile", PeopleFragment.class);
-        dlDrawer.addNavItem("Chat", "Chat", ChatFragment.class);
-        dlDrawer.addNavItem("ChickTech", "About ChichTech", AboutFragment.class);
+        dlDrawer.addNavItem("Events", R.drawable.ic_events_selector, "Events", EventsFragment.class);
+        dlDrawer.addNavItem("People", R.drawable.ic_people_selector, "People", PeopleFragment.class);
+        dlDrawer.addNavItem("Chat", R.drawable.ic_chat_selector, "Chat", ChatFragment.class);
+        dlDrawer.addNavItem("About", R.drawable.ic_about_selector, "About ChickTech", AboutFragment.class);
         // Select default
         if (savedInstanceState == null) {
             dlDrawer.selectDrawerItem(0);

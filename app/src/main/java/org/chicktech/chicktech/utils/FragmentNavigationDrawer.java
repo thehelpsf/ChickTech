@@ -17,6 +17,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import org.chicktech.chicktech.R;
+import org.chicktech.chicktech.adapters.DrawerArrayAdapter;
+import org.chicktech.chicktech.models.DrawerMenuItem;
 
 import java.util.ArrayList;
 
@@ -25,8 +27,9 @@ import java.util.ArrayList;
  */
 public class FragmentNavigationDrawer extends DrawerLayout {
     private ActionBarDrawerToggle drawerToggle;
+    private View vDrawerContainer;
     private ListView lvDrawer;
-    private ArrayAdapter<String> drawerAdapter;
+    private DrawerArrayAdapter drawerAdapter;
     private ArrayList<FragmentNavItem> drawerNavItems;
     private int drawerContainerRes;
 
@@ -43,12 +46,13 @@ public class FragmentNavigationDrawer extends DrawerLayout {
     }
 
     // setupDrawerConfiguration((ListView) findViewById(R.id.lvDrawer), R.layout.drawer_list_item, R.id.flContent);
-    public void setupDrawerConfiguration(ListView drawerListView, int drawerItemRes, int drawerContainerRes) {
+    public void setupDrawerConfiguration(View drawerContainer, ListView drawerListView, int drawerItemRes, int drawerContainerRes) {
+        vDrawerContainer = drawerContainer;
+
         // Setup navigation items array
         drawerNavItems = new ArrayList<FragmentNavigationDrawer.FragmentNavItem>();
         // Set the adapter for the list view
-        drawerAdapter = new ArrayAdapter<String>(getActivity(), drawerItemRes,
-                new ArrayList<String>());
+        drawerAdapter = new DrawerArrayAdapter(getActivity(), new ArrayList<DrawerMenuItem>());
         this.drawerContainerRes = drawerContainerRes;
         // Setup drawer list view and related adapter
         lvDrawer = drawerListView;
@@ -59,16 +63,16 @@ public class FragmentNavigationDrawer extends DrawerLayout {
         // between the sliding drawer and the action bar app icon
         drawerToggle = setupDrawerToggle();
         setDrawerListener(drawerToggle);
-        // set a custom shadow that overlays the main content when the drawer
-        setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+        // Set the overlay color over the main content
+        setScrimColor(getResources().getColor(R.color.white_transparent));
         // Setup action buttons
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
     }
 
     // addNavItem("First", "First Fragment", FirstFragment.class)
-    public void addNavItem(String navTitle, String windowTitle, Class<? extends Fragment> fragmentClass) {
-        drawerAdapter.add(navTitle);
+    public void addNavItem(String navTitle, int navIconResourceId, String windowTitle, Class<? extends Fragment> fragmentClass) {
+        drawerAdapter.add(new DrawerMenuItem(navTitle, navIconResourceId));
         drawerNavItems.add(new FragmentNavItem(windowTitle, fragmentClass));
     }
 
@@ -95,7 +99,7 @@ public class FragmentNavigationDrawer extends DrawerLayout {
         // Highlight the selected item, update the title, and close the drawer
         lvDrawer.setItemChecked(position, true);
         setTitle(navItem.getTitle());
-        closeDrawer(lvDrawer);
+        closeDrawer(vDrawerContainer);
     }
 
     public ActionBarDrawerToggle getDrawerToggle() {
@@ -172,7 +176,7 @@ public class FragmentNavigationDrawer extends DrawerLayout {
     }
 
     public boolean isDrawerOpen() {
-        return isDrawerOpen(lvDrawer);
+        return isDrawerOpen(vDrawerContainer);
     }
 
 
