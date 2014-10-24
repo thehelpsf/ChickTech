@@ -127,7 +127,7 @@ public class Event extends ParseObject {
             return "You plan to attend!";
         }
         if (isPersonNotGoing(person)) {
-            return "You plan to miss";
+            return "You plan to miss the event";
         }
         return "You have not RSVP'D yet";
     }
@@ -141,6 +141,17 @@ public class Event extends ParseObject {
             return "RSVP\nYES";
         }
         return "RSVP\nNOW";
+    }
+
+    public String getRsvpStatusLabelShort (Person person) {
+        String string = "";
+        if (isPersonGoing(person)) {
+            return "GOING";
+        }
+        if (isPersonNotGoing(person)) {
+            return "NOPE";
+        }
+        return "RSVP";
     }
 
     // Parse Setters

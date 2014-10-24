@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="225dp"
+    android:layout_height="250dp"
     android:layout_gravity="top"
     android:paddingBottom="2dp"
     android:background="@android:color/white"
@@ -29,7 +29,8 @@
         android:layout_alignParentTop="true"
         android:background="@color/white"
         android:maxLines="1"
-        android:padding="10dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 
@@ -55,6 +56,21 @@
             android:layout_centerHorizontal="true"
             android:paddingTop="10dp"
             android:paddingBottom="7dp"
+            />
+
+        <TextView
+            android:id="@+id/tvRSVPStatus"
+            android:layout_width="@dimen/badge_width"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:text="YES"
+            android:textSize="26sp"
+            android:textColor="@color/badgeText"
+            android:background="@color/brown"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="10dp"
+            android:paddingBottom="7dp"
+            android:layout_below="@+id/tvDay"
             />
 
     </RelativeLayout>
@@ -205,12 +221,6 @@
             android:paddingBottom="10dp"
             android:visibility="gone"
             android:layout_below="@+id/llLocation" >
-
-            <TextView
-                android:id="@+id/tvRSVPStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/rsvp_not" />
 
             <Button
                 android:id="@+id/btnRSVP"

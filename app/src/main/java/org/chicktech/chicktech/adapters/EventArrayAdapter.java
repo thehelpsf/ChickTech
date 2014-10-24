@@ -87,6 +87,7 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
             viewHolder.tvDay.setTypeface(displayFont);
             viewHolder.tvDateNumber.setTypeface(displayFont);
             viewHolder.tvMonth.setTypeface(displayFont);
+            viewHolder.tvRsvpStatus.setTypeface(displayFont);
 
             viewHolder.rlBadge = (RelativeLayout) convertView.findViewById(R.id.rlBadge);
             viewHolder.rlDay = (RelativeLayout) convertView.findViewById(R.id.rlDay);
@@ -132,7 +133,7 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
         viewHolder.tvDescription.setText(Html.fromHtml(event.getDescription()));
         viewHolder.tvDate.setText(event.getStartDate().toString());
         viewHolder.tvLocation.setText(event.getAddressString());
-        viewHolder.tvRsvpStatus.setText(event.getRsvpStatusString(viewHolder.person));
+        viewHolder.tvRsvpStatus.setText(event.getRsvpStatusLabelShort(viewHolder.person));
         viewHolder.tvDay.setText(event.getDayOfWeek());
         viewHolder.tvDateNumber.setText(event.getDateNumber());
         viewHolder.tvMonth.setText(event.getMonth());
