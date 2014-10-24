@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme. -->
+    <style name="CTAppTheme" parent="Theme.Base.AppCompat.Light.DarkActionBar">
+        <item name="android:actionBarItemBackground">@drawable/selectable_background_ctactionbar</item>
+        <item name="android:popupMenuStyle">@style/PopupMenu.Ctactionbar</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Ctactionbar</item>
+        <item name="android:actionBarTabStyle">@style/ActionBarTabStyle.Ctactionbar</item>
+        <item name="android:actionDropDownStyle">@style/DropDownNav.Ctactionbar</item>
+        <item name="android:actionBarStyle">@style/ActionBar.Solid.Ctactionbar</item>
+        <item name="android:actionModeBackground">@drawable/cab_background_top_ctactionbar</item>
+        <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_ctactionbar</item>
+        <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Ctactionbar</item>
+        <item name="android:actionBarWidgetTheme">@style/Theme.Ctactionbar.Widget</item>
+
+        <item name="android:textColor">@color/brown</item>
+
+    </style>
+</resources>
