@@ -17,4 +17,9 @@
         <item name="android:textColor">@color/brown</item>
 
     </style>
+
+    <style name="CTAppTheme.NoTitleBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
 </resources>
