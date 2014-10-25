@@ -19,6 +19,7 @@ import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
 import org.chicktech.chicktech.R;
+import org.chicktech.chicktech.application.CTApplication;
 import org.chicktech.chicktech.utils.CTRestClient;
 import org.chicktech.chicktech.utils.LoginUtils;
 
@@ -96,6 +97,7 @@ public class LoginActivity extends Activity {
             public void done(ParseUser user, ParseException e) {
                 pb.setVisibility(ProgressBar.INVISIBLE);
                 if (user != null) {
+                    CTApplication.parseUserSetup();
                     moveOnToApp();
                 } else {
                     Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_LONG).show();
@@ -113,6 +115,7 @@ public class LoginActivity extends Activity {
                 pb.setVisibility(ProgressBar.INVISIBLE);
                 if (e == null) {
                     Toast.makeText(LoginActivity.this, "Welcome to ChickTech!", Toast.LENGTH_LONG).show();
+                    CTApplication.parseUserSetup();
                     moveOnToApp();
                 } else {
                     Toast.makeText(LoginActivity.this, "Sign Up Failed", Toast.LENGTH_LONG).show();
