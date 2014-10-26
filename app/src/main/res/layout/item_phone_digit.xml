@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<org.chicktech.chicktech.views.SinglePhoneNumberField xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/etPhone1"
+    android:layout_height="wrap_content"
+    android:maxLength="1"
+    style="@style/CTLoginPhoneField">
+
+</org.chicktech.chicktech.views.SinglePhoneNumberField>

@@ -15,6 +15,12 @@
         <item name="android:actionBarTabTextStyle">@style/CTActionBarTabText</item>
 
         <item name="android:textColor">@color/brown</item>
+        <item name="android:textColorLink">@color/brown</item>
 
+    </style>
+
+    <style name="CTAppTheme.NoTitleBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 </resources>
