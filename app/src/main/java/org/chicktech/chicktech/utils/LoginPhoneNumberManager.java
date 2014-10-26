@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 import org.chicktech.chicktech.R;
 import org.chicktech.chicktech.views.SinglePhoneNumberField;
@@ -34,7 +35,8 @@ public class LoginPhoneNumberManager implements SinglePhoneNumberField.KeyboardL
                 view.requestFocus();
                 ((SinglePhoneNumberField) view).selectAll();
                 // Need to manually pull up keyboard (if it's not visible) since we're not letting the system handle this event.
-                activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+                ((InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput
+                        (InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                 return true;
             }
         };
