@@ -1,7 +1,9 @@
 package org.chicktech.chicktech.utils;
 
+import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
+import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
@@ -129,7 +131,7 @@ public class CTRestClient {
 
     }
 
-    public void getAllChatMessages (Person person, FindCallback<ParseObject> callback){
+    public static void getAllChatMessages (Person person, final FindCallback<ParseObject> callback){
 
         ParseQuery<ParseObject> fromPersonQuery = ParseQuery.getQuery("ChatMessage");
         fromPersonQuery.whereEqualTo("fromPersonID", person.getObjectId());
@@ -145,7 +147,19 @@ public class CTRestClient {
         ParseQuery<ParseObject> mainQuery = ParseQuery.or(queries);
 
         mainQuery.orderByAscending("createdAt");
-        mainQuery.findInBackground(callback);
+        mainQuery.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(final List<ParseObject> messages, ParseException e) {
+                //Remove the previously cached results
+                ParseObject.unpinAllInBackground("chatMessages", new DeleteCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        // Cache the new results
+                        ParseObject.pinAllInBackground("chatMessages", messages);
+                    }
+                });
+            }
+        });
 
     }
 

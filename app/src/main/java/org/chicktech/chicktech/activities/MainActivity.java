@@ -16,17 +16,26 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
+
 import org.chicktech.chicktech.R;
 import org.chicktech.chicktech.fragments.AboutFragment;
 import org.chicktech.chicktech.fragments.ChatFragment;
 import org.chicktech.chicktech.fragments.EventsFragment;
 import org.chicktech.chicktech.fragments.PeopleFragment;
 import org.chicktech.chicktech.models.ChatMessage;
+import org.chicktech.chicktech.models.Person;
 import org.chicktech.chicktech.utils.BitmapUtils;
+import org.chicktech.chicktech.utils.CTRestClient;
 import org.chicktech.chicktech.utils.CameraLaunchingActivity;
 import org.chicktech.chicktech.utils.CameraLaunchingListener;
 import org.chicktech.chicktech.utils.FileSystemUtils;
 import org.chicktech.chicktech.utils.FragmentNavigationDrawer;
+
+import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity implements CameraLaunchingActivity {
@@ -90,6 +99,17 @@ public class MainActivity extends ActionBarActivity implements CameraLaunchingAc
         //registering our receiver
         // TODO: Fix this receiver link. Need to unregister in onPause()
         this.registerReceiver(mReceiver, intentFilter);
+
+        //fetch all chat messages upon app open
+        CTRestClient.getAllChatMessages((Person)ParseUser.getCurrentUser(), new FindCallback<ParseObject>() {
+            public void done(List<ParseObject> messages, ParseException e) {
+                if (e == null) {
+                } else {
+                    Log.d("Chat Messages", "Error: " + e.getMessage());
+                }
+            }
+        });
+
     }
 
     // Temporary creation of models in parse for testing
