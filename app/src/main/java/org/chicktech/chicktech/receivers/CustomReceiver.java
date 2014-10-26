@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.parse.ParsePushBroadcastReceiver;
 
 import org.chicktech.chicktech.activities.LoginActivity;
+import org.chicktech.chicktech.utils.AppUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -17,6 +18,9 @@ public class CustomReceiver extends ParsePushBroadcastReceiver {
 
     @Override
     public void onPushOpen(Context context, Intent intent) {
+
+        boolean weAreForeground = AppUtils.isThisAppInForeground(context);
+
         //Log.e("Push", "Clicked");
         Bundle extras = intent.getExtras();
         String json = extras.getString("com.parse.Data");
