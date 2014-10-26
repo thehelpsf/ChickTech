@@ -151,8 +151,6 @@ public class LoginActivity extends Activity {
     }
 
     private void moveOnToApp() {
-        ((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput
-                (InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_IMPLICIT_ONLY);
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

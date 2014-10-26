@@ -35,8 +35,7 @@ public class LoginPhoneNumberManager implements SinglePhoneNumberField.KeyboardL
                 view.requestFocus();
                 ((SinglePhoneNumberField) view).selectAll();
                 // Need to manually pull up keyboard (if it's not visible) since we're not letting the system handle this event.
-                ((InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput
-                        (InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+                ((InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE)).showSoftInput(view, 0);
                 return true;
             }
         };
