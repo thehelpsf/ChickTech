@@ -3,57 +3,88 @@
     android:id="@+id/rlMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="org.chicktech.chicktech.activities.LoginActivity">
-
-    <EditText
-        android:id="@+id/etPhoneNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="phone"
-        android:ems="10"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="50dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:textSize="22sp"
-        android:hint="Enter your phone number"
-        android:gravity="center_horizontal" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Get Started"
-        android:id="@+id/btnSignOn"
-        android:onClick="onClickSignOn"
-        android:layout_below="@+id/etPhoneNumber"
-        android:layout_centerHorizontal="true" />
-
-    <ProgressBar
-        android:visibility="invisible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/pbWorking"
-        android:layout_alignTop="@+id/btnSignOn"
-        android:layout_toRightOf="@+id/btnSignOn"
-        android:layout_toEndOf="@+id/btnSignOn" />
+    tools:context="org.chicktech.chicktech.activities.LoginActivity"
+    android:background="@color/white">
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="95dp"
+        android:layout_margin="30dp"
+        android:layout_marginBottom="60dp"
         android:id="@+id/imageView"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:src="@drawable/chicktech_logo"
-        android:contentDescription="ChickTech" />
+        android:contentDescription="ChickTech"/>
 
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/imageView"
+        style="@style/CTLoginContainer">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvLoginPrompt"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            style="@style/CTLoginPhoneContainer"
+            android:id="@+id/llPhoneContainer"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Get Started"
+            android:id="@+id/btnSignOn"
+            android:onClick="onClickSignOn"
+            android:layout_below="@+id/llPhoneContainer"
+            android:layout_centerHorizontal="true"
+            style="@style/CTLoginButton"/>
+
+        <ProgressBar
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pbWorking"
+            android:layout_centerHorizontal="true"
+            android:layout_alignTop="@+id/btnSignOn"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Log In with Phone Number"
+            android:id="@+id/tvLoginPrompt"
+            style="@style/CTLoginLabel"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnSignOn"
+            android:id="@+id/tvLearnMore"
+            android:layout_marginTop="20dp"
+            android:text="Learn how to participate at chicktech.org"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
 
 
 </RelativeLayout>

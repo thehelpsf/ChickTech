@@ -1,15 +1,22 @@
 package org.chicktech.chicktech.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.GetCallback;
@@ -21,33 +28,47 @@ import com.parse.SignUpCallback;
 import org.chicktech.chicktech.R;
 import org.chicktech.chicktech.application.CTApplication;
 import org.chicktech.chicktech.utils.CTRestClient;
+import org.chicktech.chicktech.utils.LoginPhoneNumberManager;
 import org.chicktech.chicktech.utils.LoginUtils;
 
 public class LoginActivity extends Activity {
     private String mPhoneNumber;
-    EditText etPhoneNumber;
+    LinearLayout llPhoneContainer;
+    LoginPhoneNumberManager phoneNumberManager;
     Button btnSignOn;
     ProgressBar pb;
     RelativeLayout rlMain;
+    TextView tvLearnMore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         rlMain = (RelativeLayout) findViewById(R.id.rlMain);
-        etPhoneNumber = (EditText) findViewById(R.id.etPhoneNumber);
+        llPhoneContainer = (LinearLayout)findViewById(R.id.llPhoneContainer);
+        phoneNumberManager = new LoginPhoneNumberManager(this, llPhoneContainer, LoginPhoneNumberManager.FORMAT_US);
         btnSignOn = (Button) findViewById(R.id.btnSignOn);
-
+        tvLearnMore = (TextView)findViewById(R.id.tvLearnMore);
         pb = (ProgressBar) findViewById(R.id.pbWorking);
+
+        tvLearnMore.setText(Html.fromHtml("Learn how to participate at <a href=\"http://chicktech.org\">chicktech.org</a>"));
+        tvLearnMore.setMovementMethod(LinkMovementMethod.getInstance());
 
         mPhoneNumber = LoginUtils.getSavedPhoneNumber(this);
         if (mPhoneNumber != null) {
-            etPhoneNumber.setText(mPhoneNumber);
+            // Hide the number since we're just gonna log them in anyways
+            llPhoneContainer.setVisibility(View.INVISIBLE);
             login(mPhoneNumber);
         } else {
             rlMain.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        phoneNumberManager.requestFocus();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
     }
 
     @Override
@@ -70,17 +91,21 @@ public class LoginActivity extends Activity {
     }
 
     public void onClickSignOn(View button) {
+        if (!phoneNumberManager.validate()) {
+            Toast.makeText(this, "Please enter full phone number", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         // get phone number from EditText and put into SharedPrefs
-        final String phoneNumber = etPhoneNumber.getText().toString();
+        final String phoneNumber = phoneNumberManager.getPhoneNumber();
         LoginUtils.setSharedPrefs(this, phoneNumber);
 
-        pb.setVisibility(ProgressBar.VISIBLE);
+        showProgress();
 
         // see if user exists on Parse yet.
         CTRestClient.getPersonByPhoneNumber(phoneNumber, new GetCallback<ParseUser>() {
             public void done(ParseUser user, ParseException e) {
-                pb.setVisibility(ProgressBar.INVISIBLE);
+                hideProgress(false);
                 if (user == null) {
                     signUp(phoneNumber);
                 } else {
@@ -92,14 +117,17 @@ public class LoginActivity extends Activity {
     }
 
     private void login (String phoneNumber) {
-        pb.setVisibility(ProgressBar.VISIBLE);
+        showProgress();
         LoginUtils.login(phoneNumber, new LogInCallback() {
             public void done(ParseUser user, ParseException e) {
-                pb.setVisibility(ProgressBar.INVISIBLE);
                 if (user != null) {
+                    hideProgress(false);
                     CTApplication.parseUserSetup();
                     moveOnToApp();
                 } else {
+                    hideProgress(true);
+                    // Show the phone numbers b/c we might have hid them when auto-logging in
+                    llPhoneContainer.setVisibility(View.VISIBLE);
                     Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_LONG).show();
                 }
             }
@@ -108,16 +136,17 @@ public class LoginActivity extends Activity {
 
     private void signUp (String phoneNumber) {
 
-        pb.setVisibility(ProgressBar.VISIBLE);
+        showProgress();
 
         LoginUtils.signUp(phoneNumber, new SignUpCallback() {
             public void done(ParseException e) {
-                pb.setVisibility(ProgressBar.INVISIBLE);
                 if (e == null) {
+                    hideProgress(false);
                     Toast.makeText(LoginActivity.this, "Welcome to ChickTech!", Toast.LENGTH_LONG).show();
                     CTApplication.parseUserSetup();
                     moveOnToApp();
                 } else {
+                    hideProgress(true);
                     Toast.makeText(LoginActivity.this, "Sign Up Failed", Toast.LENGTH_LONG).show();
                 }
             }
@@ -129,5 +158,17 @@ public class LoginActivity extends Activity {
         startActivity(i);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         finish();
+    }
+
+    private void showProgress() {
+        btnSignOn.setVisibility(View.INVISIBLE);
+        pb.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgress(boolean showLoginButton) {
+        if (showLoginButton) {
+            btnSignOn.setVisibility(View.VISIBLE);
+        }
+        pb.setVisibility(View.INVISIBLE);
     }
 }
