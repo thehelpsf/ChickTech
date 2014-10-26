@@ -32,14 +32,15 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="50dp"
+            android:layout_below="@+id/tvLoginPrompt"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             style="@style/CTLoginPhoneContainer"
-            android:id="@+id/llPhoneContainer">
+            android:id="@+id/llPhoneContainer"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
         </LinearLayout>
 
@@ -52,7 +53,8 @@
             android:id="@+id/btnSignOn"
             android:onClick="onClickSignOn"
             android:layout_below="@+id/llPhoneContainer"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            style="@style/CTLoginButton"/>
 
         <ProgressBar
             android:visibility="invisible"
@@ -66,13 +68,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Log In with Phone Number"
-            android:id="@+id/textView"
+            android:id="@+id/tvLoginPrompt"
             style="@style/CTLoginLabel"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnSignOn"
+            android:id="@+id/tvLearnMore"
+            android:layout_marginTop="20dp"
+            android:text="Learn how to participate at chicktech.org"
+            android:layout_centerHorizontal="true" />
     </RelativeLayout>
 
 

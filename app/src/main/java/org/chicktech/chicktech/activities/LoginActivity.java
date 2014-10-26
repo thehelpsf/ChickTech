@@ -3,6 +3,8 @@ package org.chicktech.chicktech.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.GetCallback;
@@ -32,6 +35,7 @@ public class LoginActivity extends Activity {
     Button btnSignOn;
     ProgressBar pb;
     RelativeLayout rlMain;
+    TextView tvLearnMore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +45,11 @@ public class LoginActivity extends Activity {
         llPhoneContainer = (LinearLayout)findViewById(R.id.llPhoneContainer);
         phoneNumberManager = new LoginPhoneNumberManager(this, llPhoneContainer, LoginPhoneNumberManager.FORMAT_US);
         btnSignOn = (Button) findViewById(R.id.btnSignOn);
-
+        tvLearnMore = (TextView)findViewById(R.id.tvLearnMore);
         pb = (ProgressBar) findViewById(R.id.pbWorking);
+
+        tvLearnMore.setText(Html.fromHtml("Learn how to participate at <a href=\"http://chicktech.org\">chicktech.org</a>"));
+        tvLearnMore.setMovementMethod(LinkMovementMethod.getInstance());
 
         mPhoneNumber = LoginUtils.getSavedPhoneNumber(this);
         if (mPhoneNumber != null) {
