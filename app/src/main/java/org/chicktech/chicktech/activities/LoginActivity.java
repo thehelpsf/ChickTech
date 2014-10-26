@@ -26,6 +26,7 @@ import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
 import org.chicktech.chicktech.R;
+import org.chicktech.chicktech.application.CTApplication;
 import org.chicktech.chicktech.utils.CTRestClient;
 import org.chicktech.chicktech.utils.LoginPhoneNumberManager;
 import org.chicktech.chicktech.utils.LoginUtils;
@@ -121,6 +122,7 @@ public class LoginActivity extends Activity {
             public void done(ParseUser user, ParseException e) {
                 if (user != null) {
                     hideProgress(false);
+                    CTApplication.parseUserSetup();
                     moveOnToApp();
                 } else {
                     hideProgress(true);
@@ -141,6 +143,7 @@ public class LoginActivity extends Activity {
                 if (e == null) {
                     hideProgress(false);
                     Toast.makeText(LoginActivity.this, "Welcome to ChickTech!", Toast.LENGTH_LONG).show();
+                    CTApplication.parseUserSetup();
                     moveOnToApp();
                 } else {
                     hideProgress(true);

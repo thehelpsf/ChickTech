@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -354,13 +353,15 @@ public class EventDetailsFragment extends Fragment {
 
 
     public void sendChat() {
-        Toast.makeText(getLocalContext(), "Send Chat to Mentor about event", Toast.LENGTH_LONG).show();
-        PeopleListFragment fragment = PeopleListFragment.newInstance();
-        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
-        ft.replace(R.id.flContent, fragment);
-        ft.addToBackStack("People");
-        ft.commit();
+        Toast.makeText(getLocalContext(), "Send Chat to Partner (Student/Mentor) about event", Toast.LENGTH_LONG).show();
+
+//      Test code
+//        PeopleListFragment fragment = PeopleListFragment.newInstance();
+//        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+//        ft.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
+//        ft.replace(R.id.flContent, fragment);
+//        ft.addToBackStack("People");
+//        ft.commit();
 
     }
 }
