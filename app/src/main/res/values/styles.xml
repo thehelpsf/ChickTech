@@ -114,6 +114,7 @@
         <item name="android:inputType">phone</item>
         <item name="android:gravity">left</item>
         <item name="android:cursorVisible">false</item>
+        <item name="android:textColorHighlight">#00FFFFFF</item>
     </style>
 
     <style name="CTLoginPhoneSpacer">
