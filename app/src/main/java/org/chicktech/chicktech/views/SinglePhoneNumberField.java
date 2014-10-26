@@ -6,6 +6,8 @@ import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.widget.EditText;
 
+import org.chicktech.chicktech.R;
+
 /**
  * Created by Jing Jin on 10/25/14.
  */
@@ -33,6 +35,13 @@ public class SinglePhoneNumberField extends EditText {
     @Override
     protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
         super.onTextChanged(text, start, lengthBefore, lengthAfter);
+
+        if (lengthAfter == 0) {
+            setBackgroundResource(R.drawable.login_textfield_selector);
+        } else {
+            setBackgroundResource(R.drawable.login_textfield_filled_selector);
+        }
+
         if (listener != null) {
             listener.onTextChanged(this, text, start, lengthBefore, lengthAfter);
         }
