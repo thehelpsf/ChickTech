@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -17,6 +16,7 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import org.chicktech.chicktech.R;
+import org.chicktech.chicktech.adapters.PersonArrayAdapter;
 import org.chicktech.chicktech.models.Event;
 import org.chicktech.chicktech.utils.CTRestClient;
 
@@ -30,7 +30,7 @@ public class PeopleListFragment extends Fragment {
     private String eventID;
     private Event mEvent;
     private ArrayList<ParseUser> people;
-    private ArrayAdapter<ParseUser> aPeople;
+    private PersonArrayAdapter aPeople;
     private ListView lvPeople;
 
     public PeopleListFragment () {
@@ -80,7 +80,7 @@ public class PeopleListFragment extends Fragment {
         lvPeople = (ListView) view.findViewById(R.id.lvPeople);
 
         people = new ArrayList<ParseUser>();
-        aPeople = new ArrayAdapter<ParseUser>(getActivity(), android.R.layout.simple_list_item_1, people);
+        aPeople = new PersonArrayAdapter(getActivity(), people);
         lvPeople.setAdapter(aPeople);
 
         return view;
