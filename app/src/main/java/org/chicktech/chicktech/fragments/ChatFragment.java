@@ -2,7 +2,6 @@ package org.chicktech.chicktech.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,7 @@ import android.widget.ListView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import org.chicktech.chicktech.R;
@@ -58,16 +58,15 @@ public class ChatFragment extends Fragment{
     public void onResume() {
         super.onResume();
 
-        parseClient.getAllChatMessages(currentUser,new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> messages, ParseException e) {
-                if (e == null) {
-                    aMessages.clear();
-                    Log.d("Chat Messages", "Retrieved " + messages.size() + " events");
-                    for (int i = 0; i < messages.size(); i++) {
-                        aMessages.add((ChatMessage)messages.get(i));
-                    }
-                } else {
-                    Log.d("Chat Messages", "Error: " + e.getMessage());
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("ChatMessage");
+        query.orderByAscending("createdAt");
+        query.fromLocalDatastore();
+
+        query.findInBackground(new FindCallback<ParseObject>() {
+            public void done(List<ParseObject> chatMessages, ParseException e) {
+                aMessages.clear();
+                for (int i = 0; i < chatMessages.size(); i++) {
+                    aMessages.add((ChatMessage)chatMessages.get(i));
                 }
             }
         });
@@ -94,6 +93,7 @@ public class ChatFragment extends Fragment{
                     message.setFromPersonID(currentUser.getObjectId());
                     message.setMessage(etMessage.getText().toString());
                     parseClient.sendChatMessage(message.getToPersonID(),message.getFromPersonID(),message.getMessage());
+                    message.saveEventually();
                     messages.add(message);
                     aMessages.notifyDataSetChanged();
                     etMessage.setText("");
