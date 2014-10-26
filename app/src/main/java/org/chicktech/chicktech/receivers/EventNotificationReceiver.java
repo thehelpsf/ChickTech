@@ -15,12 +15,19 @@ public class EventNotificationReceiver extends BroadcastReceiver {
     private static final String TAG = "MyCustomReceiver";
 
 
+    // This code gets called any time one of our notifications comes in for action:
+    //   org.chicktech.chicktech.EVENT_REMINDER
+    // Regiesterd in the manifest.
+
+
     // JSON to send from Parse
     /*
     {
+        "alert":"This is the alert message of the push",
+        "title":"This is the title of the push",
         "action":"org.chicktech.chicktech.EVENT_REMINDER",
-            "message":"Girls Crazy Day is Coming Oct 3-th. Don't forget to RSVP!"
-    }
+        "message":"Girls Crazy Day is Coming Oct 30th. Don't forget to RSVP!"
+        "event_id":"bF2ZiZzsUV"
     */
 
     @Override

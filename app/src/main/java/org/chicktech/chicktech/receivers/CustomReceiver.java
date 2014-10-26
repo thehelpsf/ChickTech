@@ -13,6 +13,9 @@ import org.json.JSONObject;
 
 /**
  * Created by paul on 10/21/14.
+ *
+ * This code gets enacted when a user clicks on one our our notifications
+ * in the system notification drawer.
  */
 public class CustomReceiver extends ParsePushBroadcastReceiver {
 
