@@ -111,7 +111,6 @@ public class MainActivity extends ActionBarActivity implements CameraLaunchingAc
             }
         };
         //registering our receiver
-        // TODO: Fix this receiver link. Need to unregister in onPause()
         this.registerReceiver(mReceiver, intentFilter);
 
         //fetch all chat messages upon app open
@@ -134,7 +133,9 @@ public class MainActivity extends ActionBarActivity implements CameraLaunchingAc
     @Override
     protected void onPause() {
         super.onPause();
-        this.unregisterReceiver(mReceiver);
+        if (mReceiver != null) {
+            this.unregisterReceiver(mReceiver);
+        }
     }
 
 
