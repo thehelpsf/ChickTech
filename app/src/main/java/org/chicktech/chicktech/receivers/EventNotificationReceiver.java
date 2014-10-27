@@ -6,10 +6,9 @@ import android.content.Intent;
 import android.util.Log;
 
 import org.chicktech.chicktech.activities.ShowPopUpActivity;
+import org.chicktech.chicktech.utils.AppUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Iterator;
 
 public class EventNotificationReceiver extends BroadcastReceiver {
     private static final String TAG = "MyCustomReceiver";
@@ -44,22 +43,25 @@ public class EventNotificationReceiver extends BroadcastReceiver {
                 Log.d(TAG, "got action " + action );
                 if (action.equals("org.chicktech.chicktech.EVENT_REMINDER"))
                 {
-                    String channel = intent.getExtras().getString("com.parse.Channel");
-                    JSONObject json = new JSONObject(intent.getExtras().getString("com.parse.Data"));
-                    Log.d(TAG, "got action " + action + " on channel " + channel + " with:");
-                    Iterator itr = json.keys();
-                    while (itr.hasNext()) {
-                        String key = (String) itr.next();
-                        if (key.equals("message"))
-                        {
+                    if (AppUtils.isThisAppInForeground(context)) {
+                        // doing nothing with channel so far.
+                        String channel = intent.getExtras().getString("com.parse.Channel");
+                        JSONObject json = new JSONObject(intent.getExtras().getString("com.parse.Data"));
+
+                        // json fields: action, alert, title, event_id
+                        // if we have an event_id, start up the event detail activity and pass in event_id
+                        if (json.optString("event_id") != null) {
                             //Toast.makeText(context, "Got " + action + " notification", Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(context, ShowPopUpActivity.class);
-                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
-                            i.putExtra("message", json.getString("message"));
+                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            i.putExtra("id", json.getString("event_id"));
                             context.getApplicationContext().startActivity(i);
                         }
-                        Log.d(TAG, "..." + key + " => " + json.getString(key));
+                    } else {
+                        // let the system show the notification in the system notifications tray.
+                        //Toast.makeText(context, "See tray for notification", Toast.LENGTH_SHORT).show();
                     }
+
                 }
                 else if (action.equals("org.chicktech.chicktech.CHAT_MESSAGE")){
                     String channel = intent.getExtras().getString("com.parse.Channel");

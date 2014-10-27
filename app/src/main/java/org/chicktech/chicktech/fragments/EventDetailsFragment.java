@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -63,6 +64,7 @@ public class EventDetailsFragment extends Fragment {
     Person person;
     ScrollView svDetails;
     LinearLayout llMenu;
+    Button btnSendRsvpReminder;
     String objectID;
 
     private Animation animFadeIn;
@@ -126,7 +128,14 @@ public class EventDetailsFragment extends Fragment {
         ivRsvp = (ImageView) view.findViewById(R.id.ivRsvp);
         svDetails = (ScrollView) view.findViewById(R.id.svDetails);
         llMenu = (LinearLayout) view.findViewById(R.id.llMenu);
-        
+
+        btnSendRsvpReminder = (Button) view.findViewById(R.id.btnPushRsvpReminder);
+        if (person.getRole() == Person.Role.ORGANIZER) {
+            btnSendRsvpReminder.setVisibility(View.VISIBLE);
+        } else {
+            btnSendRsvpReminder.setVisibility(View.GONE);
+        }
+
         setupClickListeners();
 
         tvName.setTypeface(displayFont);
@@ -141,15 +150,15 @@ public class EventDetailsFragment extends Fragment {
 
         pb.setVisibility(ProgressBar.VISIBLE);
         CTRestClient.getEventByID(CTRestClient.QUERY_LOCAL, objectID, new GetCallback<ParseObject>() {
-            public void done(ParseObject event, ParseException e) {
+            public void done(ParseObject eventReceived, ParseException e) {
                 pb.setVisibility(ProgressBar.INVISIBLE);
-                if (event == null) {
+                if (eventReceived == null) {
                     Toast.makeText(getLocalContext(), "Did not get event details", Toast.LENGTH_LONG).show();
                 } else {
                     //Log.d("event", "Retrieved the object.");
-                    fillTheForm(event);
+                    fillTheForm(eventReceived);
                     svDetails.startAnimation(animFadeIn);
-                    slideMenuIn();
+                    slideMenuIn(false);
                 }
             }
         });
@@ -182,6 +191,18 @@ public class EventDetailsFragment extends Fragment {
                 sendChat();
             }
         });
+
+
+        btnSendRsvpReminder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendRsvpPushReminder();
+            }
+        });
+    }
+
+    private void sendRsvpPushReminder() {
+        CTRestClient.sendRsvpReminder(event);
     }
 
 
@@ -285,27 +306,32 @@ public class EventDetailsFragment extends Fragment {
     }
 
 
-    public void slideMenuIn() {
-        // Inflate animation from XML
-        Animation anim = AnimationUtils.loadAnimation(getLocalContext(), R.anim.slide_in_left);
-        // Setup listeners (optional)
-        anim.setDuration(1000L);
-        anim.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-                llMenu.setVisibility(View.VISIBLE);
-            }
+    public void slideMenuIn(boolean doAnimation) {
 
-            @Override
-            public void onAnimationEnd(Animation animation) {
+        if (doAnimation) {
+            // Inflate animation from XML
+            Animation anim = AnimationUtils.loadAnimation(getLocalContext(), R.anim.slide_in_left);
+            // Setup listeners (optional)
+            anim.setDuration(1000L);
+            anim.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+                    llMenu.setVisibility(View.VISIBLE);
+                }
 
-            }
+                @Override
+                public void onAnimationEnd(Animation animation) {
 
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-            }
-        });
-        llMenu.startAnimation(anim);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+                }
+            });
+            llMenu.startAnimation(anim);
+        } else {
+            llMenu.setVisibility(View.VISIBLE);
+        }
     }
 
 

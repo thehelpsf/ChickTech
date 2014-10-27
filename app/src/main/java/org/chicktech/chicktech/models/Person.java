@@ -22,6 +22,7 @@ import java.util.Date;
 public class Person extends ParseUser {
     private static final String ROLE_STUDENT = "student";
     private static final String ROLE_MENTOR = "mentor";
+    private static final String ROLE_ORGANIZER = "organizer";
 
     public static class GetPhotoCallback {
         public void done(Bitmap photo) {
@@ -37,7 +38,8 @@ public class Person extends ParseUser {
 
     public static enum Role {
         STUDENT,
-        MENTOR
+        MENTOR,
+        ORGANIZER
     }
 
     @Override
@@ -66,7 +68,9 @@ public class Person extends ParseUser {
     // Parse Getters
     public Role getRole() {
         String s = getString("role");
-        if (s.equals(ROLE_MENTOR)) {
+        if (s.equals(ROLE_ORGANIZER)) {
+            return Role.ORGANIZER;
+        } else if (s.equals(ROLE_MENTOR)) {
             return Role.MENTOR;
         } else {
             return Role.STUDENT;

@@ -103,6 +103,32 @@ public class CTRestClient {
         query.getFirstInBackground(callback);
     }
 
+    public static void sendRsvpReminder(Event event){
+
+        if (event == null) {
+            return;
+        }
+
+        ParsePush push = new ParsePush();
+        ParseQuery pQuery = ParseInstallation.getQuery(); // <-- Installation query
+        pQuery.whereEqualTo("userID", "W9gv9R7Mim"); // testing... who to send to? everyone?
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("action","org.chicktech.chicktech.EVENT_REMINDER");
+            jsonObject.put("alert", "Let us know if you'd like to attend: " + event.getTitle());
+            jsonObject.put("title", "RVSP to this ChichTech Event");
+            jsonObject.put("event_id", event.getObjectId());
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
+        push.setData(jsonObject);
+        push.setQuery(pQuery);
+        push.sendInBackground();
+
+    }
+
     public static void sendChatMessage(String toPersonID, final String fromPersonID, String message, final GetCallback<ParseObject> callback){
 
         ChatMessage chatMessage = new ChatMessage();

@@ -48,7 +48,7 @@
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@id/ViewColorPickerHelper"
             android:background="?android:attr/selectableItemBackground"
-            android:text="@android:string/cancel"
+            android:text="@android:string/ok"
             android:layout_alignParentBottom="true"/>
         <Button
             android:id="@+id/popCancelB"
@@ -57,7 +57,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:background="?android:attr/selectableItemBackground"
-            android:text="@android:string/ok"
+            android:text="@android:string/cancel"
             android:layout_alignParentBottom="true"
             android:layout_toRightOf="@id/ViewColorPickerHelper"/>
     </RelativeLayout>

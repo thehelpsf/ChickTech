@@ -289,6 +289,14 @@
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:text="@string/event_desc_label" />
 
+            <Button
+                android:id="@+id/btnPushRsvpReminder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Send RSVP Notification"
+                android:layout_below="@+id/tvEventDescription"
+                 />
+
             <TextView
                 android:id="@+id/tvPeopleTitle"
                 android:layout_width="match_parent"
@@ -308,6 +316,9 @@
                 android:layout_below="@+id/tvPeopleTitle"
                 >
             </ListView>
+
+
+
 
 
         </RelativeLayout>

@@ -1,7 +1,6 @@
 package org.chicktech.chicktech.activities;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
@@ -10,9 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -39,10 +36,15 @@ public class LoginActivity extends Activity {
     ProgressBar pb;
     RelativeLayout rlMain;
     TextView tvLearnMore;
+    String eventID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent i = getIntent();
+        eventID = i.getStringExtra("id");
+
         setContentView(R.layout.activity_login);
         rlMain = (RelativeLayout) findViewById(R.id.rlMain);
         llPhoneContainer = (LinearLayout)findViewById(R.id.llPhoneContainer);
@@ -154,7 +156,11 @@ public class LoginActivity extends Activity {
     }
 
     private void moveOnToApp() {
-        Intent i = new Intent(this, MainActivity.class);
+        Intent i;
+        i = new Intent(this, MainActivity.class);
+        if (eventID != null) {
+            i.putExtra("id", eventID);
+        }
         startActivity(i);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         finish();

@@ -3,6 +3,7 @@ package org.chicktech.chicktech.receivers;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.parse.ParsePushBroadcastReceiver;
 
@@ -21,6 +22,7 @@ public class CustomReceiver extends ParsePushBroadcastReceiver {
 
     @Override
     public void onPushOpen(Context context, Intent intent) {
+        String objectID = "";
 
         boolean weAreForeground = AppUtils.isThisAppInForeground(context);
 
@@ -29,14 +31,18 @@ public class CustomReceiver extends ParsePushBroadcastReceiver {
         String json = extras.getString("com.parse.Data");
         try {
             JSONObject jsonObj = new JSONObject(json);
-            String message = jsonObj.getString("message");
+            objectID = jsonObj.getString("event_id");
         } catch (JSONException e) {
             e.printStackTrace();
             return;
         }
-        Intent i = new Intent(context, LoginActivity.class);
-        i.putExtras(intent.getExtras());
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(i);
+        if (objectID.length() > 0) {
+            Intent i = new Intent(context, LoginActivity.class);
+            i.putExtra("id", objectID);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(i);
+        } else {
+            Toast.makeText(context, "no event id", Toast.LENGTH_LONG).show();
+        }
     }
 }

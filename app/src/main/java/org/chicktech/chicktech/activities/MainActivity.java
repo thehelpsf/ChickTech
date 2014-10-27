@@ -42,18 +42,18 @@ import java.util.List;
 
 public class MainActivity extends ActionBarActivity implements CameraLaunchingActivity {
     private static final String PHOTO_FILENAME = "CTphoto.jpg";
-
     private FragmentNavigationDrawer dlDrawer;
-
     private CameraLaunchingListener cameraListener;
-
     private BroadcastReceiver mReceiver;
-
+    private String eventID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Intent i = getIntent();
+        eventID = i.getStringExtra("id");
 
         // Find our drawer view
         dlDrawer = (FragmentNavigationDrawer) findViewById(R.id.drawer_layout);
@@ -124,7 +124,20 @@ public class MainActivity extends ActionBarActivity implements CameraLaunchingAc
             }
         });
 
+        if (eventID != null) {
+            goToEventDetail(eventID);
+        }
+
     }
+
+
+    private void goToEventDetail(String id) {
+        Intent i = new Intent(this, EventDetailActivity.class);
+        i.putExtra("id", id);
+        startActivity(i);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+    }
+
 
     // Temporary creation of models in parse for testing
     private void sendModelsToParse() {
