@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.parse.GetCallback;
@@ -30,8 +31,11 @@ public class ProfileFragment extends Fragment implements EditProfileFragment.Edi
     private ImageView imgFlower;
     private TextView tvName;
     private TextView tvDetails;
+    private LinearLayout llEmail;
     private TextView tvEmail;
+    private LinearLayout llPhone;
     private TextView tvPhoneNumber;
+    private LinearLayout llAddress;
     private TextView tvAddress;
     private TextView tvWhy;
     private FlowLayout flWhat;
@@ -109,6 +113,10 @@ public class ProfileFragment extends Fragment implements EditProfileFragment.Edi
             btnEdit.setVisibility(View.GONE);
         }
 
+        llAddress = (LinearLayout) v.findViewById(R.id.llAddress);
+        llPhone = (LinearLayout) v.findViewById(R.id.llPhone);
+        llEmail = (LinearLayout) v.findViewById(R.id.llEmail);
+
         populateProfile();
         return v;
     }
@@ -152,14 +160,30 @@ public class ProfileFragment extends Fragment implements EditProfileFragment.Edi
 
         tvName.setText(user.getPersonName());
         tvDetails.setText(user.getTagline());
-        tvEmail.setText(user.getEmail());
-        tvPhoneNumber.setText(user.getPhoneNumber());
+
+        String s = user.getEmail();
+        if (s == null || s.isEmpty()) {
+            llEmail.setVisibility(View.GONE);
+        } else {
+            tvEmail.setText(s);
+        }
+
+        s = user.getFormattedPhoneNumber();
+        if (s == null || s.isEmpty()) {
+            llPhone.setVisibility(View.GONE);
+        } else {
+            tvPhoneNumber.setText(s);
+        }
+
+        // Hide the addr section until we get a string, so we don't flash an empty section
+        llAddress.setVisibility(View.GONE);
         user.getAddressInBackground(new Person.GetAddressCallback() {
             @Override
             public void done(Address addr) {
                 if (addr == null) {
                     tvAddress.setText("");
                 } else {
+                    llAddress.setVisibility(View.VISIBLE);
                     tvAddress.setText(addr.toFullString());
                 }
             }

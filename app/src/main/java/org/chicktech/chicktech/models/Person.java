@@ -79,6 +79,14 @@ public class Person extends ParseUser {
         return getString("handle");
 }
     public String getPhoneNumber() {return getString("phoneNumber");}
+    public String getFormattedPhoneNumber() {
+        String s = getPhoneNumber();
+        if (s == null || s.isEmpty() || s.length() != 10) {
+            return s;
+        }
+
+        return "(" + s.substring(0, 3) + ")" + s.substring(3, 6) + "-" + s.substring(6, 10);
+    }
     public String getProfileImageUrl() {return getString("profileImageUrl");}
     public void getAddressInBackground(final GetAddressCallback cb) {
         ParseObject addr = getParseObject("address");

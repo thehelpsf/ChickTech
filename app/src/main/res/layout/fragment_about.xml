@@ -56,7 +56,7 @@
                 android:layout_height="30dp"
                 android:id="@+id/imgEmailIcon"
                 android:layout_marginRight="10dp"
-                android:src="@drawable/ic_email_gray" />
+                android:src="@drawable/ic_mail" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -83,7 +83,7 @@
                 android:layout_height="30dp"
                 android:id="@+id/imgPhoneIcon"
                 android:layout_marginRight="10dp"
-                android:src="@drawable/ic_phone_gray" />
+                android:src="@drawable/ic_phone" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -109,7 +109,7 @@
                 android:layout_height="30dp"
                 android:id="@+id/imgAddrIcon"
                 android:layout_marginRight="10dp"
-                android:src="@drawable/ic_house_gray" />
+                android:src="@drawable/ic_home" />
 
             <TextView
                 android:layout_width="match_parent"
