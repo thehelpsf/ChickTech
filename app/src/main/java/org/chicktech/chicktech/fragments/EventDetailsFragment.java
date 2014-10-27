@@ -192,7 +192,6 @@ public class EventDetailsFragment extends Fragment {
             }
         });
 
-
         btnSendRsvpReminder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

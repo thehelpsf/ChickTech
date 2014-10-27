@@ -14,6 +14,7 @@ public class ShowPopUpActivity extends Activity implements View.OnClickListener 
     private Button cancel;
     private boolean click = true;
     private String objectID;
+    private String message;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,7 @@ public class ShowPopUpActivity extends Activity implements View.OnClickListener 
 
         Intent i = getIntent();
         objectID = i.getStringExtra("id");
+        message = i.getStringExtra("message");
 
         setContentView(R.layout.activity_show_pop_up);
 
@@ -42,7 +44,7 @@ public class ShowPopUpActivity extends Activity implements View.OnClickListener 
         cancel.setOnClickListener(this);
 
         TextView tvMessage = (TextView) findViewById(R.id.durationTitle);
-        tvMessage.setText("View this event? " + objectID);
+        tvMessage.setText(message);
     }
     @Override
     public void onClick(View button) {

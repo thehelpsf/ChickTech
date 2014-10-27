@@ -55,6 +55,7 @@ public class EventNotificationReceiver extends BroadcastReceiver {
                             Intent i = new Intent(context, ShowPopUpActivity.class);
                             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             i.putExtra("id", json.getString("event_id"));
+                            i.putExtra("message", json.getString("alert"));
                             context.getApplicationContext().startActivity(i);
                         }
                     } else {
