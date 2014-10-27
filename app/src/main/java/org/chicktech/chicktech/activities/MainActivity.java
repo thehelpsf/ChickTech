@@ -131,6 +131,13 @@ public class MainActivity extends ActionBarActivity implements CameraLaunchingAc
     }
 
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        this.unregisterReceiver(mReceiver);
+    }
+
+
     private void goToEventDetail(String id) {
         Intent i = new Intent(this, EventDetailActivity.class);
         i.putExtra("id", id);
