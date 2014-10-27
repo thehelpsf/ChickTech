@@ -17,9 +17,11 @@ import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import org.chicktech.chicktech.R;
 import org.chicktech.chicktech.fragments.AboutFragment;
@@ -91,8 +93,20 @@ public class MainActivity extends ActionBarActivity implements CameraLaunchingAc
                 myMessage.setFromPersonID(intent.getStringExtra("fromPersonID"));
                 myMessage.setToPersonID(intent.getStringExtra("toPersonID"));
                 //myMessage.saveEventually();
+                CTRestClient.getLastChatMessage(intent.getStringExtra("toPersonID"),new GetCallback<ParseObject>() {
+                    @Override
+                    public void done(ParseObject parseObject, ParseException e) {
+                        ChatMessage chatMessage = (ChatMessage)parseObject;
+                        chatMessage.pinInBackground("ChatMessage", new SaveCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                dlDrawer.selectDrawerItem(2);
 
-                dlDrawer.selectDrawerItem(2);
+                            }
+                        });
+                    }
+                });
+
 
             }
         };

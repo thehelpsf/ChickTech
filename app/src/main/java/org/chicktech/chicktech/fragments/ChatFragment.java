@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -92,28 +93,17 @@ public class ChatFragment extends Fragment{
                     message.setToPersonID(currentUser.getPartnerID());
                     message.setFromPersonID(currentUser.getObjectId());
                     message.setMessage(etMessage.getText().toString());
-                    parseClient.sendChatMessage(message.getToPersonID(),message.getFromPersonID(),message.getMessage());
-                    message.saveEventually();
-                    messages.add(message);
-                    aMessages.notifyDataSetChanged();
+                    parseClient.sendChatMessage(message.getToPersonID(), message.getFromPersonID(), message.getMessage(),new GetCallback<ParseObject>() {
+                        @Override
+                        public void done(ParseObject chatMessage, ParseException e) {
+                            aMessages.add((ChatMessage)chatMessage);
+                        }
+                    });
+
                     etMessage.setText("");
                 }
             }
         });
-
-        /*
-        messages = new ArrayList<ChatMessage>();
-        ChatMessage testMessage = new ChatMessage();
-        testMessage.setFromPersonID("49832");
-        testMessage.setToPersonID("40345");
-        testMessage.setMessage("hey");
-        messages.add(testMessage);
-        ChatMessage anotherMessage = new ChatMessage();
-        anotherMessage.setFromPersonID("49832");
-        anotherMessage.setToPersonID("40345");
-        anotherMessage.setMessage("What's up");
-        messages.add(anotherMessage);
-        */
 
         aMessages = new ChatArrayAdapter(getActivity(),messages);
         lvMessages = (ListView) v.findViewById(R.id.lvMessages);

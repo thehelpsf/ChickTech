@@ -9,6 +9,7 @@ import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import org.chicktech.chicktech.models.ChatMessage;
 import org.chicktech.chicktech.models.Event;
@@ -102,13 +103,18 @@ public class CTRestClient {
         query.getFirstInBackground(callback);
     }
 
-    public static void sendChatMessage(String toPersonID, String fromPersonID, String message){
+    public static void sendChatMessage(String toPersonID, final String fromPersonID, String message, final GetCallback<ParseObject> callback){
 
         ChatMessage chatMessage = new ChatMessage();
         chatMessage.setToPersonID(toPersonID);
         chatMessage.setFromPersonID(fromPersonID);
         chatMessage.setMessage(message);
-        chatMessage.saveInBackground();
+        chatMessage.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                CTRestClient.getLastChatMessage(fromPersonID,callback);
+            }
+        });
 
         // Send push notification to query
         ParsePush push = new ParsePush();
@@ -163,7 +169,23 @@ public class CTRestClient {
 
     }
 
+    public static void getLastChatMessage (String personID, final GetCallback<ParseObject> callback){
 
+        ParseQuery<ParseObject> fromPersonQuery = ParseQuery.getQuery("ChatMessage");
+        fromPersonQuery.whereEqualTo("fromPersonID", personID);
 
+        ParseQuery<ParseObject> toPersonQuery = ParseQuery.getQuery("ChatMessage");
 
+        toPersonQuery.whereEqualTo("toPersonID", personID);
+
+        List<ParseQuery<ParseObject>> queries = new ArrayList<ParseQuery<ParseObject>>();
+        queries.add(fromPersonQuery);
+        queries.add(toPersonQuery);
+
+        ParseQuery<ParseObject> mainQuery = ParseQuery.or(queries);
+
+        mainQuery.orderByDescending("createdAt");
+
+        mainQuery.getFirstInBackground(callback);
+    }
 }
