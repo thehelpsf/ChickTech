@@ -13,6 +13,7 @@
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Ctactionbar</item>
         <item name="android:actionBarWidgetTheme">@style/Theme.Ctactionbar.Widget</item>
         <item name="android:actionBarTabTextStyle">@style/CTActionBarTabText</item>
+        <item name="android:windowBackground">@color/white</item>
 
         <item name="android:textColor">@color/brown</item>
         <item name="android:textColorLink">@color/brown</item>

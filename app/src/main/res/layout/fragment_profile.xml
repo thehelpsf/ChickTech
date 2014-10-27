@@ -16,38 +16,49 @@
             android:padding="10dp">
 
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:id="@+id/imgPhoto"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:background="@color/lightGray"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="133dp"
+                android:id="@+id/imgFlower"
+                android:layout_toEndOf="@+id/imgPhoto"
+                android:src="@drawable/flower_empty"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/etName"
                 android:layout_alignTop="@+id/imgPhoto"
                 android:layout_toRightOf="@+id/imgPhoto"
                 android:layout_toEndOf="@+id/imgPhoto"
-                android:layout_toStartOf="@+id/btnEdit"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="30dp"
+                android:textColor="@color/teal"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 android:hint="@string/name_hint"
-                android:singleLine="true"
-                android:layout_toLeftOf="@+id/btnEdit" />
+                android:singleLine="true" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvDetails"
-                android:layout_toRightOf="@+id/imgPhoto"
+                android:layout_alignLeft="@+id/etName"
+                android:layout_alignParentRight="true"
                 android:layout_below="@+id/etName"
                 android:layout_alignBottom="@+id/imgPhoto"
-                android:layout_marginLeft="10dp"
                 android:singleLine="false"
                 android:layout_toLeftOf="@+id/btnEdit"
                 android:layout_toStartOf="@+id/btnEdit" />

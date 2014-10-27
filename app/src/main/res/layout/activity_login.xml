@@ -11,7 +11,7 @@
         android:layout_height="95dp"
         android:layout_margin="30dp"
         android:layout_marginBottom="60dp"
-        android:id="@+id/imageView"
+        android:id="@+id/imgFlower"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
@@ -26,7 +26,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/imageView"
+        android:layout_below="@+id/imgFlower"
         style="@style/CTLoginContainer">
 
         <LinearLayout

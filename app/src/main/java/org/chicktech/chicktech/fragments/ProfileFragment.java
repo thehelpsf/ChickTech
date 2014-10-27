@@ -27,6 +27,7 @@ public class ProfileFragment extends Fragment implements EditProfileFragment.Edi
     private boolean isEditable = false;
 
     private ImageView imgPhoto;
+    private ImageView imgFlower;
     private TextView tvName;
     private TextView tvDetails;
     private TextView tvEmail;
@@ -88,6 +89,7 @@ public class ProfileFragment extends Fragment implements EditProfileFragment.Edi
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
         imgPhoto = (ImageView) v.findViewById(R.id.imgPhoto);
+        imgFlower = (ImageView) v.findViewById(R.id.imgFlower);
         tvName = (TextView) v.findViewById(R.id.etName);
         tvDetails = (TextView) v.findViewById(R.id.tvDetails);
         tvEmail = (TextView) v.findViewById(R.id.tvEmail);
@@ -140,7 +142,9 @@ public class ProfileFragment extends Fragment implements EditProfileFragment.Edi
             public void done(Bitmap photo) {
                 if (photo != null) {
                     imgPhoto.setImageBitmap(photo);
+                    imgFlower.setImageResource(R.drawable.flower_full);
                 } else {
+                    imgFlower.setImageResource(R.drawable.flower_empty);
                     imgPhoto.setImageResource(0);
                 }
             }
