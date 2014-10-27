@@ -1,7 +1,6 @@
 package org.chicktech.chicktech.adapters;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,16 +53,16 @@ public class PersonArrayAdapter extends ArrayAdapter<ParseUser> {
         // TODO: FIX, This image always shows up in the last slot. The views are
         // changing while the images is being loaded? Load the image well before this
         // code is called. Tags?
-        user.getPhotoInBackground(new Person.GetPhotoCallback() {
-            @Override
-            public void done(Bitmap photo) {
-                if (photo != null) {
-                    viewHolder.imgPhoto.setImageBitmap(photo);
-                } else {
-                    viewHolder.imgPhoto.setImageResource(0);
-                }
-            }
-        });
+//        user.getPhotoInBackground(new Person.GetPhotoCallback() {
+//            @Override
+//            public void done(Bitmap photo) {
+//                if (photo != null) {
+//                    viewHolder.imgPhoto.setImageBitmap(photo);
+//                } else {
+//                    viewHolder.imgPhoto.setImageResource(0);
+//                }
+//            }
+//        });
 
         return convertView;
     }
