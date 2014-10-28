@@ -378,15 +378,14 @@ public class EventDetailsFragment extends Fragment {
 
 
     public void sendChat() {
-        Toast.makeText(getLocalContext(), "Send Chat to Partner (Student/Mentor) about event", Toast.LENGTH_LONG).show();
 
-//      Test code
-//        PeopleListFragment fragment = PeopleListFragment.newInstance();
-//        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-//        ft.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
-//        ft.replace(R.id.flContent, fragment);
-//        ft.addToBackStack("People");
-//        ft.commit();
+        String url = new String("chicktech://"+event.getObjectId());
 
+        CTRestClient.sendChatMessage(person.getPartnerId(),person.getObjectId(),url,new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject chatMessage, ParseException e) {
+                chatMessage.pinInBackground();
+            }
+        });
     }
 }

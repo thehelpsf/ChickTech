@@ -1,6 +1,7 @@
 package org.chicktech.chicktech.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,24 @@ public class ChatArrayAdapter extends ArrayAdapter<ChatMessage> {
             viewHolder = new ViewHolder();
             convertView = getInflatedLayoutForType(message.getFromPersonID());
             viewHolder.tvMessage = (TextView) convertView.findViewById(R.id.tvMessage);
+            viewHolder.tvMessage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    TextView textView = (TextView) view;
+
+                    String url = textView.getText().toString();
+                    if (url.contains("chicktech://")){
+
+                        String segments[] = url.split("//");
+                        String objectID = segments[segments.length - 1];
+                        Intent intent= new Intent("com.chicktech.LOAD_URL");
+                        intent.putExtra("url",objectID);
+                        getContext().sendBroadcast(intent);
+                    }
+
+                }
+            });
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();

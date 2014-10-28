@@ -44,7 +44,8 @@ public class MainActivity extends ActionBarActivity implements CameraLaunchingAc
     private static final String PHOTO_FILENAME = "CTphoto.jpg";
     private FragmentNavigationDrawer dlDrawer;
     private CameraLaunchingListener cameraListener;
-    private BroadcastReceiver mReceiver;
+    private BroadcastReceiver mChatReceiver;
+    private BroadcastReceiver mLinkReceiver;
     private String eventID;
 
     @Override
@@ -79,39 +80,56 @@ public class MainActivity extends ActionBarActivity implements CameraLaunchingAc
     protected void onResume() {
         super.onResume();
 
-        IntentFilter intentFilter = new IntentFilter(
+
+        IntentFilter chatIntentFilter = new IntentFilter(
                 "android.intent.action.CHAT");
 
-        mReceiver = new BroadcastReceiver() {
+        IntentFilter urlFilter = new IntentFilter(
+                "com.chicktech.LOAD_URL");
+
+        mChatReceiver = new BroadcastReceiver() {
 
             @Override
             public void onReceive(Context context, Intent intent) {
-                //extract our message from intent
-                ChatMessage myMessage = new ChatMessage();
-                //log our message value
-                myMessage.setMessage(intent.getStringExtra("message"));
-                myMessage.setFromPersonID(intent.getStringExtra("fromPersonID"));
-                myMessage.setToPersonID(intent.getStringExtra("toPersonID"));
-                //myMessage.saveEventually();
-                CTRestClient.getLastChatMessage(intent.getStringExtra("toPersonID"),new GetCallback<ParseObject>() {
-                    @Override
-                    public void done(ParseObject parseObject, ParseException e) {
-                        ChatMessage chatMessage = (ChatMessage)parseObject;
-                        chatMessage.pinInBackground("ChatMessage", new SaveCallback() {
-                            @Override
-                            public void done(ParseException e) {
-                                dlDrawer.selectDrawerItem(2);
 
-                            }
-                        });
-                    }
-                });
+                    //extract our message from intent
+                    ChatMessage myMessage = new ChatMessage();
+                    //log our message value
+                    myMessage.setMessage(intent.getStringExtra("message"));
+                    myMessage.setFromPersonID(intent.getStringExtra("fromPersonID"));
+                    myMessage.setToPersonID(intent.getStringExtra("toPersonID"));
+                    //myMessage.saveEventually();
+                    CTRestClient.getLastChatMessage(intent.getStringExtra("toPersonID"), new GetCallback<ParseObject>() {
+                        @Override
+                        public void done(ParseObject parseObject, ParseException e) {
+                            ChatMessage chatMessage = (ChatMessage) parseObject;
+                            chatMessage.pinInBackground("ChatMessage", new SaveCallback() {
+                                @Override
+                                public void done(ParseException e) {
+                                    dlDrawer.selectDrawerItem(2);
+
+                                }
+                            });
+                        }
+                    });
+                }
 
 
+        };
+
+
+        mLinkReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String url = intent.getStringExtra("url");
+                goToEventDetail(url);
             }
         };
+
+
         //registering our receiver
-        this.registerReceiver(mReceiver, intentFilter);
+        this.registerReceiver(mChatReceiver, chatIntentFilter);
+        this.registerReceiver(mLinkReceiver, urlFilter);
 
         //fetch all chat messages upon app open
         CTRestClient.getAllChatMessages((Person)ParseUser.getCurrentUser(), new FindCallback<ParseObject>() {
@@ -133,8 +151,11 @@ public class MainActivity extends ActionBarActivity implements CameraLaunchingAc
     @Override
     protected void onPause() {
         super.onPause();
-        if (mReceiver != null) {
-            this.unregisterReceiver(mReceiver);
+        if (mChatReceiver != null) {
+            this.unregisterReceiver(mChatReceiver);
+        }
+        if (mLinkReceiver != null) {
+            this.unregisterReceiver(mLinkReceiver);
         }
     }
 

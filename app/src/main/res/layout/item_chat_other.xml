@@ -12,6 +12,7 @@
         android:paddingRight="10dp"
         android:text="test message"
         android:textColor="@android:color/white"
+        android:clickable="true"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_toRightOf="@+id/ivProfileImage"
         android:layout_centerVertical="true"/>
