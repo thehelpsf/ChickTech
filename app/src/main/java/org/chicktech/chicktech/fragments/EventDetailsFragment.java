@@ -65,6 +65,7 @@ public class EventDetailsFragment extends Fragment {
     ScrollView svDetails;
     LinearLayout llMenu;
     Button btnSendRsvpReminder;
+    Button btnSendGoReminder;
     String objectID;
 
     private Animation animFadeIn;
@@ -130,10 +131,14 @@ public class EventDetailsFragment extends Fragment {
         llMenu = (LinearLayout) view.findViewById(R.id.llMenu);
 
         btnSendRsvpReminder = (Button) view.findViewById(R.id.btnPushRsvpReminder);
+        btnSendGoReminder = (Button) view.findViewById(R.id.btnPushGoReminder);
+
         if (person.getRole() == Person.Role.ORGANIZER) {
             btnSendRsvpReminder.setVisibility(View.VISIBLE);
+            btnSendGoReminder.setVisibility(View.VISIBLE);
         } else {
             btnSendRsvpReminder.setVisibility(View.GONE);
+            btnSendGoReminder.setVisibility(View.GONE);
         }
 
         setupClickListeners();
@@ -196,13 +201,25 @@ public class EventDetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 sendRsvpPushReminder();
-                Toast.makeText(getActivity(), "Notifications sent to students and mentors", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "RSVP Notifications sent to students and mentors", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnSendGoReminder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendGoPushReminder();
+                Toast.makeText(getActivity(), "GO Notifications sent to students and mentors", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void sendRsvpPushReminder() {
         CTRestClient.sendRsvpReminder(event);
+    }
+
+    private void sendGoPushReminder() {
+        CTRestClient.sendGoReminder(event);
     }
 
 
@@ -349,8 +366,7 @@ public class EventDetailsFragment extends Fragment {
     }
 
 
-    // TODO: Refactor RSVP code to use separate set of objects instead of having
-    // RSVP lists within Event object.
+    // TODO: Refactor RSVP code to use separate set of objects instead of having RSVP lists within Event object.
     private boolean isRsvpIng = false;
     private void updateRSVP() {
         if (isRsvpIng) {

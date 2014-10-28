@@ -144,6 +144,48 @@ public class CTRestClient {
 
     }
 
+    public static void sendGoReminder(Event event){
+
+        if (event == null) {
+            return;
+        }
+
+        ParsePush push = new ParsePush();
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("action","org.chicktech.chicktech.EVENT_REMINDER");
+            jsonObject.put("alert", "Don't forget to attend this event: " + event.getTitle());
+            jsonObject.put("title", "Reminder about ChichTech Event");
+            jsonObject.put("event_id", event.getObjectId());
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
+        push.setData(jsonObject);
+        push.setChannel("STUDENT");
+        push.sendInBackground();
+
+
+
+        push = new ParsePush();
+
+        jsonObject = new JSONObject();
+        try {
+            jsonObject.put("action","org.chicktech.chicktech.EVENT_REMINDER");
+            jsonObject.put("alert", "Check in with your mentee about getting to: " + event.getTitle());
+            jsonObject.put("title", "Help your mentee get there");
+            jsonObject.put("event_id", event.getObjectId());
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
+        push.setData(jsonObject);
+        push.setChannel("MENTOR");
+        push.sendInBackground();
+
+    }
+
     public static void sendChatMessage(String toPersonID, final String fromPersonID, String message, final GetCallback<ParseObject> callback){
 
         ChatMessage chatMessage = new ChatMessage();
