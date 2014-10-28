@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -32,6 +33,7 @@ public class PeopleListFragment extends Fragment {
     private ArrayList<ParseUser> people;
     private PersonArrayAdapter aPeople;
     private ListView lvPeople;
+    ProgressBar pb;
 
     public PeopleListFragment () {
 
@@ -57,6 +59,9 @@ public class PeopleListFragment extends Fragment {
             return;
         }
 
+        people = new ArrayList<ParseUser>();
+        aPeople = new PersonArrayAdapter(getActivity(), people);
+
         CTRestClient.getEventByID(CTRestClient.QUERY_SERVER, eventID, new GetCallback<ParseObject>() {
             public void done(ParseObject event, ParseException e) {
                 if (event == null) {
@@ -78,24 +83,34 @@ public class PeopleListFragment extends Fragment {
         //Toast.makeText(getActivity(), "ID = " + eventID, Toast.LENGTH_SHORT).show();
 
         lvPeople = (ListView) view.findViewById(R.id.lvPeople);
+        pb = (ProgressBar) view.findViewById(R.id.pbLoading);
 
-        people = new ArrayList<ParseUser>();
-        aPeople = new PersonArrayAdapter(getActivity(), people);
         lvPeople.setAdapter(aPeople);
 
         return view;
     }
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mEvent != null) {
+            getRSVPs(mEvent);
+        }
+    }
+
     private void getRSVPs(Event event) {
+        pb.setVisibility(ProgressBar.VISIBLE);
         CTRestClient.getRSVPList(event, new FindCallback<ParseUser>() {
             @Override
             public void done(List<ParseUser> parseUsers, ParseException e) {
                 if (parseUsers.size() > 0) {
+                    aPeople.clear();
                     aPeople.addAll(parseUsers);
                 } else {
                     Toast.makeText(getActivity(), "no RSVPs for this event yet", Toast.LENGTH_LONG).show();
                 }
+                pb.setVisibility(ProgressBar.INVISIBLE);
             }
         });
     }
