@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -32,6 +33,7 @@ public class PeopleListFragment extends Fragment {
     private Event mEvent;
     private ArrayList<ParseUser> people;
     private PersonArrayAdapter aPeople;
+    private TextView tvNoRsvpsYet;
     private ListView lvPeople;
     ProgressBar pb;
 
@@ -62,17 +64,6 @@ public class PeopleListFragment extends Fragment {
         people = new ArrayList<ParseUser>();
         aPeople = new PersonArrayAdapter(getActivity(), people);
 
-        CTRestClient.getEventByID(CTRestClient.QUERY_SERVER, eventID, new GetCallback<ParseObject>() {
-            public void done(ParseObject event, ParseException e) {
-                if (event == null) {
-                    Toast.makeText(getActivity(), "Did not get event details", Toast.LENGTH_LONG).show();
-                } else {
-                    //Log.d("event", "Retrieved the object.");
-                    mEvent = (Event)event;
-                    getRSVPs(mEvent);
-                }
-            }
-        });
 
     }
 
@@ -84,6 +75,7 @@ public class PeopleListFragment extends Fragment {
 
         lvPeople = (ListView) view.findViewById(R.id.lvPeople);
         pb = (ProgressBar) view.findViewById(R.id.pbLoading);
+        tvNoRsvpsYet = (TextView) view.findViewById(R.id.tvNoRsvpsYet);
 
         lvPeople.setAdapter(aPeople);
 
@@ -94,21 +86,36 @@ public class PeopleListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (mEvent != null) {
-            getRSVPs(mEvent);
-        }
+        CTRestClient.getEventByID(CTRestClient.QUERY_SERVER, eventID, new GetCallback<ParseObject>() {
+            public void done(ParseObject event, ParseException e) {
+                if (event == null) {
+                    Toast.makeText(getActivity(), "Did not get event details", Toast.LENGTH_LONG).show();
+                } else {
+                    //Log.d("event", "Retrieved the object.");
+                    mEvent = (Event)event;
+                    getRSVPs(mEvent);
+                }
+            }
+        });
     }
+
 
     private void getRSVPs(Event event) {
         pb.setVisibility(ProgressBar.VISIBLE);
         CTRestClient.getRSVPList(event, new FindCallback<ParseUser>() {
             @Override
             public void done(List<ParseUser> parseUsers, ParseException e) {
-                if (parseUsers.size() > 0) {
+                if (e == null) {
                     aPeople.clear();
-                    aPeople.addAll(parseUsers);
+                    if (parseUsers.size() > 0) {
+                        tvNoRsvpsYet.setVisibility(View.INVISIBLE);
+                        aPeople.addAll(parseUsers);
+                    } else {
+                        tvNoRsvpsYet.setVisibility(View.VISIBLE);
+                        //Toast.makeText(getActivity(), "no RSVPs for this event yet", Toast.LENGTH_LONG).show();
+                    }
                 } else {
-                    Toast.makeText(getActivity(), "no RSVPs for this event yet", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Error Getting RSVP List", Toast.LENGTH_SHORT).show();
                 }
                 pb.setVisibility(ProgressBar.INVISIBLE);
             }

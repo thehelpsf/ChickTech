@@ -55,11 +55,10 @@ public class CTRestClient {
 
     public static void getRSVPList(Event event, FindCallback<ParseUser> callback){
         String yeses = event.getRsvpYes();
-        if (yeses.length() < 1) {
-            return; // no rsvps in this list.
+        if (yeses.length() > 0) {
+            yeses = yeses.substring(1);
         }
 
-        yeses = yeses.substring(1);
         String []ids = yeses.split(",");
 
         ParseQuery<ParseUser> query = ParseUser.getQuery();
