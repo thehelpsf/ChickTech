@@ -13,17 +13,22 @@
             android:text="test message"
             android:textColor="@android:color/white"
             android:clickable="true"
+            android:layout_marginRight="10dp"
+
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_toLeftOf="@+id/ivProfileImage"
             android:layout_centerVertical="true"/>
 
-        <ImageView
+        <org.chicktech.chicktech.views.RoundedImageView
             android:id="@+id/ivProfileImage"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_launcher"
+            android:src="@drawable/chicktech_icon_android"
             />
 
 </RelativeLayout>
