@@ -75,7 +75,7 @@ public class EventsFragment extends Fragment {
                 pb.setVisibility(ProgressBar.INVISIBLE);
                 if (e == null) {
                     if (events.size() == 0) {
-                        fetchServerEvents();
+                        //fetchServerEvents();
                     } else {
                         //Toast.makeText(getActivity(), "got events locally", Toast.LENGTH_SHORT).show();
                         aEvents.clear();
@@ -86,14 +86,15 @@ public class EventsFragment extends Fragment {
                     }
                 } else {
                     //Toast.makeText(getActivity(), "no events saved locally", Toast.LENGTH_SHORT).show();
-                    fetchServerEvents();
+                    //fetchServerEvents();
                 }
+                fetchServerEvents();
             }
         });
     }
 
     public void fetchServerEvents() {
-        Toast.makeText(getActivity(), "fetching events from server", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), "fetching events from server", Toast.LENGTH_SHORT).show();
 
         pb.setVisibility(ProgressBar.VISIBLE);
         parseClient.getEventList(CTRestClient.QUERY_SERVER, new FindCallback<ParseObject>() {
@@ -146,7 +147,7 @@ public class EventsFragment extends Fragment {
         // handle item selection
         switch (item.getItemId()) {
             case R.id.action_new_event:
-                Toast.makeText(getActivity(), "launch new event activity", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "launch new event activity", Toast.LENGTH_SHORT).show();
                 //createNewEvent();
                 return true;
             default:

@@ -348,13 +348,31 @@ public class EventDetailsFragment extends Fragment {
     }
 
 
+    // TODO: Refactor RSVP code to use separate set of objects instead of having
+    // RSVP lists within Event object.
+    private boolean isRsvpIng = false;
     private void updateRSVP() {
-        if (event.isPersonGoing(person)) {
-            event.addRsvpNo(person);
-        } else {
-            event.addRsvpYes(person);
+        if (isRsvpIng) {
+            return;
         }
-        refreshRsvpOnScreen(true);
+
+        isRsvpIng = true;
+
+        CTRestClient.getEventByID(false, event.getObjectId(), new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject object, ParseException e) {
+                event = (Event) object;
+                if (e == null) {
+                    if (event.isPersonGoing(person)) {
+                        event.addRsvpNo(person);
+                    } else {
+                        event.addRsvpYes(person);
+                    }
+                    refreshRsvpOnScreen(true);
+                }
+                isRsvpIng = false;
+            }
+        });
     }
 
 
