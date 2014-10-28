@@ -3,6 +3,7 @@ package org.chicktech.chicktech.models;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.parse.GetCallback;
 import com.parse.GetDataCallback;
@@ -11,6 +12,8 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
+
+import org.chicktech.chicktech.R;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Date;
@@ -23,6 +26,8 @@ public class Person extends ParseUser {
     private static final String ROLE_STUDENT = "student";
     private static final String ROLE_MENTOR = "mentor";
     private static final String ROLE_ORGANIZER = "organizer";
+
+    private ImageView iv;
 
     public static class GetPhotoCallback {
         public void done(Bitmap photo) {
@@ -139,6 +144,31 @@ public class Person extends ParseUser {
                 }
                 Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                 cb.done(bmp);
+            }
+        });
+    }
+    public void loadPhotoInBackgroundToImageView(ImageView ivTarget) {
+        iv = ivTarget;
+
+        ParseFile file = (ParseFile)get("photo");
+        if (file == null) {
+            iv.setImageResource(R.drawable.ic_calendar);
+            return;
+        }
+
+        file.getDataInBackground(new GetDataCallback() {
+            @Override
+            public void done(byte[] bytes, ParseException e) {
+
+                if (e != null) {
+                    Log.d("Person", "Error getting profile photo: " + e.getMessage());
+                    iv.setImageResource(R.drawable.ic_clock);
+                    return;
+                }
+
+                Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                iv.setImageBitmap(bmp);
+
             }
         });
     }

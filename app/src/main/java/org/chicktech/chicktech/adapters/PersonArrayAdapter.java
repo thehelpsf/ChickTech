@@ -20,6 +20,7 @@ import java.util.List;
  */
 public class PersonArrayAdapter extends ArrayAdapter<ParseUser> {
     private ViewHolder viewHolder;
+    private Person user;
 
     // View lookup cache
     private static class ViewHolder {
@@ -33,7 +34,8 @@ public class PersonArrayAdapter extends ArrayAdapter<ParseUser> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Person user = (Person)getItem(position);
+        user = (Person)getItem(position);
+
         if (user == null) {
             return convertView;
         }
@@ -50,19 +52,7 @@ public class PersonArrayAdapter extends ArrayAdapter<ParseUser> {
 
         viewHolder.tvName.setText(user.getPersonName());
 
-        // TODO: FIX, This image always shows up in the last slot. The views are
-        // changing while the images is being loaded? Load the image well before this
-        // code is called. Tags?
-//        user.getPhotoInBackground(new Person.GetPhotoCallback() {
-//            @Override
-//            public void done(Bitmap photo) {
-//                if (photo != null) {
-//                    viewHolder.imgPhoto.setImageBitmap(photo);
-//                } else {
-//                    viewHolder.imgPhoto.setImageResource(0);
-//                }
-//            }
-//        });
+        user.loadPhotoInBackgroundToImageView(viewHolder.imgPhoto);
 
         return convertView;
     }
