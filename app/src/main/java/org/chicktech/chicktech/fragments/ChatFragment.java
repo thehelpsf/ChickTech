@@ -35,6 +35,7 @@ public class ChatFragment extends Fragment{
     Person currentUser;
     CTRestClient parseClient;
 
+
     public static ChatFragment newInstance() {
         ChatFragment fragment = new ChatFragment();
         Bundle args = new Bundle();
@@ -53,11 +54,14 @@ public class ChatFragment extends Fragment{
         if (getArguments() != null) {
             //TODO: Retrieve args here
         }
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
+        currentUser = (Person) ParseUser.getCurrentUser();
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("ChatMessage");
         query.orderByAscending("createdAt");
@@ -67,10 +71,22 @@ public class ChatFragment extends Fragment{
             public void done(List<ParseObject> chatMessages, ParseException e) {
                 aMessages.clear();
                 for (int i = 0; i < chatMessages.size(); i++) {
-                    aMessages.add((ChatMessage)chatMessages.get(i));
+                    aMessages.add((ChatMessage) chatMessages.get(i));
                 }
             }
         });
+
+        CTRestClient.getPersonById(currentUser.getPartnerId(),new GetCallback<ParseUser>() {
+            @Override
+            public void done(ParseUser parseUser, ParseException e) {
+                Person partnerUser = (Person) parseUser;
+                String chatTitle = " Chat with " + partnerUser.getPersonName();
+                getActivity().getActionBar()
+                        .setTitle(chatTitle);
+            }
+        });
+
+
     }
 
 
@@ -82,7 +98,6 @@ public class ChatFragment extends Fragment{
         etMessage = (EditText) v.findViewById(R.id.etMessage);
         lvMessages = (ListView) v.findViewById(R.id.lvMessages);
         messages = new ArrayList<ChatMessage>();
-        currentUser = (Person) ParseUser.getCurrentUser();
         parseClient = new CTRestClient();
 
         btnSend.setOnClickListener(new View.OnClickListener() {

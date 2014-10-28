@@ -2,17 +2,22 @@ package org.chicktech.chicktech.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.parse.GetCallback;
+import com.parse.ParseException;
 import com.parse.ParseUser;
 
 import org.chicktech.chicktech.R;
 import org.chicktech.chicktech.models.ChatMessage;
 import org.chicktech.chicktech.models.Person;
+import org.chicktech.chicktech.utils.CTRestClient;
+import org.chicktech.chicktech.views.RoundedImageView;
 
 import java.util.List;
 
@@ -23,18 +28,44 @@ public class ChatArrayAdapter extends ArrayAdapter<ChatMessage> {
 
     ViewHolder viewHolder;
     Person currentUser;
+    Bitmap userPhoto;
+    Bitmap partnerPhoto;
 
     // View lookup cache
     private static class ViewHolder {
         TextView tvMessage;
+        RoundedImageView roundedImageView;
     }
 
     public ChatArrayAdapter(Context context, List<ChatMessage> messages) {
         super(context, 0, messages);
+
+        currentUser = (Person) ParseUser.getCurrentUser();
+
+        currentUser.getPhotoInBackground(new Person.GetPhotoCallback() {
+            @Override
+            public void done(Bitmap photo) {
+                userPhoto = photo;
+            }
+        });
+
+        CTRestClient.getPersonById(currentUser.getPartnerId(), new GetCallback<ParseUser>() {
+            @Override
+            public void done(ParseUser person, ParseException e) {
+                Person partner = (Person) person;
+                partner.getPhotoInBackground(new Person.GetPhotoCallback() {
+                    @Override
+                    public void done(Bitmap photo) {
+                        partnerPhoto = photo;
+                    }
+                });
+            }
+        });
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         currentUser = (Person) ParseUser.getCurrentUser();
 
         ChatMessage message = getItem(position);
@@ -43,6 +74,7 @@ public class ChatArrayAdapter extends ArrayAdapter<ChatMessage> {
             viewHolder = new ViewHolder();
             convertView = getInflatedLayoutForType(message.getFromPersonID());
             viewHolder.tvMessage = (TextView) convertView.findViewById(R.id.tvMessage);
+            viewHolder.roundedImageView = (RoundedImageView) convertView.findViewById(R.id.ivProfileImage);
             viewHolder.tvMessage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -64,6 +96,19 @@ public class ChatArrayAdapter extends ArrayAdapter<ChatMessage> {
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
+        }
+
+
+        if (message.getFromPersonID().equals(currentUser.getObjectId())){
+
+            if (userPhoto != null) {
+                viewHolder.roundedImageView.setImageBitmap(userPhoto);
+            }
+        }
+        else{
+            if (partnerPhoto != null) {
+                viewHolder.roundedImageView.setImageBitmap(partnerPhoto);
+            }
         }
 
         viewHolder.tvMessage.setText(message.getMessage());
