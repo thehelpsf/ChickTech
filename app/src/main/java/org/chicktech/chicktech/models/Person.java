@@ -152,7 +152,7 @@ public class Person extends ParseUser {
 
         ParseFile file = (ParseFile)get("photo");
         if (file == null) {
-            iv.setImageResource(R.drawable.ic_calendar);
+            iv.setImageResource(R.drawable.ic_girl);
             return;
         }
 
@@ -162,7 +162,7 @@ public class Person extends ParseUser {
 
                 if (e != null) {
                     Log.d("Person", "Error getting profile photo: " + e.getMessage());
-                    iv.setImageResource(R.drawable.ic_clock);
+                    iv.setImageResource(R.drawable.ic_girl);
                     return;
                 }
 
