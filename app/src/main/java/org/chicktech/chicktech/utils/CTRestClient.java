@@ -109,8 +109,6 @@ public class CTRestClient {
         }
 
         ParsePush push = new ParsePush();
-        ParseQuery pQuery = ParseInstallation.getQuery(); // <-- Installation query
-        pQuery.whereEqualTo("userID", "W9gv9R7Mim"); // testing... who to send to? everyone?
 
         JSONObject jsonObject = new JSONObject();
         try {
@@ -123,7 +121,25 @@ public class CTRestClient {
             e.printStackTrace();
         }
         push.setData(jsonObject);
-        push.setQuery(pQuery);
+        push.setChannel("STUDENT");
+        push.sendInBackground();
+
+
+
+        push = new ParsePush();
+
+        jsonObject = new JSONObject();
+        try {
+            jsonObject.put("action","org.chicktech.chicktech.EVENT_REMINDER");
+            jsonObject.put("alert", "Check in with your mentee about attending: " + event.getTitle());
+            jsonObject.put("title", "Remind your mentee to RVSP");
+            jsonObject.put("event_id", event.getObjectId());
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
+        push.setData(jsonObject);
+        push.setChannel("MENTOR");
         push.sendInBackground();
 
     }

@@ -19,11 +19,14 @@ import android.widget.Toast;
 import com.parse.GetCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
+import com.parse.ParsePush;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
 
 import org.chicktech.chicktech.R;
 import org.chicktech.chicktech.application.CTApplication;
+import org.chicktech.chicktech.models.Person;
 import org.chicktech.chicktech.utils.CTRestClient;
 import org.chicktech.chicktech.utils.LoginPhoneNumberManager;
 import org.chicktech.chicktech.utils.LoginUtils;
@@ -118,6 +121,27 @@ public class LoginActivity extends Activity {
 
     }
 
+    private void subscribeToBroadcastChannel(ParseUser user) {
+        final Person person = (Person) user;
+        final String role;
+        if (person != null) {
+            role = person.getRoleString();
+            ParsePush.subscribeInBackground(person.getRole().toString(), new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    if (e == null) {
+//                    Log.d("debug", "successfully subscribed to the student channel.");
+//                        Toast.makeText(LoginActivity.this, "successfully subscribed to the " + role + " channel.", Toast.LENGTH_SHORT).show();
+                    } else {
+//                    Log.d("debug", "successfully subscribed to the student channel.");
+                        Toast.makeText(LoginActivity.this, "did not subscribe to " + role + " channel", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+
+        }
+    }
+
     private void login (String phoneNumber) {
         showProgress();
         LoginUtils.login(phoneNumber, new LogInCallback() {
@@ -125,6 +149,7 @@ public class LoginActivity extends Activity {
                 if (user != null) {
                     hideProgress(false);
                     CTApplication.parseUserSetup();
+                    subscribeToBroadcastChannel(user);
                     moveOnToApp();
                 } else {
                     hideProgress(true);

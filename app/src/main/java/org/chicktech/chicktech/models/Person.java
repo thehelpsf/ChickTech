@@ -81,6 +81,12 @@ public class Person extends ParseUser {
             return Role.STUDENT;
         }
     }
+    public String getRoleString() {
+        String role = getString("role");
+        if (role.length() == 0)
+            return ROLE_STUDENT;
+        return role;
+    }
     public String getPersonName() {
         return getString("personName");
     }

@@ -196,6 +196,7 @@ public class EventDetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 sendRsvpPushReminder();
+                Toast.makeText(getActivity(), "Notifications sent to students and mentors", Toast.LENGTH_SHORT).show();
             }
         });
     }
