@@ -414,13 +414,23 @@ public class EventDetailsFragment extends Fragment {
 
     public void sendChat() {
 
-        String url = new String("chicktech://"+event.getObjectId());
 
-        CTRestClient.sendChatMessage(person.getPartnerId(),person.getObjectId(),url,new GetCallback<ParseObject>() {
+        String cannedMessage = "Hey! You should check out this event!";
+        CTRestClient.sendChatMessage(person.getPartnerId(),person.getObjectId(),cannedMessage,new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject chatMessage, ParseException e) {
                 chatMessage.pinInBackground();
+                String url = new String("chicktech://"+event.getObjectId());
+
+                CTRestClient.sendChatMessage(person.getPartnerId(),person.getObjectId(),url,new GetCallback<ParseObject>() {
+                    @Override
+                    public void done(ParseObject chatMessage, ParseException e) {
+                        chatMessage.pinInBackground();
+                    }
+                });
             }
         });
+
+
     }
 }
