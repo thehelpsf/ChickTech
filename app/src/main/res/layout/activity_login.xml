@@ -2,15 +2,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rlMain"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context="org.chicktech.chicktech.activities.LoginActivity"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:layout_weight="1">
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="95dp"
-        android:layout_margin="30dp"
-        android:layout_marginBottom="60dp"
+        android:minHeight="70dp"
+        android:maxHeight="95dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
         android:id="@+id/imgFlower"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -20,7 +22,7 @@
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"

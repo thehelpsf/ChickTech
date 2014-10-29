@@ -39,6 +39,7 @@
             android:name=".activities.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/CTAppTheme.NoTitleBar"
+            android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
