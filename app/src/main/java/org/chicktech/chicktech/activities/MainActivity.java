@@ -163,7 +163,7 @@ public class MainActivity extends ActionBarActivity implements CameraLaunchingAc
     // Temporary creation of models in parse for testing
     private void showChatToast(){
         if (!dlDrawer.isChatSelectedIndex()) {
-            Toast.makeText(this.getApplicationContext(), "New Message", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this.getApplicationContext(), "You Received a New Chat Message", Toast.LENGTH_LONG).show();
         }
     }
 
