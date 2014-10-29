@@ -70,7 +70,6 @@ public class MainActivity extends ActionBarActivity implements CameraLaunchingAc
         if (savedInstanceState == null) {
             dlDrawer.selectDrawerItem(0);
         }
-
         // Temporary creation of models in parse for testing
         sendModelsToParse();
 
@@ -92,13 +91,6 @@ public class MainActivity extends ActionBarActivity implements CameraLaunchingAc
             @Override
             public void onReceive(Context context, Intent intent) {
 
-                    //extract our message from intent
-                    ChatMessage myMessage = new ChatMessage();
-                    //log our message value
-                    myMessage.setMessage(intent.getStringExtra("message"));
-                    myMessage.setFromPersonID(intent.getStringExtra("fromPersonID"));
-                    myMessage.setToPersonID(intent.getStringExtra("toPersonID"));
-                    //myMessage.saveEventually();
                     CTRestClient.getLastChatMessage(intent.getStringExtra("toPersonID"), new GetCallback<ParseObject>() {
                         @Override
                         public void done(ParseObject parseObject, ParseException e) {
@@ -106,8 +98,9 @@ public class MainActivity extends ActionBarActivity implements CameraLaunchingAc
                             chatMessage.pinInBackground("ChatMessage", new SaveCallback() {
                                 @Override
                                 public void done(ParseException e) {
-                                    dlDrawer.selectDrawerItem(2);
-
+                                   // dlDrawer.selectDrawerItem(2);
+                                    Intent intent= new Intent("com.chicktech.CHAT_MESSAGE");
+                                    getBaseContext().sendBroadcast(intent);
                                 }
                             });
                         }
