@@ -61,6 +61,7 @@ public class EventDetailsFragment extends Fragment {
     ImageView ivImage;
     ImageView ivRsvp;
     ProgressBar pb;
+    ProgressBar pbRSVPing;
     Person person;
     ScrollView svDetails;
     LinearLayout llMenu;
@@ -108,6 +109,7 @@ public class EventDetailsFragment extends Fragment {
 
         imageLoader = ImageLoader.getInstance();
         pb = (ProgressBar) view.findViewById(R.id.pbLoading);
+        pbRSVPing = (ProgressBar) view.findViewById(R.id.pbRSVPing);
 
         person = (Person) ParseUser.getCurrentUser();
 
@@ -374,10 +376,12 @@ public class EventDetailsFragment extends Fragment {
         }
 
         isRsvpIng = true;
+        pbRSVPing.setVisibility(View.VISIBLE);
 
         CTRestClient.getEventByID(false, event.getObjectId(), new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject object, ParseException e) {
+                pbRSVPing.setVisibility(View.INVISIBLE);
                 event = (Event) object;
                 if (e == null) {
                     if (event.isPersonGoing(person)) {
