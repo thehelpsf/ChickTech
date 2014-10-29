@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -70,9 +71,6 @@ public class MainActivity extends ActionBarActivity implements CameraLaunchingAc
         if (savedInstanceState == null) {
             dlDrawer.selectDrawerItem(0);
         }
-        // Temporary creation of models in parse for testing
-        sendModelsToParse();
-
     }
 
     @Override
@@ -91,14 +89,15 @@ public class MainActivity extends ActionBarActivity implements CameraLaunchingAc
             @Override
             public void onReceive(Context context, Intent intent) {
 
-                    CTRestClient.getLastChatMessage(intent.getStringExtra("toPersonID"), new GetCallback<ParseObject>() {
+                showChatToast();
+
+                CTRestClient.getLastChatMessage(intent.getStringExtra("toPersonID"), new GetCallback<ParseObject>() {
                         @Override
                         public void done(ParseObject parseObject, ParseException e) {
                             ChatMessage chatMessage = (ChatMessage) parseObject;
                             chatMessage.pinInBackground("ChatMessage", new SaveCallback() {
                                 @Override
                                 public void done(ParseException e) {
-                                   // dlDrawer.selectDrawerItem(2);
                                     Intent intent= new Intent("com.chicktech.CHAT_MESSAGE");
                                     getBaseContext().sendBroadcast(intent);
                                 }
@@ -162,27 +161,10 @@ public class MainActivity extends ActionBarActivity implements CameraLaunchingAc
 
 
     // Temporary creation of models in parse for testing
-    private void sendModelsToParse() {
-
-//        Address tempAddress = new Address("Portland State University",
-//                "1825 SW Broadway",
-//                "Computer Lab EB 325 West",
-//                "Portland",
-//                "OR",
-//                "97201"
-//                );
-//        tempAddress.saveInBackground();
-
-        //ChatMessage tempChatMessage = new ChatMessage();
-        //Event tempEvent = new Event("Event One", "This is the first event of the year.", new Date(), new Date());
-        //Person tempPerson = new Person();
-
-        //RSVP tempRSVP = new RSVP();
-
-        //tempChatMessage.saveInBackground();
-        //tempEvent.saveInBackground();
-        //tempPerson.saveInBackground();
-        //tempRSVP.saveInBackground();
+    private void showChatToast(){
+        if (!dlDrawer.isChatSelectedIndex()) {
+            Toast.makeText(this.getApplicationContext(), "New Message", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

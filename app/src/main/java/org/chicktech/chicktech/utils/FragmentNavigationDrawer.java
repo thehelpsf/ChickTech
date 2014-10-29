@@ -6,14 +6,12 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import org.chicktech.chicktech.R;
@@ -94,7 +92,7 @@ public class FragmentNavigationDrawer extends DrawerLayout {
 
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(drawerContainerRes, fragment).commit();
+        fragmentManager.beginTransaction().replace(drawerContainerRes, fragment,navItem.getTitle()).commit();
 
         // Highlight the selected item, update the title, and close the drawer
         lvDrawer.setItemChecked(position, true);
@@ -102,10 +100,29 @@ public class FragmentNavigationDrawer extends DrawerLayout {
         closeDrawer(vDrawerContainer);
     }
 
+    public Boolean isChatSelectedIndex(){
+
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        Fragment fragment = fragmentManager.findFragmentByTag("Chat"); //Fragment Title is the Tag
+
+        if (fragment != null){
+            if (fragment.isVisible()){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
+
+
+    }
+
     public ActionBarDrawerToggle getDrawerToggle() {
         return drawerToggle;
     }
-
 
     private FragmentActivity getActivity() {
         return (FragmentActivity) getContext();
