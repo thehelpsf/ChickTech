@@ -2,10 +2,12 @@ package org.chicktech.chicktech.utils;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -30,6 +32,10 @@ public class FragmentNavigationDrawer extends DrawerLayout {
     private DrawerArrayAdapter drawerAdapter;
     private ArrayList<FragmentNavItem> drawerNavItems;
     private int drawerContainerRes;
+    private Handler handler;
+    private Runnable switchFragmentsTask;
+    private int selectedIndex = 0;
+
 
     public FragmentNavigationDrawer(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -45,6 +51,14 @@ public class FragmentNavigationDrawer extends DrawerLayout {
 
     // setupDrawerConfiguration((ListView) findViewById(R.id.lvDrawer), R.layout.drawer_list_item, R.id.flContent);
     public void setupDrawerConfiguration(View drawerContainer, ListView drawerListView, int drawerItemRes, int drawerContainerRes) {
+        handler = new Handler();
+        switchFragmentsTask = new Runnable() {
+            @Override
+            public void run() {
+                showSelectedFragment();
+            }
+        };
+
         vDrawerContainer = drawerContainer;
 
         // Setup navigation items array
@@ -74,11 +88,10 @@ public class FragmentNavigationDrawer extends DrawerLayout {
         drawerNavItems.add(new FragmentNavItem(windowTitle, fragmentClass));
     }
 
-    /** Swaps fragments in the main content view */
-    public void selectDrawerItem(int position) {
+    private void showSelectedFragment () {
         // Create a new fragment and specify the planet to show based on
         // position
-        FragmentNavItem navItem = drawerNavItems.get(position);
+        FragmentNavItem navItem = drawerNavItems.get(selectedIndex);
         Fragment fragment = null;
         try {
             fragment = navItem.getFragmentClass().newInstance();
@@ -92,12 +105,23 @@ public class FragmentNavigationDrawer extends DrawerLayout {
 
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(drawerContainerRes, fragment,navItem.getTitle()).commit();
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+        ft.replace(drawerContainerRes, fragment, navItem.getTitle());
+        ft.commit();
 
-        // Highlight the selected item, update the title, and close the drawer
-        lvDrawer.setItemChecked(position, true);
+        // Set the title
         setTitle(navItem.getTitle());
+    }
+
+    /** Swaps fragments in the main content view */
+    public void selectDrawerItem(int position) {
+        selectedIndex = position;
+        // Highlight the selected item, and close the drawer
+        lvDrawer.setItemChecked(position, true);
         closeDrawer(vDrawerContainer);
+        // Swich fragments after drawer has closed
+        handler.postDelayed(switchFragmentsTask, 200);
     }
 
     public Boolean isChatSelectedIndex(){
