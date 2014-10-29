@@ -15,7 +15,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -39,6 +38,9 @@ import org.chicktech.chicktech.utils.FileSystemUtils;
 import org.chicktech.chicktech.utils.FragmentNavigationDrawer;
 
 import java.util.List;
+
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 
 
 public class MainActivity extends ActionBarActivity implements CameraLaunchingActivity {
@@ -163,7 +165,8 @@ public class MainActivity extends ActionBarActivity implements CameraLaunchingAc
     // Temporary creation of models in parse for testing
     private void showChatToast(){
         if (!dlDrawer.isChatSelectedIndex()) {
-            Toast.makeText(this.getApplicationContext(), "You Received a New Chat Message", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this.getApplicationContext(), "You Received a New Chat Message", Toast.LENGTH_LONG).show();
+            Crouton.showText(this, "You Received a New Chat Message", Style.INFO);
         }
     }
 
