@@ -6,6 +6,7 @@ import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Html;
@@ -61,6 +62,7 @@ public class EventDetailsFragment extends Fragment {
     ImageView ivImage;
     ImageView ivRsvp;
     ProgressBar pb;
+    ProgressBar pbRSVPing;
     Person person;
     ScrollView svDetails;
     LinearLayout llMenu;
@@ -108,6 +110,7 @@ public class EventDetailsFragment extends Fragment {
 
         imageLoader = ImageLoader.getInstance();
         pb = (ProgressBar) view.findViewById(R.id.pbLoading);
+        pbRSVPing = (ProgressBar) view.findViewById(R.id.pbRSVPing);
 
         person = (Person) ParseUser.getCurrentUser();
 
@@ -374,10 +377,12 @@ public class EventDetailsFragment extends Fragment {
         }
 
         isRsvpIng = true;
+        pbRSVPing.setVisibility(View.VISIBLE);
 
         CTRestClient.getEventByID(false, event.getObjectId(), new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject object, ParseException e) {
+                pbRSVPing.setVisibility(View.INVISIBLE);
                 event = (Event) object;
                 if (e == null) {
                     if (event.isPersonGoing(person)) {
@@ -413,24 +418,31 @@ public class EventDetailsFragment extends Fragment {
 
 
     public void sendChat() {
-
-
-        String cannedMessage = "Hey! You should check out this event!";
+        String cannedMessage = "Hey, you should check out this event. Click this link!";
         CTRestClient.sendChatMessage(person.getPartnerId(),person.getObjectId(),cannedMessage,new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject chatMessage, ParseException e) {
                 chatMessage.pinInBackground();
+                delayThenSendMessage();
+            }
+        });
+    }
+
+
+    private void delayThenSendMessage() {
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
                 String url = new String("chicktech://"+event.getObjectId());
 
-                CTRestClient.sendChatMessage(person.getPartnerId(),person.getObjectId(),url,new GetCallback<ParseObject>() {
+                CTRestClient.sendChatMessage(person.getPartnerId(), person.getObjectId(), url, new GetCallback<ParseObject>() {
                     @Override
                     public void done(ParseObject chatMessage, ParseException e) {
                         chatMessage.pinInBackground();
                     }
                 });
             }
-        });
-
-
+        }, 2500);
     }
 }
