@@ -28,6 +28,8 @@ public class ChatArrayAdapter extends ArrayAdapter<ChatMessage> {
 
     ViewHolder viewHolder;
     Person currentUser;
+    boolean fetchedUserPhoto = false;
+    boolean fetchedPartnerPhoto = false;
     Bitmap userPhoto;
     Bitmap partnerPhoto;
 
@@ -41,26 +43,6 @@ public class ChatArrayAdapter extends ArrayAdapter<ChatMessage> {
         super(context, 0, messages);
 
         currentUser = (Person) ParseUser.getCurrentUser();
-
-        currentUser.getPhotoInBackground(new Person.GetPhotoCallback() {
-            @Override
-            public void done(Bitmap photo) {
-                userPhoto = photo;
-            }
-        });
-
-        CTRestClient.getPersonById(currentUser.getPartnerId(), new GetCallback<ParseUser>() {
-            @Override
-            public void done(ParseUser person, ParseException e) {
-                Person partner = (Person) person;
-                partner.getPhotoInBackground(new Person.GetPhotoCallback() {
-                    @Override
-                    public void done(Bitmap photo) {
-                        partnerPhoto = photo;
-                    }
-                });
-            }
-        });
     }
 
     @Override
@@ -100,20 +82,63 @@ public class ChatArrayAdapter extends ArrayAdapter<ChatMessage> {
 
 
         if (message.getFromPersonID().equals(currentUser.getObjectId())){
-
-            if (userPhoto != null) {
-                viewHolder.roundedImageView.setImageBitmap(userPhoto);
-            }
+            populateUserPhotoAsync(viewHolder.roundedImageView);
         }
         else{
-            if (partnerPhoto != null) {
-                viewHolder.roundedImageView.setImageBitmap(partnerPhoto);
-            }
+            populatePartnerPhotoAsync(viewHolder.roundedImageView);
         }
 
         viewHolder.tvMessage.setText(message.getMessage());
 
         return convertView;
+    }
+
+    // Caches or makes an async call as needed
+    private void populateUserPhotoAsync(final RoundedImageView v) {
+        if (fetchedUserPhoto) {
+            populatePhoto(userPhoto, v);
+            return;
+        }
+
+        currentUser.getPhotoInBackground(new Person.GetPhotoCallback() {
+            @Override
+            public void done(Bitmap photo) {
+                fetchedUserPhoto = true;
+                userPhoto = photo;
+                populatePhoto(userPhoto, v);
+            }
+        });
+    }
+
+    // Caches or makes an async call as needed
+    private void populatePartnerPhotoAsync(final RoundedImageView v) {
+        if (fetchedPartnerPhoto) {
+            populatePhoto(partnerPhoto, v);
+            return;
+        }
+
+        CTRestClient.getPersonById(currentUser.getPartnerId(), new GetCallback<ParseUser>() {
+            @Override
+            public void done(ParseUser person, ParseException e) {
+                Person partner = (Person) person;
+                partner.getPhotoInBackground(new Person.GetPhotoCallback() {
+                    @Override
+                    public void done(Bitmap photo) {
+                        fetchedPartnerPhoto = true;
+                        partnerPhoto = photo;
+                        populatePhoto(partnerPhoto, v);
+                    }
+                });
+            }
+        });
+    }
+
+    private void populatePhoto(Bitmap photo, RoundedImageView v) {
+        if (photo != null) {
+            v.setImageBitmap(photo);
+        } else {
+            v.setImageResource(0);
+        }
     }
 
     // Given the item type, responsible for returning the correct inflated XML layout file
