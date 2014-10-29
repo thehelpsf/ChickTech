@@ -48,6 +48,7 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
         RelativeLayout rlBadge;
         RelativeLayout rlDay;
         RelativeLayout rlBody;
+        RelativeLayout rlEventName;
         Person person;
     }
 
@@ -83,7 +84,7 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
             viewHolder.ivImage = (ImageView) convertView.findViewById(R.id.ivImage);
             viewHolder.person = (Person) ParseUser.getCurrentUser();
 
-            viewHolder.tvName.setTypeface(displayFont);
+            //viewHolder.tvName.setTypeface(displayFont);
             viewHolder.tvDay.setTypeface(displayFont);
             viewHolder.tvDateNumber.setTypeface(displayFont);
             viewHolder.tvMonth.setTypeface(displayFont);
@@ -91,6 +92,7 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
 
             viewHolder.rlBadge = (RelativeLayout) convertView.findViewById(R.id.rlBadge);
             viewHolder.rlDay = (RelativeLayout) convertView.findViewById(R.id.rlDay);
+            viewHolder.rlEventName = (RelativeLayout) convertView.findViewById(R.id.rlEventName);
 
             convertView.setTag(viewHolder);
         } else {
@@ -99,6 +101,7 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
 
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) viewHolder.rlBadge.getLayoutParams();
         RelativeLayout.LayoutParams params2 = (RelativeLayout.LayoutParams) viewHolder.rlDay.getLayoutParams();
+        RelativeLayout.LayoutParams paramsName = (RelativeLayout.LayoutParams) viewHolder.rlEventName.getLayoutParams();
 
         if (position % 2 == 0) {
             // even
@@ -106,15 +109,25 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
             params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
             params2.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             params2.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+
             viewHolder.tvName.setGravity(Gravity.CENTER_HORIZONTAL);
-            //params.addRule(RelativeLayout.LEFT_OF, R.id.id_to_be_left_of);
+
+            paramsName.removeRule(RelativeLayout.LEFT_OF);
+            paramsName.addRule(RelativeLayout.RIGHT_OF, R.id.rlDay);
+            paramsName.removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            paramsName.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         } else {
             params.removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
             params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             params2.removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
             params2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+
             viewHolder.tvName.setGravity(Gravity.CENTER_HORIZONTAL);
-            //params.addRule(RelativeLayout.LEFT_OF, R.id.id_to_be_left_of);
+
+            paramsName.removeRule(RelativeLayout.RIGHT_OF);
+            paramsName.addRule(RelativeLayout.LEFT_OF, R.id.rlDay);
+            paramsName.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            paramsName.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         }
 
         viewHolder.rlBadge.setLayoutParams(params); //causes layout update

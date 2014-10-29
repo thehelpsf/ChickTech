@@ -143,7 +143,7 @@ public class EventDetailsFragment extends Fragment {
 
         setupClickListeners();
 
-        tvName.setTypeface(displayFont);
+        //tvName.setTypeface(displayFont);
         tvDay.setTypeface(displayFont);
         tvDateNumber.setTypeface(displayFont);
         tvMonth.setTypeface(displayFont);
