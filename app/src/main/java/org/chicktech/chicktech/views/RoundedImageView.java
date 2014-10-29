@@ -56,10 +56,35 @@ public class RoundedImageView extends ImageView {
 
     public static Bitmap getCroppedBitmap(Bitmap bmp, int radius) {
         Bitmap sbmp;
-        if(bmp.getWidth() != radius || bmp.getHeight() != radius)
-            sbmp = Bitmap.createScaledBitmap(bmp, radius, radius, false);
-        else
+
+        // Center-crop the bitmap if it's not square
+        if (bmp.getWidth() >= bmp.getHeight()){
+
+            sbmp = Bitmap.createBitmap(
+                    bmp,
+                    bmp.getWidth()/2 - bmp.getHeight()/2,
+                    0,
+                    bmp.getHeight(),
+                    bmp.getHeight()
+            );
+
+        } else if (bmp.getHeight() > bmp.getWidth()) {
+
+            sbmp = Bitmap.createBitmap(
+                    bmp,
+                    0,
+                    bmp.getHeight()/2 - bmp.getWidth()/2,
+                    bmp.getWidth(),
+                    bmp.getWidth()
+            );
+        } else {
             sbmp = bmp;
+        }
+
+        // Scale it if it's too big
+        if(sbmp.getWidth() != radius)
+            sbmp = Bitmap.createScaledBitmap(sbmp, radius, radius, false);
+
         Bitmap output = Bitmap.createBitmap(sbmp.getWidth(),
                 sbmp.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(output);
