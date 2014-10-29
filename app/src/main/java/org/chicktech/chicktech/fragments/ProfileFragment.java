@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.parse.GetCallback;
@@ -26,7 +28,10 @@ import org.chicktech.chicktech.utils.CTRestClient;
 public class ProfileFragment extends Fragment implements EditProfileFragment.EditProfileManager {
     private Person user;
     private boolean isEditable = false;
+    boolean isLoading = true;
 
+    private ProgressBar pbLoading;
+    private ScrollView svProfile;
     private ImageView imgPhoto;
     private ImageView imgFlower;
     private TextView tvName;
@@ -68,7 +73,6 @@ public class ProfileFragment extends Fragment implements EditProfileFragment.Edi
             isEditable = true;
             user = (Person) ParseUser.getCurrentUser();
         } else {
-            //TODO: Better loading UI
             CTRestClient.getPersonById(passedUid, new GetCallback<ParseUser>() {
                 @Override
                 public void done(ParseUser parseUser, ParseException e) {
@@ -92,6 +96,8 @@ public class ProfileFragment extends Fragment implements EditProfileFragment.Edi
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
+        pbLoading = (ProgressBar) v.findViewById(R.id.pbLoading);
+        svProfile = (ScrollView) v.findViewById(R.id.svProfile);
         imgPhoto = (ImageView) v.findViewById(R.id.imgPhoto);
         imgFlower = (ImageView) v.findViewById(R.id.imgFlower);
         tvName = (TextView) v.findViewById(R.id.etName);
@@ -141,7 +147,11 @@ public class ProfileFragment extends Fragment implements EditProfileFragment.Edi
     }
 
     private void populateProfile() {
+        startLoading();
+
         if (user == null) {
+            // Don't "finishLoading" in this case, b/c this can be called while
+            // we're still waiting on user data from the network.
             return;
         }
 
@@ -175,19 +185,6 @@ public class ProfileFragment extends Fragment implements EditProfileFragment.Edi
             tvPhoneNumber.setText(s);
         }
 
-        // Hide the addr section until we get a string, so we don't flash an empty section
-        llAddress.setVisibility(View.GONE);
-        user.getAddressInBackground(new Person.GetAddressCallback() {
-            @Override
-            public void done(Address addr) {
-                if (addr == null) {
-                    tvAddress.setText("");
-                } else {
-                    llAddress.setVisibility(View.VISIBLE);
-                    tvAddress.setText(addr.toFullString());
-                }
-            }
-        });
         tvWhy.setText(user.getInterestReason());
 
         flWhat.removeAllViews();
@@ -198,11 +195,39 @@ public class ProfileFragment extends Fragment implements EditProfileFragment.Edi
                 addInterestView(interestArray[i]);
             }
         }
+
+        user.getAddressInBackground(new Person.GetAddressCallback() {
+            @Override
+            public void done(Address addr) {
+                if (addr == null) {
+                    tvAddress.setText("");
+                } else {
+                    llAddress.setVisibility(View.VISIBLE);
+                    tvAddress.setText(addr.toFullString());
+                }
+
+                // This is where the profile populating actually ends since everything else is synchronous
+                finishLoading();
+
+            }
+        });
     }
 
     private void addInterestView(String interest) {
         TextView tvInterest = (TextView) getActivity().getLayoutInflater().inflate(R.layout.item_interest, flWhat, false);
         tvInterest.setText(interest);
         flWhat.addView(tvInterest);
+    }
+
+    private void startLoading() {
+        isLoading = true;
+        pbLoading.setVisibility(View.VISIBLE);
+        svProfile.setVisibility(View.INVISIBLE);
+    }
+
+    private void finishLoading() {
+        isLoading = false;
+        svProfile.setVisibility(View.VISIBLE);
+        pbLoading.setVisibility(View.GONE);
     }
 }
