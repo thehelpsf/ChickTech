@@ -1,5 +1,9 @@
 package org.chicktech.chicktech.fragments;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -34,6 +38,8 @@ public class ChatFragment extends Fragment{
     ArrayList<ChatMessage> messages;
     Person currentUser;
     CTRestClient parseClient;
+    private BroadcastReceiver mChatMessageReceiver;
+
 
 
     public static ChatFragment newInstance() {
@@ -55,6 +61,16 @@ public class ChatFragment extends Fragment{
             //TODO: Retrieve args here
         }
 
+
+
+
+
+
+    }
+
+    public void setupChatReceiver(){
+
+
     }
 
     @Override
@@ -62,6 +78,7 @@ public class ChatFragment extends Fragment{
         super.onResume();
 
         currentUser = (Person) ParseUser.getCurrentUser();
+
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("ChatMessage");
         query.orderByAscending("createdAt");
@@ -86,9 +103,38 @@ public class ChatFragment extends Fragment{
             }
         });
 
+        IntentFilter chatIntentFilter = new IntentFilter(
+                "com.chicktech.CHAT_MESSAGE");
+
+        mChatMessageReceiver = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+                ParseQuery<ParseObject> query = ParseQuery.getQuery("ChatMessage");
+                query.orderByDescending("createdAt");
+                query.fromLocalDatastore();
+
+                query.getFirstInBackground(new GetCallback<ParseObject>() {
+                    public void done(ParseObject chatMessage, ParseException e) {
+                        chatMessage.saveEventually();
+                        aMessages.add((ChatMessage) chatMessage);
+                    }
+                });
+            }
+        };
+
+        getActivity().registerReceiver(mChatMessageReceiver, chatIntentFilter);
 
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        getActivity().unregisterReceiver(mChatMessageReceiver);
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -111,6 +157,7 @@ public class ChatFragment extends Fragment{
                     parseClient.sendChatMessage(message.getToPersonID(), message.getFromPersonID(), message.getMessage(),new GetCallback<ParseObject>() {
                         @Override
                         public void done(ParseObject chatMessage, ParseException e) {
+                            chatMessage.pinInBackground();
                             aMessages.add((ChatMessage)chatMessage);
                         }
                     });
