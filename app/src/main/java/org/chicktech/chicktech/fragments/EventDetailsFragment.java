@@ -407,7 +407,7 @@ public class EventDetailsFragment extends Fragment {
         String zoomLevel = "18";
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
-        String data = "geo:0,0?q=" + event.getAddressString();
+        String data = "geo:0,0?q=" + event.getNavString();
         if (zoomLevel != null) {
             data = String.format("%s?z=%s", data, zoomLevel);
         }

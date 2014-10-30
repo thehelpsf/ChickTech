@@ -41,6 +41,14 @@ public class Event extends ParseObject {
         return "unknown";
     }
 
+    public String getNavString() {
+        Address location = getLocation();
+        if (location != null) {
+            return location.toNavString();
+        }
+        return "unknown";
+    }
+
     public String getDayOfWeek() {
         Date d = getStartDate();
         SimpleDateFormat sdf = new SimpleDateFormat("EEE");
