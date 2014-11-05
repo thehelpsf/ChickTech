@@ -37,6 +37,9 @@ import org.chicktech.chicktech.models.Event;
 import org.chicktech.chicktech.models.Person;
 import org.chicktech.chicktech.utils.CTRestClient;
 
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
+
 /**
  * Created by paul on 10/24/14.
  */
@@ -423,6 +426,7 @@ public class EventDetailsFragment extends Fragment {
             @Override
             public void done(ParseObject chatMessage, ParseException e) {
                 chatMessage.pinInBackground();
+                Crouton.showText(getActivity(), "You recommended this event via chat", Style.INFO);
                 delayThenSendMessage();
             }
         });
