@@ -119,9 +119,13 @@ public class FragmentNavigationDrawer extends DrawerLayout {
         selectedIndex = position;
         // Highlight the selected item, and close the drawer
         lvDrawer.setItemChecked(position, true);
-        closeDrawer(vDrawerContainer);
-        // Swich fragments after drawer has closed
-        handler.postDelayed(switchFragmentsTask, 200);
+        if (isDrawerOpen()) {
+            closeDrawer(vDrawerContainer);
+            // Swich fragments after drawer has closed
+            handler.postDelayed(switchFragmentsTask, 200);
+        } else {
+            switchFragmentsTask.run();
+        }
     }
 
     public Boolean isChatSelectedIndex(){

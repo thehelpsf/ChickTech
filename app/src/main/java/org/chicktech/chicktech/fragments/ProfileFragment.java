@@ -27,7 +27,7 @@ import org.chicktech.chicktech.utils.CTRestClient;
 
 public class ProfileFragment extends Fragment implements EditProfileFragment.EditProfileManager {
     private Person user;
-    private boolean isEditable = false;
+    private boolean isSelf = false;
     boolean isLoading = true;
 
     private ProgressBar pbLoading;
@@ -44,7 +44,7 @@ public class ProfileFragment extends Fragment implements EditProfileFragment.Edi
     private TextView tvAddress;
     private TextView tvWhy;
     private FlowLayout flWhat;
-    private Button btnEdit;
+    private Button btnAction;
 
     public static ProfileFragment newInstance() {
         ProfileFragment fragment = new ProfileFragment();
@@ -70,7 +70,7 @@ public class ProfileFragment extends Fragment implements EditProfileFragment.Edi
         if (passedUid == null) {
             Log.d("Profile", "No person ID passed when initializing profile view!");
         }else if (currentUser.getObjectId().equals(passedUid)) {
-            isEditable = true;
+            isSelf = true;
             user = (Person) ParseUser.getCurrentUser();
         } else {
             CTRestClient.getPersonById(passedUid, new GetCallback<ParseUser>() {
@@ -107,16 +107,17 @@ public class ProfileFragment extends Fragment implements EditProfileFragment.Edi
         tvAddress = (TextView) v.findViewById(R.id.tvAddress);
         tvWhy = (TextView) v.findViewById(R.id.tvWhy);
         flWhat = (FlowLayout) v.findViewById(R.id.flWhat);
-        btnEdit = (Button) v.findViewById(R.id.btnEdit);
-        if (isEditable) {
-            btnEdit.setOnClickListener(new View.OnClickListener() {
+        btnAction = (Button) v.findViewById(R.id.btnAction);
+        if (isSelf) {
+            btnAction.setBackgroundResource(R.drawable.btn_edit);
+            btnAction.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     editProfile();
                 }
             });
         } else {
-            btnEdit.setVisibility(View.GONE);
+            btnAction.setBackgroundResource(R.drawable.btn_chat);
         }
 
         llAddress = (LinearLayout) v.findViewById(R.id.llAddress);
