@@ -51,6 +51,22 @@ public class Address extends ParseObject {
         }
         return addr.trim();
     }
+    public String toNavString() {
+        String addr = "";
+        String s = getAddress1();
+        if (s != null && !s.isEmpty()) {
+            addr += s;
+        }
+        s = getCity();
+        if (s != null && !s.isEmpty()) {
+            addr += "\n" + s;
+        }
+        s = getState();
+        if (s != null && !s.isEmpty()) {
+            addr += ", " + s;
+        }
+        return addr.trim();
+    }
     public String getName() {
         return getString("name");
     }

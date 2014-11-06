@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 20
-    buildToolsVersion "20.0.0"
+    buildToolsVersion '20.0.0'
 
     defaultConfig {
         applicationId "org.chicktech.chicktech"
@@ -27,4 +27,5 @@ dependencies {
     compile 'com.mobsandgeeks:android-saripaar:1.0.2'
     compile 'com.wefika:flowlayout:0.3.4'
     compile files('libs/universal-image-loader-1.8.4.jar')
+    compile files('libs/crouton-1.8.5.jar')
 }

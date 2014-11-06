@@ -146,4 +146,16 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="CTChatMessage">
+        <item name="android:background">@drawable/bg_chat_green</item>
+        <item name="android:textColor">@color/black_transparent</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+    <style name="CTChatMessage.Theirs">
+        <item name="android:background">@drawable/bg_chat_pink</item>
+    </style>
+
 </resources>
