@@ -13,10 +13,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.chicktech.chicktech.R;
+import org.chicktech.chicktech.activities.KeyboardDetectingActivity;
 import org.chicktech.chicktech.adapters.DrawerArrayAdapter;
 import org.chicktech.chicktech.models.DrawerMenuItem;
 
@@ -34,6 +36,7 @@ public class FragmentNavigationDrawer extends DrawerLayout {
     private int drawerContainerRes;
     private Handler handler;
     private Runnable switchFragmentsTask;
+    private Runnable openDrawerTask;
     private int selectedIndex = 0;
 
 
@@ -56,6 +59,12 @@ public class FragmentNavigationDrawer extends DrawerLayout {
             @Override
             public void run() {
                 showSelectedFragment();
+            }
+        };
+        openDrawerTask = new Runnable() {
+            @Override
+            public void run() {
+                FragmentNavigationDrawer.super.openDrawer(vDrawerContainer);
             }
         };
 
@@ -238,4 +247,16 @@ public class FragmentNavigationDrawer extends DrawerLayout {
     }
 
 
+    @Override
+    public void openDrawer(View drawerView) {
+        // Hide keyboard
+        KeyboardDetectingActivity activity = (KeyboardDetectingActivity)getActivity();
+        if (activity.isKeyboardVisible()) {
+            InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+            handler.postDelayed(openDrawerTask, 200);
+        } else {
+            openDrawerTask.run();
+        }
+    }
 }

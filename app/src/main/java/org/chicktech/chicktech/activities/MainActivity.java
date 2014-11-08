@@ -14,7 +14,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -43,7 +45,7 @@ import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 
 
-public class MainActivity extends ActionBarActivity implements CameraLaunchingActivity, NavDrawerActivity {
+public class MainActivity extends KeyboardDetectingActivity implements CameraLaunchingActivity, NavDrawerActivity {
 
     private static final String PHOTO_FILENAME = "CTphoto.jpg";
     private FragmentNavigationDrawer dlDrawer;
@@ -51,6 +53,11 @@ public class MainActivity extends ActionBarActivity implements CameraLaunchingAc
     private BroadcastReceiver mChatReceiver;
     private BroadcastReceiver mLinkReceiver;
     private String eventID;
+
+    @Override
+    protected View getRootView() {
+        return dlDrawer;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +81,8 @@ public class MainActivity extends ActionBarActivity implements CameraLaunchingAc
         if (savedInstanceState == null) {
             selectTopLevelNav(TopLevelNavs.EVENTS);
         }
+
+        startKeyboardDetection();
     }
 
     public void selectTopLevelNav(TopLevelNavs enumId) {
