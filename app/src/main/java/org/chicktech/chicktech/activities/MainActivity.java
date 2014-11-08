@@ -43,14 +43,7 @@ import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 
 
-public class MainActivity extends ActionBarActivity implements CameraLaunchingActivity {
-
-    public static enum TopLevelNavs {
-        EVENTS,
-        PEOPLE,
-        CHAT,
-        ABOUT
-    };
+public class MainActivity extends ActionBarActivity implements CameraLaunchingActivity, NavDrawerActivity {
 
     private static final String PHOTO_FILENAME = "CTphoto.jpg";
     private FragmentNavigationDrawer dlDrawer;

@@ -21,6 +21,7 @@ import com.parse.ParseUser;
 import com.wefika.flowlayout.FlowLayout;
 
 import org.chicktech.chicktech.R;
+import org.chicktech.chicktech.activities.NavDrawerActivity;
 import org.chicktech.chicktech.models.Address;
 import org.chicktech.chicktech.models.Person;
 import org.chicktech.chicktech.utils.CTRestClient;
@@ -118,6 +119,12 @@ public class ProfileFragment extends Fragment implements EditProfileFragment.Edi
             });
         } else {
             btnAction.setBackgroundResource(R.drawable.btn_chat);
+            btnAction.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ((NavDrawerActivity)getActivity()).selectTopLevelNav(NavDrawerActivity.TopLevelNavs.CHAT);
+                }
+            });
         }
 
         llAddress = (LinearLayout) v.findViewById(R.id.llAddress);
