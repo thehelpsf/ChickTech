@@ -44,6 +44,14 @@ import de.keyboardsurfer.android.widget.crouton.Style;
 
 
 public class MainActivity extends ActionBarActivity implements CameraLaunchingActivity {
+
+    public static enum TopLevelNavs {
+        EVENTS,
+        PEOPLE,
+        CHAT,
+        ABOUT
+    };
+
     private static final String PHOTO_FILENAME = "CTphoto.jpg";
     private FragmentNavigationDrawer dlDrawer;
     private CameraLaunchingListener cameraListener;
@@ -65,14 +73,18 @@ public class MainActivity extends ActionBarActivity implements CameraLaunchingAc
         dlDrawer.setupDrawerConfiguration(findViewById(R.id.rlDrawerContainer), (ListView) findViewById(R.id.lvDrawer),
                 R.layout.drawer_nav_item, R.id.flContent);
         // Add nav items
-        dlDrawer.addNavItem("Events", R.drawable.ic_events_selector, "Events", EventsFragment.class);
-        dlDrawer.addNavItem("People", R.drawable.ic_people_selector, "People", PeopleFragment.class);
-        dlDrawer.addNavItem("Chat", R.drawable.ic_chat_selector, "Chat", ChatFragment.class);
-        dlDrawer.addNavItem("About", R.drawable.ic_about_selector, "About ChickTech", AboutFragment.class);
+        dlDrawer.addNavItem(TopLevelNavs.EVENTS.hashCode(), "Events", R.drawable.ic_events_selector, "Events", EventsFragment.class);
+        dlDrawer.addNavItem(TopLevelNavs.PEOPLE.hashCode(), "People", R.drawable.ic_people_selector, "People", PeopleFragment.class);
+        dlDrawer.addNavItem(TopLevelNavs.CHAT.hashCode(), "Chat", R.drawable.ic_chat_selector, "Chat", ChatFragment.class);
+        dlDrawer.addNavItem(TopLevelNavs.ABOUT.hashCode(), "About", R.drawable.ic_about_selector, "About ChickTech", AboutFragment.class);
         // Select default
         if (savedInstanceState == null) {
-            dlDrawer.selectDrawerItem(0);
+            selectTopLevelNav(TopLevelNavs.EVENTS);
         }
+    }
+
+    public void selectTopLevelNav(TopLevelNavs enumId) {
+        dlDrawer.selectDrawerItemById(enumId.hashCode());
     }
 
     @Override
