@@ -83,9 +83,9 @@ public class FragmentNavigationDrawer extends DrawerLayout {
     }
 
     // addNavItem("First", "First Fragment", FirstFragment.class)
-    public void addNavItem(String navTitle, int navIconResourceId, String windowTitle, Class<? extends Fragment> fragmentClass) {
+    public void addNavItem(int id, String navTitle, int navIconResourceId, String windowTitle, Class<? extends Fragment> fragmentClass) {
         drawerAdapter.add(new DrawerMenuItem(navTitle, navIconResourceId));
-        drawerNavItems.add(new FragmentNavItem(windowTitle, fragmentClass));
+        drawerNavItems.add(new FragmentNavItem(id, windowTitle, fragmentClass));
     }
 
     private void showSelectedFragment () {
@@ -119,9 +119,13 @@ public class FragmentNavigationDrawer extends DrawerLayout {
         selectedIndex = position;
         // Highlight the selected item, and close the drawer
         lvDrawer.setItemChecked(position, true);
-        closeDrawer(vDrawerContainer);
-        // Swich fragments after drawer has closed
-        handler.postDelayed(switchFragmentsTask, 200);
+        if (isDrawerOpen()) {
+            closeDrawer(vDrawerContainer);
+            // Swich fragments after drawer has closed
+            handler.postDelayed(switchFragmentsTask, 200);
+        } else {
+            switchFragmentsTask.run();
+        }
     }
 
     public Boolean isChatSelectedIndex(){
@@ -160,6 +164,16 @@ public class FragmentNavigationDrawer extends DrawerLayout {
         getSupportActionBar().setTitle(title);
     }
 
+    public void selectDrawerItemById(int id) {
+        for(int i = 0; i < drawerNavItems.size(); i++) {
+            FragmentNavItem item = drawerNavItems.get(i);
+            if (item.getId() == id) {
+                selectDrawerItem(i);
+                return;
+            }
+        }
+    }
+
     private class FragmentDrawerItemListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -169,14 +183,16 @@ public class FragmentNavigationDrawer extends DrawerLayout {
 
     private class FragmentNavItem {
         private Class<? extends Fragment> fragmentClass;
+        private int id;
         private String title;
         private Bundle fragmentArgs;
 
-        public FragmentNavItem(String title, Class<? extends Fragment> fragmentClass) {
-            this(title, fragmentClass, null);
+        public FragmentNavItem(int id, String title, Class<? extends Fragment> fragmentClass) {
+            this(id, title, fragmentClass, null);
         }
 
-        public FragmentNavItem(String title, Class<? extends Fragment> fragmentClass, Bundle args) {
+        public FragmentNavItem(int id, String title, Class<? extends Fragment> fragmentClass, Bundle args) {
+            this.id = id;
             this.fragmentClass = fragmentClass;
             this.fragmentArgs = args;
             this.title = title;
@@ -189,6 +205,7 @@ public class FragmentNavigationDrawer extends DrawerLayout {
         public String getTitle() {
             return title;
         }
+        public int getId() { return id; }
 
         public Bundle getFragmentArgs() {
             return fragmentArgs;
