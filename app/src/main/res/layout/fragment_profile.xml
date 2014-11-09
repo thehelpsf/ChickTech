@@ -224,9 +224,8 @@
     <Button
         android:layout_width="67dp"
         android:layout_height="67dp"
-        android:id="@+id/btnEdit"
+        android:id="@+id/btnAction"
         style="?android:attr/borderlessButtonStyle"
-        android:background="@drawable/btn_edit"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
