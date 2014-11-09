@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import com.parse.ParsePushBroadcastReceiver;
 
-import org.chicktech.chicktech.activities.LoginActivity;
+import org.chicktech.chicktech.activities.EventDetailActivity;
 import org.chicktech.chicktech.utils.AppUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,7 +37,7 @@ public class CustomReceiver extends ParsePushBroadcastReceiver {
             return;
         }
         if (objectID.length() > 0) {
-            Intent i = new Intent(context, LoginActivity.class);
+            Intent i = new Intent(context, EventDetailActivity.class);
             i.putExtra("id", objectID);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(i);

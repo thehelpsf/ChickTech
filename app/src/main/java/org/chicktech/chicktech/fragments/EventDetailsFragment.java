@@ -139,7 +139,7 @@ public class EventDetailsFragment extends Fragment {
         btnSendRsvpReminder = (Button) view.findViewById(R.id.btnPushRsvpReminder);
         btnSendGoReminder = (Button) view.findViewById(R.id.btnPushGoReminder);
 
-        if (person.getRole() == Person.Role.ORGANIZER) {
+        if (person.getRole() == Person.Role.ORGANIZER || person.getRole() == Person.Role.MENTOR) {
             btnSendRsvpReminder.setVisibility(View.VISIBLE);
             btnSendGoReminder.setVisibility(View.VISIBLE);
         } else {
@@ -407,12 +407,13 @@ public class EventDetailsFragment extends Fragment {
             return;
         }
 
-        String zoomLevel = "18";
+        String zoomLevel = "23";
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
-        String data = "geo:0,0?q=" + event.getNavString();
+        String encodedQuery = Uri.encode(event.getNavString());
+        String data = "geo:0,0?q=" + encodedQuery;
         if (zoomLevel != null) {
-            data = String.format("%s?z=%s", data, zoomLevel);
+            data = String.format("%s&z=%s", data, zoomLevel);// this does not seem to be working
         }
         intent.setData(Uri.parse(data));
         startActivity(intent);
@@ -421,7 +422,7 @@ public class EventDetailsFragment extends Fragment {
 
 
     public void sendChat() {
-        String cannedMessage = "Hey, you should check out this event. Click this link!";
+        String cannedMessage = "This event would be a great place to learn about it. Click this link to check it out!";
         CTRestClient.sendChatMessage(person.getPartnerId(),person.getObjectId(),cannedMessage,new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject chatMessage, ParseException e) {
@@ -447,6 +448,6 @@ public class EventDetailsFragment extends Fragment {
                     }
                 });
             }
-        }, 2500);
+        }, 1000);
     }
 }
