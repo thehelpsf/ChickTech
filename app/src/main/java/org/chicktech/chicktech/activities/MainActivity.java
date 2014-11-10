@@ -14,7 +14,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -43,13 +45,19 @@ import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 
 
-public class MainActivity extends ActionBarActivity implements CameraLaunchingActivity {
+public class MainActivity extends KeyboardDetectingActivity implements CameraLaunchingActivity, NavDrawerActivity {
+
     private static final String PHOTO_FILENAME = "CTphoto.jpg";
     private FragmentNavigationDrawer dlDrawer;
     private CameraLaunchingListener cameraListener;
     private BroadcastReceiver mChatReceiver;
     private BroadcastReceiver mLinkReceiver;
     private String eventID;
+
+    @Override
+    protected View getRootView() {
+        return dlDrawer;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,14 +73,20 @@ public class MainActivity extends ActionBarActivity implements CameraLaunchingAc
         dlDrawer.setupDrawerConfiguration(findViewById(R.id.rlDrawerContainer), (ListView) findViewById(R.id.lvDrawer),
                 R.layout.drawer_nav_item, R.id.flContent);
         // Add nav items
-        dlDrawer.addNavItem("Events", R.drawable.ic_events_selector, "Events", EventsFragment.class);
-        dlDrawer.addNavItem("People", R.drawable.ic_people_selector, "People", PeopleFragment.class);
-        dlDrawer.addNavItem("Chat", R.drawable.ic_chat_selector, "Chat", ChatFragment.class);
-        dlDrawer.addNavItem("About", R.drawable.ic_about_selector, "About ChickTech", AboutFragment.class);
+        dlDrawer.addNavItem(TopLevelNavs.EVENTS.hashCode(), "Events", R.drawable.ic_events_selector, "Events", EventsFragment.class);
+        dlDrawer.addNavItem(TopLevelNavs.PEOPLE.hashCode(), "People", R.drawable.ic_people_selector, "People", PeopleFragment.class);
+        dlDrawer.addNavItem(TopLevelNavs.CHAT.hashCode(), "Chat", R.drawable.ic_chat_selector, "Chat", ChatFragment.class);
+        dlDrawer.addNavItem(TopLevelNavs.ABOUT.hashCode(), "About", R.drawable.ic_about_selector, "About ChickTech", AboutFragment.class);
         // Select default
         if (savedInstanceState == null) {
-            dlDrawer.selectDrawerItem(0);
+            selectTopLevelNav(TopLevelNavs.EVENTS);
         }
+
+        startKeyboardDetection();
+    }
+
+    public void selectTopLevelNav(TopLevelNavs enumId) {
+        dlDrawer.selectDrawerItemById(enumId.hashCode());
     }
 
     @Override
