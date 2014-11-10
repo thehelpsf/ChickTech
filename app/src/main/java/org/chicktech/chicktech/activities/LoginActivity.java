@@ -125,8 +125,7 @@ public class LoginActivity extends Activity {
         final Person person = (Person) user;
         final String role;
         if (person != null) {
-            //role = person.getRoleString();
-            role = "TEST";
+            role = person.getRoleString();
             ParsePush.subscribeInBackground(role, new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
