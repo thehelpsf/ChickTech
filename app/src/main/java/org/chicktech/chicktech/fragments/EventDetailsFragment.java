@@ -448,6 +448,6 @@ public class EventDetailsFragment extends Fragment {
                     }
                 });
             }
-        }, 1000);
+        }, 2000);
     }
 }
