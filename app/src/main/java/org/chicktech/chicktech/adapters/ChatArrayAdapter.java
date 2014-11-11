@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
@@ -32,6 +34,8 @@ public class ChatArrayAdapter extends ArrayAdapter<ChatMessage> {
     boolean fetchedPartnerPhoto = false;
     Bitmap userPhoto;
     Bitmap partnerPhoto;
+
+    public boolean enableAnimations = false;
 
     // View lookup cache
     private static class ViewHolder {
@@ -89,6 +93,11 @@ public class ChatArrayAdapter extends ArrayAdapter<ChatMessage> {
         }
 
         viewHolder.tvMessage.setText(message.getMessage());
+
+        if(enableAnimations) {
+            Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_bottom_no_fade);
+            convertView.startAnimation(animation);
+        }
 
         return convertView;
     }
