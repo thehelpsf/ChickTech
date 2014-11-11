@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +40,8 @@ public class ChatFragment extends Fragment{
     Person currentUser;
     CTRestClient parseClient;
     private BroadcastReceiver mChatMessageReceiver;
+    private Runnable disableListAnimationsTask;
+    private Handler handler;
 
 
 
@@ -61,10 +64,15 @@ public class ChatFragment extends Fragment{
             //TODO: Retrieve args here
         }
 
-
-
-
-
+        handler = new Handler();
+        disableListAnimationsTask = new Runnable() {
+            @Override
+            public void run() {
+                // Disable animation in next run loop so animations that are queued in this
+                // run loop can still run.
+                aMessages.enableAnimations = false;
+            }
+        };
 
     }
 
@@ -118,14 +126,16 @@ public class ChatFragment extends Fragment{
                 query.getFirstInBackground(new GetCallback<ParseObject>() {
                     public void done(ParseObject chatMessage, ParseException e) {
                         chatMessage.saveEventually();
+                        // Animate when receiving new messages
+                        aMessages.enableAnimations = true;
                         aMessages.add((ChatMessage) chatMessage);
+                        handler.postDelayed(disableListAnimationsTask, 0);
                     }
                 });
             }
         };
 
         getActivity().registerReceiver(mChatMessageReceiver, chatIntentFilter);
-
     }
 
     @Override
@@ -158,7 +168,10 @@ public class ChatFragment extends Fragment{
                         @Override
                         public void done(ParseObject chatMessage, ParseException e) {
                             chatMessage.pinInBackground();
+                            // Animate when sending messages
+                            aMessages.enableAnimations = true;
                             aMessages.add((ChatMessage)chatMessage);
+                            handler.postDelayed(disableListAnimationsTask, 0);
                         }
                     });
 
