@@ -48,10 +48,13 @@ public class PeopleFragment extends Fragment {
                 ProfileFragment.class, myProfileArgs);
 
         Bundle mentorProfileArgs = new Bundle();
-        mentorProfileArgs.putString(PERSON_ID_KEY, user.getPartnerId());
+        String partnerId = user.getPartnerId();
+        mentorProfileArgs.putString(PERSON_ID_KEY, partnerId);
+
+        // Create the partner tab, but show the no partner message if one hasn't been assigned yet.
         tabHost.addTab(tabHost.newTabSpec("my match").setIndicator(user.getRole() == Person.Role.MENTOR ? context.getString(R.string.student_profile_tab_label)
                         : context.getString(R.string.mentor_profile_tab_label)),
-                ProfileFragment.class, mentorProfileArgs);
+                partnerId == null ? NoPartnerFragment.class : ProfileFragment.class, mentorProfileArgs);
         return tabHost;
     }
 
