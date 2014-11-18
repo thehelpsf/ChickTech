@@ -168,7 +168,7 @@ public class ChatFragment extends Fragment{
         lvMessages.setAdapter(aMessages);
 
 
-        final String partnerId = currentUser.getPartnerID();
+        final String partnerId = currentUser.getPartnerId();
         if (partnerId == null) {
             // When no mentor/mentee has been assigned yet, disable send button and show no partner message.
             btnSend.setEnabled(false);
