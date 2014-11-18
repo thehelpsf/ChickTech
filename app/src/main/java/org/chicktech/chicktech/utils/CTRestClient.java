@@ -109,8 +109,12 @@ public class CTRestClient {
         }
 
         ParsePush push = new ParsePush();
+        JSONObject jsonObject;
 
-        JSONObject jsonObject = new JSONObject();
+        boolean sendToMentor = false;
+        boolean sendToStudent = true;
+
+        jsonObject = new JSONObject();
         try {
             jsonObject.put("action","org.chicktech.chicktech.EVENT_REMINDER");
             jsonObject.put("alert", "Let us know if you'd like to attend: " + event.getTitle());
@@ -121,26 +125,31 @@ public class CTRestClient {
             e.printStackTrace();
         }
         push.setData(jsonObject);
-        push.setChannel("STUDENT");
+        if (sendToStudent) {
+            push.setChannel("STUDENT");
+        } else {
+            push.setChannel("TEST");
+        }
         push.sendInBackground();
 
 
+        if (sendToMentor) {
+            push = new ParsePush();
 
-        push = new ParsePush();
-
-        jsonObject = new JSONObject();
-        try {
-            jsonObject.put("action","org.chicktech.chicktech.EVENT_REMINDER");
-            jsonObject.put("alert", "Check in with your mentee about attending: " + event.getTitle());
-            jsonObject.put("title", "Remind your mentee to RVSP");
-            jsonObject.put("event_id", event.getObjectId());
+            jsonObject = new JSONObject();
+            try {
+                jsonObject.put("action","org.chicktech.chicktech.EVENT_REMINDER");
+                jsonObject.put("alert", "Check in with your mentee about attending: " + event.getTitle());
+                jsonObject.put("title", "Remind your mentee to RVSP");
+                jsonObject.put("event_id", event.getObjectId());
+            }
+            catch (JSONException e){
+                e.printStackTrace();
+            }
+            push.setData(jsonObject);
+            push.setChannel("MENTOR");
+            push.sendInBackground();
         }
-        catch (JSONException e){
-            e.printStackTrace();
-        }
-        push.setData(jsonObject);
-        push.setChannel("MENTOR");
-        push.sendInBackground();
 
     }
 
