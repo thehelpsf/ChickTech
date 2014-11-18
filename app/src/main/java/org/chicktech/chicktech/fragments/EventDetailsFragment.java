@@ -147,6 +147,11 @@ public class EventDetailsFragment extends Fragment {
             btnSendGoReminder.setVisibility(View.GONE);
         }
 
+        if (person.getPartnerId() == null) {
+            tvChat.setVisibility(View.GONE);
+        }
+
+
         setupClickListeners();
 
         //tvName.setTypeface(displayFont);
@@ -422,8 +427,12 @@ public class EventDetailsFragment extends Fragment {
 
 
     public void sendChat() {
-        String cannedMessage = "This event would be a great place to learn about it. Click this link to check it out!";
-        CTRestClient.sendChatMessage(person.getPartnerId(),person.getObjectId(),cannedMessage,new GetCallback<ParseObject>() {
+        String partnerId = person.getPartnerId();
+        if (partnerId == null) {
+            return;
+        }
+        String cannedMessage = "Hey, you should check out this event. Click this link!";
+        CTRestClient.sendChatMessage(partnerId,person.getObjectId(),cannedMessage,new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject chatMessage, ParseException e) {
                 chatMessage.pinInBackground();
@@ -435,6 +444,9 @@ public class EventDetailsFragment extends Fragment {
 
 
     private void delayThenSendMessage() {
+        if (person.getPartnerId() == null) {
+            return;
+        }
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override

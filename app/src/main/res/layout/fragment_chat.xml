@@ -7,6 +7,14 @@
     android:textIsSelectable="true"
     tools:context="org.chicktech.chicktech.fragments.ChatFragment">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvNoPartner"
+        android:layout_centerInParent="true"
+        android:text="You have no partner yet."
+        android:visibility="gone"/>
+
 
     <ListView
         android:id="@+id/lvMessages"
@@ -47,7 +55,7 @@
             android:id="@+id/btnSend"
             android:layout_width="30dp"
             android:layout_height="29dp"
-            android:background="@drawable/ic_send"
+            android:background="@drawable/btn_send_selector"
             android:layout_marginLeft="5dp"
             style="?android:attr/borderlessButtonStyle"
             >

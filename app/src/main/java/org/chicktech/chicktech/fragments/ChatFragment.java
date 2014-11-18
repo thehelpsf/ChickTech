@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -64,6 +65,8 @@ public class ChatFragment extends Fragment{
             //TODO: Retrieve args here
         }
 
+        currentUser = (Person) ParseUser.getCurrentUser();
+
         handler = new Handler();
         disableListAnimationsTask = new Runnable() {
             @Override
@@ -85,8 +88,9 @@ public class ChatFragment extends Fragment{
     public void onResume() {
         super.onResume();
 
-        currentUser = (Person) ParseUser.getCurrentUser();
-
+        if (currentUser.getPartnerId() == null) {
+            return;
+        }
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("ChatMessage");
         query.orderByAscending("createdAt");
@@ -142,6 +146,10 @@ public class ChatFragment extends Fragment{
     public void onPause() {
         super.onPause();
 
+        if (currentUser.getPartnerId() == null) {
+            return;
+        }
+
         getActivity().unregisterReceiver(mChatMessageReceiver);
 
     }
@@ -155,34 +163,45 @@ public class ChatFragment extends Fragment{
         lvMessages = (ListView) v.findViewById(R.id.lvMessages);
         messages = new ArrayList<ChatMessage>();
         parseClient = new CTRestClient();
-
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (etMessage.length() > 0){
-                    ChatMessage message = new ChatMessage();
-                    message.setToPersonID(currentUser.getPartnerID());
-                    message.setFromPersonID(currentUser.getObjectId());
-                    message.setMessage(etMessage.getText().toString());
-                    parseClient.sendChatMessage(message.getToPersonID(), message.getFromPersonID(), message.getMessage(),new GetCallback<ParseObject>() {
-                        @Override
-                        public void done(ParseObject chatMessage, ParseException e) {
-                            chatMessage.pinInBackground();
-                            // Animate when sending messages
-                            aMessages.enableAnimations = true;
-                            aMessages.add((ChatMessage)chatMessage);
-                            handler.postDelayed(disableListAnimationsTask, 0);
-                        }
-                    });
-
-                    etMessage.setText("");
-                }
-            }
-        });
-
         aMessages = new ChatArrayAdapter(getActivity(),messages);
         lvMessages = (ListView) v.findViewById(R.id.lvMessages);
         lvMessages.setAdapter(aMessages);
+
+
+        final String partnerId = currentUser.getPartnerId();
+        if (partnerId == null) {
+            // When no mentor/mentee has been assigned yet, disable send button and show no partner message.
+            btnSend.setEnabled(false);
+            etMessage.setEnabled(false);
+
+            TextView tvNoPartner = (TextView) v.findViewById(R.id.tvNoPartner);
+            tvNoPartner.setText(getString(currentUser.getRole() == Person.Role.MENTOR ? R.string.no_student_message : R.string.no_mentor_message));
+            tvNoPartner.setVisibility(View.VISIBLE);
+        } else {
+            btnSend.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (etMessage.length() > 0) {
+                        ChatMessage message = new ChatMessage();
+                        message.setToPersonID(partnerId);
+                        message.setFromPersonID(currentUser.getObjectId());
+                        message.setMessage(etMessage.getText().toString());
+                        parseClient.sendChatMessage(message.getToPersonID(), message.getFromPersonID(), message.getMessage(), new GetCallback<ParseObject>() {
+                            @Override
+                            public void done(ParseObject chatMessage, ParseException e) {
+                                chatMessage.pinInBackground();
+                                // Animate when sending messages
+                                aMessages.enableAnimations = true;
+                                aMessages.add((ChatMessage) chatMessage);
+                                handler.postDelayed(disableListAnimationsTask, 0);
+                            }
+                        });
+
+                        etMessage.setText("");
+                    }
+                }
+            });
+        }
 
         return v;
     }

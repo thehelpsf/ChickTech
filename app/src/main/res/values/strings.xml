@@ -49,5 +49,7 @@
     <string name="my_profile_tab_label">My Profile</string>
     <string name="mentor_profile_tab_label">My Mentor</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_mentor_message">You don\'t have a mentor yet.</string>
+    <string name="no_student_message">You don\'t have a student yet.</string>
 
 </resources>

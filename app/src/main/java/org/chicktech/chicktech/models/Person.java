@@ -182,8 +182,6 @@ public class Person extends ParseUser {
         return getString("partnerID");
     }
 
-    public String getPartnerID () { return getString("partnerID");}
-
     // Parse Setters
     public void setRole(Role role) {
         switch(role) {

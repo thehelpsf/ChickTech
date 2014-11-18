@@ -126,7 +126,12 @@ public class ChatArrayAdapter extends ArrayAdapter<ChatMessage> {
             return;
         }
 
-        CTRestClient.getPersonById(currentUser.getPartnerId(), new GetCallback<ParseUser>() {
+        String partnerId = currentUser.getPartnerId();
+        if (partnerId == null) {
+            return;
+        }
+
+        CTRestClient.getPersonById(partnerId, new GetCallback<ParseUser>() {
             @Override
             public void done(ParseUser person, ParseException e) {
                 Person partner = (Person) person;
