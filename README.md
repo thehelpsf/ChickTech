@@ -2,11 +2,8 @@
 
 ## User Story Walkthroughs
 
-### Student
-![Video Walkthrough](screencap_student.gif)
-
-### Mentor
-![Video Walkthrough](screencap_mentor.gif)
+### Promo Video
+[See our promotional video here!](https://vimeo.com/110634881)
 
 ## Overview
 
